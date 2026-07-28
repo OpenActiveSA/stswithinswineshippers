@@ -391,7 +391,7 @@ body.template-index #MainContent {
 
 .product-card-wrapper .card__content,
 .card-wrapper .card__content {
-  padding: 1.6rem 2.8rem 2.6rem;
+  padding: 0 2.8rem 2.6rem;
   text-align: center;
   flex: 1 1 auto;
   display: flex !important;
@@ -401,7 +401,7 @@ body.template-index #MainContent {
 
 .product-card-wrapper .card--standard > .card__content,
 .card-wrapper .card--standard > .card__content {
-  padding: 1.6rem 2.8rem 2.6rem;
+  padding: 0 2.8rem 2.6rem;
 }
 
 .product-card-wrapper .card__information,
@@ -410,12 +410,14 @@ body.template-index #MainContent {
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding-top: 0 !important;
 }
 
 .product-card-wrapper .card--standard > .card__content .card__information,
 .card-wrapper .card--standard > .card__content .card__information {
   padding-left: 0.6rem;
   padding-right: 0.6rem;
+  padding-top: 0 !important;
 }
 
 .product-card-wrapper .card__heading,
@@ -482,7 +484,7 @@ body.template-index #MainContent {
   color: var(--sts-gold);
   font-size: 2rem;
   line-height: 1;
-  margin: 0.3rem 0 0.5rem;
+  margin: 0 0 0.5rem;
 }
 
 .sts-card-stars span {
