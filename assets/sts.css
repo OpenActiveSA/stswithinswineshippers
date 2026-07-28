@@ -494,32 +494,51 @@ body.template-index #MainContent {
   border: 0 !important;
 }
 
-.featured-collection .sts-slider-dots {
+.featured-collection .sts-slider-dots,
+.sts-slider-dots {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0;
+  min-width: 0;
 }
 
-.featured-collection .sts-slider-dots__list {
+.featured-collection .sts-slider-dots__list,
+.sts-slider-dots__list {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1.35rem;
 }
 
-.featured-collection .sts-slider-dots__dot {
+/* Match hero dots: round inactive + gold active pill */
+.featured-collection .sts-slider-dots__dot,
+.sts-slider-dots__dot {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  flex: 0 0 auto;
+  box-sizing: border-box;
   width: 1.32rem;
   height: 1.32rem;
+  min-width: 1.32rem;
+  min-height: 1.32rem;
   padding: 0;
+  margin: 0;
   border: 0;
   border-radius: 999px;
-  background: #ffffff;
+  background: #1c1c1a;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
   cursor: pointer;
   transition: width 0.25s ease, background 0.25s ease;
 }
 
-.featured-collection .sts-slider-dots__dot.is-active {
+.featured-collection .sts-slider-dots__dot.is-active,
+.sts-slider-dots__dot.is-active {
   width: 3.84rem;
+  min-width: 3.84rem;
   background: #d4c391;
 }
 
