@@ -16,7 +16,19 @@
     z-index: 0;
   }
 
-  #shopify-section-{{ section.id }} .sts-hero__media img {
+  #shopify-section-{{ section.id }} .sts-hero__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sts-hero__slide.is-active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  #shopify-section-{{ section.id }} .sts-hero__slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -26,7 +38,7 @@
   #shopify-section-{{ section.id }} .sts-hero__overlay {
     position: absolute !important;
     inset: 0 !important;
-    z-index: 1 !important;
+    z-index: 2 !important;
     pointer-events: none !important;
     display: block !important;
     opacity: 1 !important;
@@ -42,7 +54,7 @@
 
   #shopify-section-{{ section.id }} .sts-hero__content {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     width: 100%;
     max-width: 96rem;
     margin: 0 auto;
@@ -116,30 +128,89 @@
     gap: 1.4rem;
     justify-content: center;
   }
+
+  #shopify-section-{{ section.id }} .sts-hero__dots {
+    position: absolute;
+    left: 50%;
+    bottom: 2.8rem;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  #shopify-section-{{ section.id }} .sts-hero__dot {
+    width: 0.7rem;
+    height: 0.7rem;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    transition: width 0.25s ease, background 0.25s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sts-hero__dot.is-active {
+    width: 2.4rem;
+    background: #d4c391;
+  }
 {%- endstyle -%}
 
-<section class="sts-hero">
+{%- liquid
+  assign slide_files = 'mainbanner-background.png,mainbanner2-background.png,mainbanner3-background.png,mainbanner4-background.png' | split: ','
+  assign slide_count = 0
+  if section.blocks.size > 0
+    for block in section.blocks
+      if block.type == 'slide' and block.settings.image != blank
+        assign slide_count = slide_count | plus: 1
+      endif
+    endfor
+  endif
+-%}
+
+<section
+  class="sts-hero"
+  data-sts-hero
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-speed="{{ section.settings.autoplay_speed | times: 1000 }}"
+>
   <div class="sts-hero__media">
-    {%- if section.settings.image != blank -%}
-      {{
-        section.settings.image
-        | image_url: width: 2400
-        | image_tag:
-          loading: 'eager',
-          widths: '800, 1200, 1600, 2000, 2400',
-          sizes: '100vw',
-          alt: section.settings.heading_line_1
-      }}
+    {%- if slide_count > 0 -%}
+      {%- assign index = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'slide' and block.settings.image != blank -%}
+          <div
+            class="sts-hero__slide{% if index == 0 %} is-active{% endif %}"
+            data-sts-slide
+            {{ block.shopify_attributes }}
+          >
+            {{
+              block.settings.image
+              | image_url: width: 2400
+              | image_tag:
+                loading: 'eager',
+                widths: '800, 1200, 1600, 2000, 2400',
+                sizes: '100vw',
+                alt: section.settings.heading_line_1
+            }}
+          </div>
+          {%- assign index = index | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
     {%- else -%}
-      <img
-        src="{{ 'mainbanner-background.png' | asset_url }}"
-        alt="{{ section.settings.heading_line_1 | escape }}"
-        width="2400"
-        height="1350"
-        loading="eager"
-        fetchpriority="high"
-        class="sts-hero__img"
-      >
+      {%- for file in slide_files -%}
+        <div class="sts-hero__slide{% if forloop.first %} is-active{% endif %}" data-sts-slide>
+          <img
+            src="{{ file | strip | asset_url }}"
+            alt="{{ section.settings.heading_line_1 | escape }}"
+            width="2400"
+            height="1350"
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+            {% if forloop.first %}fetchpriority="high"{% endif %}
+          >
+        </div>
+      {%- endfor -%}
     {%- endif -%}
   </div>
 
@@ -174,18 +245,83 @@
       {%- endif -%}
     </div>
   </div>
+
+  <div class="sts-hero__dots" data-sts-dots aria-label="Banner slides"></div>
 </section>
+
+<script>
+  (function () {
+    const root = document.currentScript.previousElementSibling;
+    if (!root || !root.hasAttribute('data-sts-hero')) return;
+
+    const slides = Array.from(root.querySelectorAll('[data-sts-slide]'));
+    const dotsWrap = root.querySelector('[data-sts-dots]');
+    if (slides.length < 2) {
+      if (dotsWrap) dotsWrap.style.display = 'none';
+      return;
+    }
+
+    let index = 0;
+    const autoplay = root.getAttribute('data-autoplay') === 'true';
+    const speed = Number(root.getAttribute('data-speed') || 5000);
+    let timer;
+
+    slides.forEach((_, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'sts-hero__dot' + (i === 0 ? ' is-active' : '');
+      btn.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      btn.addEventListener('click', () => goTo(i, true));
+      dotsWrap.appendChild(btn);
+    });
+
+    const dots = Array.from(dotsWrap.querySelectorAll('.sts-hero__dot'));
+
+    function goTo(next, user) {
+      slides[index].classList.remove('is-active');
+      dots[index].classList.remove('is-active');
+      index = (next + slides.length) % slides.length;
+      slides[index].classList.add('is-active');
+      dots[index].classList.add('is-active');
+      if (user) restart();
+    }
+
+    function next() {
+      goTo(index + 1, false);
+    }
+
+    function restart() {
+      if (!autoplay) return;
+      clearInterval(timer);
+      timer = setInterval(next, speed);
+    }
+
+    restart();
+  })();
+</script>
 
 {% schema %}
 {
   "name": "STS Hero",
   "tag": "section",
   "class": "section-sts-hero",
+  "max_blocks": 8,
   "settings": [
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Background image"
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Change slides every",
+      "default": 5
     },
     {
       "type": "text",
@@ -226,6 +362,20 @@
       "type": "url",
       "id": "button_link_2",
       "label": "Secondary button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Optional. If no slides are added, the 4 theme asset banners are used."
+        }
+      ]
     }
   ],
   "presets": [
