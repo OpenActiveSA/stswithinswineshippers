@@ -357,8 +357,36 @@ body.template-index #MainContent {
 .card-wrapper .card__inner {
   background: var(--sts-card);
   border-radius: var(--sts-radius-card) var(--sts-radius-card) 0 0;
-  padding: 1.2rem 1.2rem 0;
+  padding: 0;
   flex: 0 0 auto;
+}
+
+.product-card-wrapper .card__media,
+.card-wrapper .card__media {
+  margin: 0 !important;
+  width: auto !important;
+  left: 1.2rem;
+  right: 1.2rem;
+  top: 1.2rem;
+  bottom: 0;
+}
+
+.product-card-wrapper .card .media,
+.card-wrapper .card .media {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-card-wrapper .card .media img,
+.card-wrapper .card .media img {
+  object-fit: contain;
+  object-position: center center;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
 }
 
 .product-card-wrapper .card__content,
