@@ -174,6 +174,27 @@ h5,
   text-decoration: none;
 }
 
+/* Switch to drawer sooner so 5-item nav does not wrap */
+@media screen and (min-width: 990px) and (max-width: 1199px) {
+  .header__inline-menu {
+    display: none !important;
+  }
+
+  header-drawer {
+    display: block !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .header__inline-menu {
+    display: block !important;
+  }
+
+  header-drawer {
+    display: none !important;
+  }
+}
+
 /* Open pill search in header */
 .sts-header-search {
   display: flex;
