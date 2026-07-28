@@ -37,20 +37,40 @@
     slider.addEventListener('slideChanged', () => syncDots(slider));
     syncDots(slider);
 
-    // Dawn recalculates pages on resize; keep dots in sync.
-    const resizeObserver = new ResizeObserver(() => syncDots(slider));
-    if (slider.slider) resizeObserver.observe(slider.slider);
+    if (slider.slider) {
+      const resizeObserver = new ResizeObserver(() => syncDots(slider));
+      resizeObserver.observe(slider.slider);
+    }
   }
 
   function init() {
     document.querySelectorAll('slider-component').forEach(bindSlider);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
+  function start() {
+    const run = () => {
+      init();
+      requestAnimationFrame(init);
+      setTimeout(init, 250);
+    };
+
+    if (window.customElements && customElements.whenDefined) {
+      customElements.whenDefined('slider-component').then(run);
+    } else {
+      run();
+    }
   }
 
-  document.addEventListener('shopify:section:load', init);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+
+  document.addEventListener('shopify:section:load', () => {
+    document.querySelectorAll('slider-component').forEach((slider) => {
+      delete slider.dataset.stsDotsBound;
+    });
+    start();
+  });
 })();
