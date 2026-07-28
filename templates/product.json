@@ -1,0 +1,97 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "meta": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"sts-product-meta\">{% if product.description != blank %}<p>{{ product.description | strip_html | truncate: 180 }}</p>{% endif %}<p>SKU: {{ product.selected_or_first_available_variant.sku | default: 'N/A' }}{% if product.type != blank %} &nbsp;|&nbsp; Categories: {{ product.type }}{% endif %}</p></div>"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "rating",
+        "price",
+        "quantity_selector",
+        "buy_buttons",
+        "meta"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 48,
+        "padding_bottom": 24
+      }
+    },
+    "sts_tabs": {
+      "type": "sts-product-tabs",
+      "settings": {
+        "tab_1_label": "Description",
+        "tab_2_label": "Additional information",
+        "fallback_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>",
+        "additional_info": ""
+      }
+    },
+    "sts_review": {
+      "type": "sts-review-band",
+      "settings": {
+        "author": "Rodrigo Teixeira",
+        "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "date": "March 3, 2023"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Related products",
+        "heading_size": "h1",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "padding_top": 48,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": ["main", "sts_tabs", "sts_review", "related-products"]
+}

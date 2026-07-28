@@ -1,0 +1,105 @@
+{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+
+<div class="sts-product-tabs" id="StsProductTabs-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="sts-product-tabs__nav" role="tablist">
+    <button
+      type="button"
+      class="sts-product-tabs__btn is-active"
+      role="tab"
+      aria-selected="true"
+      data-sts-tab="description"
+    >
+      {{ section.settings.tab_1_label }}
+    </button>
+    <button
+      type="button"
+      class="sts-product-tabs__btn"
+      role="tab"
+      aria-selected="false"
+      data-sts-tab="additional"
+    >
+      {{ section.settings.tab_2_label }}
+    </button>
+  </div>
+
+  <div class="sts-product-tabs__panel is-active rte" data-sts-panel="description">
+    {%- if product.description != blank -%}
+      {{ product.description }}
+    {%- else -%}
+      {{ section.settings.fallback_description }}
+    {%- endif -%}
+  </div>
+
+  <div class="sts-product-tabs__panel rte" data-sts-panel="additional">
+    {%- if section.settings.additional_info != blank -%}
+      {{ section.settings.additional_info }}
+    {%- else -%}
+      <p>
+        {%- if product.vendor != blank -%}Vendor: {{ product.vendor }}. {% endif -%}
+        {%- if product.type != blank -%}Type: {{ product.type }}. {% endif -%}
+        {%- if product.selected_or_first_available_variant.sku != blank -%}
+          SKU: {{ product.selected_or_first_available_variant.sku }}.
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    const root = document.getElementById('StsProductTabs-{{ section.id }}');
+    if (!root) return;
+    const buttons = root.querySelectorAll('[data-sts-tab]');
+    const panels = root.querySelectorAll('[data-sts-panel]');
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-sts-tab');
+        buttons.forEach((b) => {
+          b.classList.toggle('is-active', b === btn);
+          b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+        });
+        panels.forEach((panel) => {
+          panel.classList.toggle('is-active', panel.getAttribute('data-sts-panel') === id);
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "STS Product tabs",
+  "tag": "section",
+  "class": "section-sts-product-tabs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tab_1_label",
+      "label": "First tab label",
+      "default": "Description"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_label",
+      "label": "Second tab label",
+      "default": "Additional information"
+    },
+    {
+      "type": "richtext",
+      "id": "fallback_description",
+      "label": "Fallback description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "additional_info",
+      "label": "Additional information"
+    }
+  ],
+  "presets": [
+    {
+      "name": "STS Product tabs"
+    }
+  ]
+}
+{% endschema %}

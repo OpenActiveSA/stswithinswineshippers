@@ -1,0 +1,9 @@
+﻿# OS / editor
+.DS_Store
+Thumbs.db
+*.zip
+
+# Local previews / exports
+design-preview/
+_theme_zip_tmp/
+sts-swithins-dawn-theme.zip

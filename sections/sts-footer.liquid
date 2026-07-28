@@ -1,0 +1,216 @@
+{% comment %} St Swithins custom footer matching design {% endcomment %}
+
+<footer class="sts-footer" {{ section.shopify_attributes }}>
+  <div class="sts-footer__panel">
+    <div class="sts-footer__menus">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'menu' -%}
+          <div class="sts-footer__col" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}
+              <h2 class="sts-footer__heading">{{ block.settings.heading }}</h2>
+            {%- endif -%}
+            {%- if block.settings.menu != blank -%}
+              <ul class="sts-footer__list">
+                {%- for link in block.settings.menu.links -%}
+                  <li>
+                    <a href="{{ link.url }}">{{ link.title | escape }}</a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- else -%}
+              <ul class="sts-footer__list">
+                {%- assign placeholders = block.settings.placeholder_links | split: ',' -%}
+                {%- for item in placeholders -%}
+                  {%- assign label = item | strip -%}
+                  {%- if label != blank -%}
+                    <li><a href="#">{{ label }}</a></li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="sts-footer__brand">
+      <a href="{{ routes.root_url }}" class="sts-wordmark" aria-label="{{ shop.name }}">
+        <span class="sts-wordmark__name">ST SWITHINS</span>
+        <span class="sts-wordmark__tag">WINE SHIPPERS</span>
+      </a>
+
+      {%- if section.settings.newsletter_enable -%}
+        {%- form 'customer', id: 'ContactFooterSTS', class: 'sts-footer__newsletter' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="field">
+            <input
+              id="NewsletterForm--sts"
+              type="email"
+              name="contact[email]"
+              class="field__input"
+              value="{{ form.email }}"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              placeholder="{{ section.settings.newsletter_placeholder }}"
+              required
+            >
+            <label class="visually-hidden" for="NewsletterForm--sts">
+              {{ section.settings.newsletter_placeholder }}
+            </label>
+          </div>
+          <button type="submit" class="sts-btn sts-btn--dark" name="commit">
+            {{ section.settings.newsletter_button }}
+          </button>
+        {%- endform -%}
+      {%- endif -%}
+
+      {%- if section.settings.address != blank -%}
+        <p class="sts-footer__address">{{ section.settings.address }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.show_social -%}
+        <ul class="sts-footer__social">
+          {%- if settings.social_instagram_link != blank -%}
+            <li>
+              <a href="{{ settings.social_instagram_link }}" aria-label="Instagram">
+                {{- 'icon-instagram.svg' | inline_asset_content -}}
+              </a>
+            </li>
+          {%- endif -%}
+          {%- if settings.social_facebook_link != blank -%}
+            <li>
+              <a href="{{ settings.social_facebook_link }}" aria-label="Facebook">
+                {{- 'icon-facebook.svg' | inline_asset_content -}}
+              </a>
+            </li>
+          {%- endif -%}
+          {%- if settings.social_twitter_link != blank -%}
+            <li>
+              <a href="{{ settings.social_twitter_link }}" aria-label="X">
+                {{- 'icon-twitter.svg' | inline_asset_content -}}
+              </a>
+            </li>
+          {%- endif -%}
+          {%- if settings.social_instagram_link == blank and settings.social_facebook_link == blank and settings.social_twitter_link == blank -%}
+            <li><span aria-hidden="true">IG</span></li>
+            <li><span aria-hidden="true">FB</span></li>
+            <li><span aria-hidden="true">X</span></li>
+          {%- endif -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    <div class="sts-footer__bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+      <span>{{ section.settings.credit_text }}</span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "STS Footer",
+  "class": "section-sts-footer",
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "ABOUT"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        },
+        {
+          "type": "text",
+          "id": "placeholder_links",
+          "label": "Placeholder links (comma-separated)",
+          "default": "Our Story, Meet the Team, Wine Blog, FAQs",
+          "info": "Used when no menu is selected"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "label": "Show newsletter signup",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Email placeholder",
+      "default": "Enter email address..."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button",
+      "label": "Subscribe button",
+      "default": "SUBSCRIBE"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Address",
+      "default": "11-12 ST SWITHIN'S LANE, LONDON EC4N 8AL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social icons",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "credit_text",
+      "label": "Credit text",
+      "default": "Built by Open Agency"
+    }
+  ],
+  "presets": [
+    {
+      "name": "STS Footer",
+      "blocks": [
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "ABOUT",
+            "placeholder_links": "Our Story, Meet the Team, Wine Blog, FAQs"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "INFORMATION",
+            "placeholder_links": "Delivery, Returns Policy, Terms & Conditions, Privacy Policy, Cookie Policy"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "SHOP",
+            "placeholder_links": "All Wines, Gifts, Gift Vouchers, New Arrivals, Special Offers"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "VISIT",
+            "placeholder_links": "Wine Bar, Tasting Terrace, Wine Tastings, Book a Table, Private Events, Contact"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

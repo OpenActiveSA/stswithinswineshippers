@@ -1,0 +1,49 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "sts_footer": {
+      "type": "sts-footer",
+      "blocks": {
+        "about": {
+          "type": "menu",
+          "settings": {
+            "heading": "ABOUT",
+            "placeholder_links": "Our Story, Meet the Team, Wine Blog, FAQs"
+          }
+        },
+        "information": {
+          "type": "menu",
+          "settings": {
+            "heading": "INFORMATION",
+            "placeholder_links": "Delivery, Returns Policy, Terms & Conditions, Privacy Policy, Cookie Policy"
+          }
+        },
+        "shop": {
+          "type": "menu",
+          "settings": {
+            "heading": "SHOP",
+            "placeholder_links": "All Wines, Gifts, Gift Vouchers, New Arrivals, Special Offers"
+          }
+        },
+        "visit": {
+          "type": "menu",
+          "settings": {
+            "heading": "VISIT",
+            "placeholder_links": "Wine Bar, Tasting Terrace, Wine Tastings, Book a Table, Private Events, Contact"
+          }
+        }
+      },
+      "block_order": ["about", "information", "shop", "visit"],
+      "settings": {
+        "newsletter_enable": true,
+        "newsletter_placeholder": "Enter email address...",
+        "newsletter_button": "SUBSCRIBE",
+        "address": "11-12 ST SWITHIN'S LANE, LONDON EC4N 8AL",
+        "show_social": true,
+        "credit_text": "Built by Open Agency"
+      }
+    }
+  },
+  "order": ["sts_footer"]
+}

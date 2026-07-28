@@ -1,0 +1,45 @@
+<section class="sts-review-band" {{ section.shopify_attributes }}>
+  <div class="sts-review-band__stars" aria-hidden="true">★★★★</div>
+  {%- if section.settings.author != blank -%}
+    <p class="sts-review-band__author">{{ section.settings.author }}</p>
+  {%- endif -%}
+  {%- if section.settings.quote != blank -%}
+    <blockquote class="sts-review-band__quote">{{ section.settings.quote }}</blockquote>
+  {%- endif -%}
+  {%- if section.settings.date != blank -%}
+    <p class="sts-review-band__date">{{ section.settings.date }}</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "STS Review band",
+  "tag": "section",
+  "class": "section-sts-review-band",
+  "settings": [
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Author",
+      "default": "Rodrigo Teixeira"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      "type": "text",
+      "id": "date",
+      "label": "Date",
+      "default": "March 3, 2023"
+    }
+  ],
+  "presets": [
+    {
+      "name": "STS Review band"
+    }
+  ]
+}
+{% endschema %}

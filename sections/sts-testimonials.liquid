@@ -1,0 +1,91 @@
+<section class="sts-testimonials" {{ section.shopify_attributes }}>
+  <div class="sts-testimonials__inner">
+    {%- for block in section.blocks -%}
+      <article class="sts-testimonial" {{ block.shopify_attributes }}>
+        <div class="sts-testimonial__stars" aria-hidden="true">★★★★★</div>
+        {%- if block.settings.quote != blank -%}
+          <p class="sts-testimonial__quote">{{ block.settings.quote }}</p>
+        {%- endif -%}
+        {%- if block.settings.author != blank -%}
+          <p class="sts-testimonial__author">{{ block.settings.author }}</p>
+        {%- endif -%}
+      </article>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.google_label != blank -%}
+    <div class="sts-testimonials__google">
+      <a href="{{ section.settings.google_link | default: '#' }}">{{ section.settings.google_label }}</a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "STS Testimonials",
+  "tag": "section",
+  "class": "section-sts-testimonials",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Our host Fred was superb. He knows his wines and provided a 5 star service throughout our stay."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Gary Grant"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "google_label",
+      "label": "Google review link label",
+      "default": "Add Google review"
+    },
+    {
+      "type": "url",
+      "id": "google_link",
+      "label": "Google review link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "STS Testimonials",
+      "blocks": [
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "Our host Fred was superb. He knows his wines and provided a 5 star service throughout our stay. Would highly recommend for an enjoyable experience.",
+            "author": "Gary Grant"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "Ludo, Alpesh and Fred were fantastic — quick, professional service. They know their wines inside out and the atmosphere is superb.",
+            "author": "Jon Doe"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "Best wines based on our taste — no guessing. Booking my future visits already. Thank you!",
+            "author": "Christine"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

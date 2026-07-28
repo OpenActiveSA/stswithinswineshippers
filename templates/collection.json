@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "sts_intro": {
+      "type": "sts-collection-intro",
+      "settings": {
+        "heading": "Shop wines with personality",
+        "text": "<p>From bold reds to crisp whites, every bottle is chosen for its unique story and quality. Explore our collection and uncover something unexpected.</p>",
+        "show_filter_labels": true,
+        "padding_top": 96,
+        "padding_bottom": 36
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": false,
+        "columns_mobile": "2",
+        "padding_top": 24,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": ["sts_intro", "product-grid"]
+}

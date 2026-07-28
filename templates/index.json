@@ -1,0 +1,118 @@
+{
+  "sections": {
+    "sts_hero": {
+      "type": "sts-hero",
+      "settings": {
+        "heading_line_1": "Destination for",
+        "heading_line_2": "Wine Enthusiasts",
+        "button_label_1": "VIEW ALL WINES",
+        "button_link_1": "shopify://collections/all",
+        "button_label_2": "OUR STORY",
+        "button_link_2": ""
+      }
+    },
+    "finest_selection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Finest Selection",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 6,
+        "columns_desktop": 3,
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "outline",
+        "enable_desktop_slider": true,
+        "swipe_on_mobile": true,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "padding_top": 60,
+        "padding_bottom": 52
+      }
+    },
+    "sts_shipping": {
+      "type": "sts-image-banner",
+      "settings": {
+        "heading": "Fine wine shipping. Handled properly.",
+        "text": "<p>Wine shipping requires more than standard freight services. It demands specialist knowledge, careful handling and a deep understanding of international wine logistics. STS Wine Shippers provides end-to-end solutions for wineries, distributors and wine businesses across South Africa and around the world.</p>",
+        "button_label": "OUR STORY",
+        "button_link": ""
+      }
+    },
+    "red_selection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Red Wine Selection",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "outline",
+        "enable_desktop_slider": true,
+        "swipe_on_mobile": true,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "padding_top": 60,
+        "padding_bottom": 52
+      }
+    },
+    "sts_testimonials": {
+      "type": "sts-testimonials",
+      "blocks": {
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "quote": "Our host Fred was superb. He knows his wines and provided a 5 star service throughout our stay. Would highly recommend for an enjoyable experience.",
+            "author": "Gary Grant"
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "quote": "Ludo, Alpesh and Fred were fantastic — quick, professional service. They know their wines inside out and the atmosphere is superb.",
+            "author": "Jon Doe"
+          }
+        },
+        "quote_3": {
+          "type": "quote",
+          "settings": {
+            "quote": "Best wines based on our taste — no guessing. Booking my future visits already. Thank you!",
+            "author": "Christine"
+          }
+        }
+      },
+      "block_order": ["quote_1", "quote_2", "quote_3"],
+      "settings": {
+        "google_label": "Add Google review",
+        "google_link": ""
+      }
+    }
+  },
+  "order": [
+    "sts_hero",
+    "finest_selection",
+    "sts_shipping",
+    "red_selection",
+    "sts_testimonials"
+  ]
+}

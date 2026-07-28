@@ -1,0 +1,106 @@
+<section class="sts-hero" {{ section.shopify_attributes }}>
+  <div class="sts-hero__media">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 2400
+        | image_tag:
+          loading: 'eager',
+          widths: '800, 1200, 1600, 2000, 2400',
+          sizes: '100vw',
+          alt: section.settings.heading_line_1
+      }}
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+    <div class="sts-hero__overlay"></div>
+  </div>
+
+  <div class="sts-hero__content">
+    {%- if section.settings.heading_line_1 != blank -%}
+      <p class="sts-hero__eyebrow">{{ section.settings.heading_line_1 }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading_line_2 != blank -%}
+      <span class="sts-hero__script">{{ section.settings.heading_line_2 }}</span>
+    {%- endif -%}
+
+    <div class="sts-hero__actions">
+      {%- if section.settings.button_label_1 != blank -%}
+        <a
+          href="{{ section.settings.button_link_1 | default: routes.all_products_collection_url }}"
+          class="sts-btn sts-btn--solid"
+        >
+          {{ section.settings.button_label_1 }}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.button_label_2 != blank -%}
+        <a
+          href="{{ section.settings.button_link_2 | default: '#' }}"
+          class="sts-btn sts-btn--outline"
+        >
+          {{ section.settings.button_label_2 }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="sts-hero__dots" aria-hidden="true">
+      <span class="is-active"></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "STS Hero",
+  "tag": "section",
+  "class": "section-sts-hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Destination for"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2 (script)",
+      "default": "Wine Enthusiasts"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Primary button label",
+      "default": "VIEW ALL WINES"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Secondary button label",
+      "default": "OUR STORY"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Secondary button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "STS Hero"
+    }
+  ]
+}
+{% endschema %}
