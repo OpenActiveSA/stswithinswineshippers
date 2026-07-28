@@ -45,14 +45,21 @@ h5,
 }
 
 /* —— Logo —— */
+.header__heading-logo-wrapper {
+  width: auto !important;
+  max-width: 180px;
+}
+
 .sts-logo,
 .header__heading-logo.sts-logo {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: min(180px, 42vw);
-  max-height: 72px;
+  display: block !important;
+  width: 160px !important;
+  max-width: min(180px, 42vw) !important;
+  height: auto !important;
+  max-height: 82px !important;
   object-fit: contain;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .sts-footer__logo-link {
@@ -61,8 +68,10 @@ h5,
 }
 
 .sts-footer__logo {
-  max-width: 200px;
-  max-height: 90px;
+  width: 180px !important;
+  max-width: 200px !important;
+  max-height: 100px !important;
+  height: auto !important;
   margin: 0 auto;
 }
 
