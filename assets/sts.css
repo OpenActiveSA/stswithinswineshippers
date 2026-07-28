@@ -1332,6 +1332,10 @@ body.template-product .quantity__input {
   margin: 0 auto 1.2rem;
   line-height: 1.5;
   font-weight: 400;
+  font-style: italic;
+  color: #ffffff !important;
+  border-left: 0 !important;
+  padding-left: 0 !important;
 }
 
 .sts-review-band__date {
