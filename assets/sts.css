@@ -11,7 +11,7 @@
   --sts-gold: #c4a574;
   --sts-gold-deep: #b08d5b;
   --sts-white: #ffffff;
-  --sts-black: #0f0f0f;
+  --sts-black: #1c1c1a;
   --sts-radius-pill: 999px;
   --sts-radius-card: 10px;
   --sts-font-display: 'DM Sans', system-ui, sans-serif;
@@ -112,7 +112,7 @@ h5,
 }
 
 .header-wrapper {
-  background: var(--sts-black);
+  background: #1c1c1a;
   color: var(--sts-white);
 }
 
@@ -173,7 +173,7 @@ h5,
   min-height: 3.6rem;
 }
 
-/* Transparent header on homepage */
+/* Transparent header on homepage + dark gradient under nav */
 body.template-index .shopify-section-group-header-group {
   position: absolute;
   top: 0;
@@ -182,7 +182,27 @@ body.template-index .shopify-section-group-header-group {
   z-index: 30;
 }
 
+body.template-index .shopify-section-group-header-group::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(10rem, 18vw, 16rem);
+  background: linear-gradient(
+    180deg,
+    #1c1c1a 0%,
+    rgba(28, 28, 26, 0.85) 35%,
+    rgba(28, 28, 26, 0.35) 70%,
+    rgba(28, 28, 26, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
 body.template-index .header-wrapper {
+  position: relative;
+  z-index: 1;
   background: transparent;
   border: 0;
   box-shadow: none;
@@ -416,7 +436,12 @@ body.template-index #MainContent {
 .sts-hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.45) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(28, 28, 26, 0.45) 0%,
+    rgba(28, 28, 26, 0.25) 40%,
+    rgba(28, 28, 26, 0.4) 100%
+  );
 }
 
 .sts-hero__content {
