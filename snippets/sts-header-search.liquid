@@ -1,0 +1,26 @@
+{% comment %}
+  Always-visible pill search in the header (desktop/tablet).
+{% endcomment %}
+<div class="sts-header-search small-hide">
+  <form action="{{ routes.search_url }}" method="get" role="search" class="sts-header-search__form">
+    <label class="visually-hidden" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
+    <input
+      id="{{ input_id }}"
+      class="sts-header-search__input"
+      type="search"
+      name="q"
+      value="{{ search.terms | escape }}"
+      placeholder="{{ 'general.search.search' | t }}"
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="false"
+    >
+    <input type="hidden" name="options[prefix]" value="last">
+    <button type="submit" class="sts-header-search__button" aria-label="{{ 'general.search.search' | t }}">
+      <span class="svg-wrapper">
+        {{- 'icon-search.svg' | inline_asset_content -}}
+      </span>
+    </button>
+  </form>
+</div>

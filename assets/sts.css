@@ -154,15 +154,83 @@ h5,
 
 .header__inline-menu .list-menu__item {
   font-family: var(--sts-font-body);
-  font-size: 1.1rem;
-  font-weight: 400;
-  letter-spacing: 0.18em;
+  font-size: 1.45rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.header__inline-menu .header__menu-item {
+  padding: 1rem 1.2rem;
 }
 
 .header__inline-menu .header__menu-item:hover {
   text-decoration: none;
   opacity: 0.75;
+}
+
+.header__inline-menu .header__active-menu-item {
+  color: var(--sts-gold);
+  text-decoration: none;
+}
+
+/* Open pill search in header */
+.sts-header-search {
+  display: flex;
+  align-items: center;
+  margin-right: 0.4rem;
+}
+
+.sts-header-search__form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 18rem;
+}
+
+.sts-header-search__input {
+  width: 100%;
+  min-height: 3.8rem;
+  padding: 0 4.2rem 0 1.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: var(--sts-radius-pill);
+  background: transparent;
+  color: var(--sts-white);
+  font-family: var(--sts-font-body);
+  font-size: 1.25rem;
+  outline: none;
+}
+
+.sts-header-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.sts-header-search__input:focus {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.sts-header-search__button {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3.2rem;
+  height: 3.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--sts-white);
+  cursor: pointer;
+  padding: 0;
+}
+
+.sts-header-search__button .svg-wrapper,
+.sts-header-search__button svg {
+  width: 1.8rem;
+  height: 1.8rem;
+  color: inherit;
 }
 
 .header__search .field__input,
@@ -415,9 +483,9 @@ body.template-index #MainContent {
   color: var(--sts-wine);
   border: 1px solid var(--sts-white);
   min-width: 18rem;
-  min-height: 4.8rem;
+  min-height: 5.2rem;
   padding: 0 2.8rem;
-  font-size: 1.05rem;
+  font-size: 1.3rem;
   font-weight: 500;
   letter-spacing: 0.06em;
   line-height: 1;
@@ -433,9 +501,9 @@ body.template-index #MainContent {
   color: var(--sts-gold);
   border: 2px solid var(--sts-gold);
   min-width: 18rem;
-  min-height: 4.8rem;
+  min-height: 5.2rem;
   padding: 0 2.8rem;
-  font-size: 1.05rem;
+  font-size: 1.3rem;
   font-weight: 500;
   letter-spacing: 0.06em;
   line-height: 1;

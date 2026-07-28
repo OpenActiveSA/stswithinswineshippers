@@ -209,7 +209,10 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
+      {% render 'sts-header-search', input_id: 'Search-Inline' %}
+      <div class="medium-hide large-up-hide">
+        {% render 'header-search', input_id: 'Search-In-Modal' %}
+      </div>
 
       {%- if shop.customer_accounts_enabled -%}
         <a
