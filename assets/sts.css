@@ -1054,6 +1054,24 @@ body.template-product .product {
   background: var(--sts-cream);
 }
 
+@media screen and (min-width: 990px) {
+  body.template-product .product:not(.product--no-media) .product__media-wrapper {
+    max-width: 50% !important;
+    width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2) !important;
+  }
+
+  body.template-product .product:not(.product--no-media) .product__info-wrapper {
+    max-width: 50% !important;
+    width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2) !important;
+    padding-left: 4rem;
+  }
+
+  body.template-product .product--right:not(.product--no-media) .product__info-wrapper {
+    padding-left: 0;
+    padding-right: 4rem;
+  }
+}
+
 body.template-product .product__media-wrapper .product-media-container,
 body.template-product .product__media-item {
   background: var(--sts-card);
