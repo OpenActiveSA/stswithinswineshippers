@@ -1,17 +1,63 @@
 {%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  #shopify-section-{{ section.id }} .sts-shop-intro {
+    background: #1c1c1a;
+    color: #ffffff;
+    text-align: center;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
+
+  #shopify-section-{{ section.id }} .sts-shop-intro__title {
+    font-family: var(--sts-font-display, 'DM Sans', system-ui, sans-serif);
+    font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+    margin: 0 auto 1.8rem;
+    max-width: 56rem;
+    color: #ffffff !important;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-intro__text,
+  #shopify-section-{{ section.id }} .sts-shop-intro__text p {
+    max-width: 58rem;
+    margin: 0 auto 3rem;
+    color: rgba(255, 255, 255, 0.92) !important;
+    font-size: 1.5rem;
+    line-height: 1.65;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-intro__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-intro__filter {
+    min-width: 14rem;
+    padding: 1rem 2rem;
+    border: 1px solid #d4c391;
+    border-radius: 999px;
+    color: #d4c391;
+    font-size: 1.15rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-intro__filter span {
+    color: #d4c391;
   }
 {%- endstyle -%}
 
-<div class="sts-shop-intro section-{{ section.id }}-padding">
+<div class="sts-shop-intro">
   <h1 class="sts-shop-intro__title">
     {%- if section.settings.heading != blank -%}
       {{ section.settings.heading }}
@@ -65,21 +111,21 @@
       "type": "range",
       "id": "padding_top",
       "min": 0,
-      "max": 120,
+      "max": 160,
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 96
+      "default": 0
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
-      "max": 100,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 36
+      "default": 56
     }
   ],
   "presets": [

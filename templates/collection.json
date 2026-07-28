@@ -6,7 +6,7 @@
         "heading": "Shop wines with personality",
         "text": "<p>From bold reds to crisp whites, every bottle is chosen for its unique story and quality. Explore our collection and uncover something unexpected.</p>",
         "show_filter_labels": true,
-        "padding_top": 120,
+        "padding_top": 0,
         "padding_bottom": 56
       }
     },

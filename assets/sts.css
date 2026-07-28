@@ -908,7 +908,7 @@ body.template-collection .product-grid {
   background: var(--sts-black);
   color: var(--sts-white);
   text-align: center;
-  padding: 10rem 2rem 4.5rem;
+  padding: 0 2rem 4.5rem;
 }
 
 .sts-shop-intro__title {
