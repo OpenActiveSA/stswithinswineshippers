@@ -1,0 +1,24 @@
+{%- comment -%}
+  Renders the St Swithins SVG logo from theme assets.
+  Accepts:
+  - class: extra CSS classes (optional)
+  - on_light: if true, inverts to black for light backgrounds (optional)
+{%- endcomment -%}
+{%- liquid
+  assign logo_class = 'sts-logo'
+  if class != blank
+    assign logo_class = logo_class | append: ' ' | append: class
+  endif
+  if on_light
+    assign logo_class = logo_class | append: ' sts-logo--on-light'
+  endif
+-%}
+<img
+  src="{{ 'st-swithins-logo.svg' | asset_url }}"
+  alt="{{ shop.name | escape }}"
+  class="{{ logo_class }}"
+  width="149"
+  height="76"
+  loading="eager"
+  decoding="async"
+>

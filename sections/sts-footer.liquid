@@ -34,9 +34,8 @@
     </div>
 
     <div class="sts-footer__brand">
-      <a href="{{ routes.root_url }}" class="sts-wordmark" aria-label="{{ shop.name }}">
-        <span class="sts-wordmark__name">ST SWITHINS</span>
-        <span class="sts-wordmark__tag">WINE SHIPPERS</span>
+      <a href="{{ routes.root_url }}" class="sts-footer__logo-link" aria-label="{{ shop.name }}">
+        {% render 'sts-logo', on_light: true, class: 'sts-footer__logo' %}
       </a>
 
       {%- if section.settings.newsletter_enable -%}

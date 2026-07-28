@@ -172,10 +172,9 @@
             }}
           </div>
         {%- else -%}
-          <span class="sts-wordmark">
-            <span class="sts-wordmark__name">ST SWITHINS</span>
-            <span class="sts-wordmark__tag">WINE SHIPPERS</span>
-          </span>
+          <div class="header__heading-logo-wrapper">
+            {% render 'sts-logo', class: 'header__heading-logo motion-reduce' %}
+          </div>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -218,10 +217,9 @@
             }}
           </div>
         {%- else -%}
-          <span class="sts-wordmark">
-            <span class="sts-wordmark__name">ST SWITHINS</span>
-            <span class="sts-wordmark__tag">WINE SHIPPERS</span>
-          </span>
+          <div class="header__heading-logo-wrapper">
+            {% render 'sts-logo', class: 'header__heading-logo' %}
+          </div>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
