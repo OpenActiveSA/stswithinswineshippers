@@ -637,6 +637,7 @@ body.template-index #MainContent {
   font-size: clamp(2.8rem, 4vw, 4.4rem);
   font-weight: 400;
   margin: 0 0 1.4rem;
+  color: #ffffff !important;
 }
 
 .sts-banner__text {
@@ -644,6 +645,12 @@ body.template-index #MainContent {
   line-height: 1.7;
   opacity: 0.92;
   margin: 0 0 2.2rem;
+  color: #ffffff !important;
+}
+
+.sts-banner__text p,
+.sts-banner__text * {
+  color: #ffffff !important;
 }
 
 /* —— Testimonials —— */
