@@ -477,6 +477,38 @@ body.template-index #MainContent {
 
 .featured-collection .slider-buttons {
   justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.featured-collection .sts-slider-dots {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.featured-collection .sts-slider-dots__list {
+  display: flex;
+  align-items: center;
+  gap: 1.35rem;
+}
+
+.featured-collection .sts-slider-dots__dot {
+  width: 1.32rem;
+  height: 1.32rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #1c1c1a;
+  opacity: 0.35;
+  cursor: pointer;
+  transition: width 0.25s ease, opacity 0.25s ease, background 0.25s ease;
+}
+
+.featured-collection .sts-slider-dots__dot.is-active {
+  width: 3.84rem;
+  opacity: 1;
+  background: #1c1c1a;
 }
 
 .sts-btn--hero-primary {

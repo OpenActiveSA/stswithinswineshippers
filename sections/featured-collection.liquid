@@ -177,11 +177,10 @@
               {{- 'icon-caret.svg' | inline_asset_content -}}
             </span>
           </button>
-          <div class="slider-counter caption">
-            <span class="slider-counter--current">1</span>
-            <span aria-hidden="true"> / </span>
-            <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
-            <span class="slider-counter--total">{{ products_to_display }}</span>
+          <div class="slider-counter sts-slider-dots" data-sts-slider-dots aria-label="{{ 'general.slider.of' | t }}">
+            <span class="slider-counter--current visually-hidden">1</span>
+            <span class="slider-counter--total visually-hidden">{{ products_to_display }}</span>
+            <div class="sts-slider-dots__list" role="presentation"></div>
           </div>
           <button
             type="button"
@@ -214,6 +213,8 @@
     {%- endif -%}
   </div>
 </div>
+
+<script src="{{ 'sts-slider-dots.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {
