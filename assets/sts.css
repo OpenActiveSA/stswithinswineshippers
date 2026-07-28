@@ -1103,7 +1103,7 @@ body.template-product .quantity {
 /* —— Footer —— */
 .sts-footer {
   background: var(--sts-cream);
-  padding: 4rem 2rem 2rem;
+  padding: 4rem 2rem 4.5rem;
   color: var(--sts-ink);
 }
 
