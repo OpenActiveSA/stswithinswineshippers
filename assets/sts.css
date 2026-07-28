@@ -1,6 +1,6 @@
 /* St Swithins Wine Shippers — brand overrides on Dawn */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Outfit:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Great+Vibes&display=swap');
 
 :root {
   --sts-cream: #f5f1ea;
@@ -14,9 +14,9 @@
   --sts-black: #0f0f0f;
   --sts-radius-pill: 999px;
   --sts-radius-card: 10px;
-  --sts-font-display: 'Cormorant Garamond', Georgia, serif;
+  --sts-font-display: 'DM Sans', system-ui, sans-serif;
   --sts-font-script: 'Great Vibes', cursive;
-  --sts-font-body: 'Outfit', system-ui, sans-serif;
+  --sts-font-body: 'DM Sans', system-ui, sans-serif;
 }
 
 body {
@@ -24,6 +24,13 @@ body {
   font-family: var(--sts-font-body);
   letter-spacing: 0.02em;
   color: var(--sts-ink);
+}
+
+/* Override Dawn theme font tokens */
+:root,
+body {
+  --font-body-family: 'DM Sans', system-ui, sans-serif !important;
+  --font-heading-family: 'DM Sans', system-ui, sans-serif !important;
 }
 
 h1,
