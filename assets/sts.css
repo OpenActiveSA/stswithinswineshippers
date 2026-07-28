@@ -1193,7 +1193,7 @@ body.template-product .quantity {
 .sts-footer__panel {
   background: var(--sts-white);
   border-radius: 1.2rem;
-  padding: 4rem 3rem 2.5rem;
+  padding: 4rem 5rem 2.5rem;
   max-width: 128rem;
   margin: 0 auto;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
