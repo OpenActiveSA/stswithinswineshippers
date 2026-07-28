@@ -165,12 +165,13 @@
         {%- endif -%}
       </ul>
       {%- if show_mobile_slider or show_desktop_slider -%}
-        <div class="slider-buttons">
+        <div class="slider-buttons sts-slider-controls">
           <button
             type="button"
-            class="slider-button slider-button--prev"
+            class="slider-button slider-button--prev visually-hidden"
             name="previous"
-            aria-label="{{ 'general.slider.previous_slide' | t }}"
+            tabindex="-1"
+            aria-hidden="true"
             aria-controls="Slider-{{ section.id }}"
           >
             <span class="svg-wrapper">
@@ -184,9 +185,10 @@
           </div>
           <button
             type="button"
-            class="slider-button slider-button--next"
+            class="slider-button slider-button--next visually-hidden"
             name="next"
-            aria-label="{{ 'general.slider.next_slide' | t }}"
+            tabindex="-1"
+            aria-hidden="true"
             aria-controls="Slider-{{ section.id }}"
           >
             <span class="svg-wrapper">
