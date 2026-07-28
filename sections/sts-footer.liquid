@@ -41,12 +41,15 @@
       {%- if section.settings.newsletter_enable -%}
         {%- form 'customer', id: 'ContactFooterSTS', class: 'sts-footer__newsletter' -%}
           <input type="hidden" name="contact[tags]" value="newsletter">
-          <div class="field">
+          <div class="sts-footer__newsletter-pill">
+            <label class="visually-hidden" for="NewsletterForm--sts">
+              {{ section.settings.newsletter_placeholder }}
+            </label>
             <input
               id="NewsletterForm--sts"
               type="email"
               name="contact[email]"
-              class="field__input"
+              class="sts-footer__newsletter-input"
               value="{{ form.email }}"
               aria-required="true"
               autocorrect="off"
@@ -55,13 +58,10 @@
               placeholder="{{ section.settings.newsletter_placeholder }}"
               required
             >
-            <label class="visually-hidden" for="NewsletterForm--sts">
-              {{ section.settings.newsletter_placeholder }}
-            </label>
+            <button type="submit" class="sts-footer__newsletter-btn" name="commit">
+              {{ section.settings.newsletter_button }}
+            </button>
           </div>
-          <button type="submit" class="sts-btn sts-btn--dark" name="commit">
-            {{ section.settings.newsletter_button }}
-          </button>
         {%- endform -%}
       {%- endif -%}
 
@@ -71,32 +71,33 @@
 
       {%- if section.settings.show_social -%}
         <ul class="sts-footer__social">
-          {%- if settings.social_instagram_link != blank -%}
-            <li>
-              <a href="{{ settings.social_instagram_link }}" aria-label="Instagram">
-                {{- 'icon-instagram.svg' | inline_asset_content -}}
-              </a>
-            </li>
-          {%- endif -%}
-          {%- if settings.social_facebook_link != blank -%}
-            <li>
-              <a href="{{ settings.social_facebook_link }}" aria-label="Facebook">
-                {{- 'icon-facebook.svg' | inline_asset_content -}}
-              </a>
-            </li>
-          {%- endif -%}
-          {%- if settings.social_twitter_link != blank -%}
-            <li>
-              <a href="{{ settings.social_twitter_link }}" aria-label="X">
-                {{- 'icon-twitter.svg' | inline_asset_content -}}
-              </a>
-            </li>
-          {%- endif -%}
-          {%- if settings.social_instagram_link == blank and settings.social_facebook_link == blank and settings.social_twitter_link == blank -%}
-            <li><span aria-hidden="true">IG</span></li>
-            <li><span aria-hidden="true">FB</span></li>
-            <li><span aria-hidden="true">X</span></li>
-          {%- endif -%}
+          <li>
+            <a
+              href="{{ settings.social_instagram_link | default: '#' }}"
+              aria-label="Instagram"
+              {% if settings.social_instagram_link == blank %}aria-disabled="true"{% endif %}
+            >
+              {{- 'icon-instagram.svg' | inline_asset_content -}}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ settings.social_facebook_link | default: '#' }}"
+              aria-label="Facebook"
+              {% if settings.social_facebook_link == blank %}aria-disabled="true"{% endif %}
+            >
+              {{- 'icon-facebook.svg' | inline_asset_content -}}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ settings.social_twitter_link | default: '#' }}"
+              aria-label="X"
+              {% if settings.social_twitter_link == blank %}aria-disabled="true"{% endif %}
+            >
+              {{- 'icon-twitter.svg' | inline_asset_content -}}
+            </a>
+          </li>
         </ul>
       {%- endif -%}
     </div>
