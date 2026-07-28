@@ -25,18 +25,20 @@
   </div>
 
   <div class="sts-hero__content">
-    {%- if section.settings.heading_line_1 != blank -%}
-      <p class="sts-hero__eyebrow">{{ section.settings.heading_line_1 }}</p>
-    {%- endif -%}
-    {%- if section.settings.heading_line_2 != blank -%}
-      <span class="sts-hero__script">{{ section.settings.heading_line_2 }}</span>
-    {%- endif -%}
+    <h1 class="sts-hero__heading">
+      {%- if section.settings.heading_line_1 != blank -%}
+        <span class="sts-hero__line sts-hero__line--light">{{ section.settings.heading_line_1 }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading_line_2 != blank -%}
+        <span class="sts-hero__line sts-hero__line--gold">{{ section.settings.heading_line_2 }}</span>
+      {%- endif -%}
+    </h1>
 
     <div class="sts-hero__actions">
       {%- if section.settings.button_label_1 != blank -%}
         <a
           href="{{ section.settings.button_link_1 | default: routes.all_products_collection_url }}"
-          class="sts-btn sts-btn--solid"
+          class="sts-btn sts-btn--hero-primary"
         >
           {{ section.settings.button_label_1 }}
         </a>
@@ -44,17 +46,11 @@
       {%- if section.settings.button_label_2 != blank -%}
         <a
           href="{{ section.settings.button_link_2 | default: '#' }}"
-          class="sts-btn sts-btn--outline"
+          class="sts-btn sts-btn--hero-secondary"
         >
           {{ section.settings.button_label_2 }}
         </a>
       {%- endif -%}
-    </div>
-
-    <div class="sts-hero__dots" aria-hidden="true">
-      <span class="is-active"></span>
-      <span></span>
-      <span></span>
     </div>
   </div>
 </section>
@@ -79,14 +75,14 @@
     {
       "type": "text",
       "id": "heading_line_2",
-      "label": "Heading line 2 (script)",
+      "label": "Heading line 2",
       "default": "Wine Enthusiasts"
     },
     {
       "type": "text",
       "id": "button_label_1",
       "label": "Primary button label",
-      "default": "VIEW ALL WINES"
+      "default": "VIEW OUR WINES"
     },
     {
       "type": "url",
@@ -97,7 +93,7 @@
       "type": "text",
       "id": "button_label_2",
       "label": "Secondary button label",
-      "default": "OUR STORY"
+      "default": "BOOK A VISIT"
     },
     {
       "type": "url",
