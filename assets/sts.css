@@ -436,12 +436,7 @@ body.template-index #MainContent {
 .sts-hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(28, 28, 26, 0.45) 0%,
-    rgba(28, 28, 26, 0.25) 40%,
-    rgba(28, 28, 26, 0.4) 100%
-  );
+  background: rgba(28, 28, 26, 0.35);
 }
 
 .sts-hero__content {
