@@ -11,7 +11,14 @@
           alt: section.settings.heading
       }}
     {%- else -%}
-      {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      <img
+        src="{{ 'background-second-home-section.png' | asset_url }}"
+        alt="{{ section.settings.heading | escape }}"
+        width="2000"
+        height="900"
+        loading="lazy"
+        class="sts-banner__img"
+      >
     {%- endif -%}
     <div class="sts-banner__overlay"></div>
   </div>
