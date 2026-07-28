@@ -1,17 +1,21 @@
-<section class="sts-testimonials" {{ section.shopify_attributes }}>
-  <div class="sts-testimonials__inner">
-    {%- for block in section.blocks -%}
-      <article class="sts-testimonial" {{ block.shopify_attributes }}>
-        <div class="sts-testimonial__stars" aria-hidden="true">★★★★★</div>
-        {%- if block.settings.quote != blank -%}
-          <p class="sts-testimonial__quote">{{ block.settings.quote }}</p>
-        {%- endif -%}
-        {%- if block.settings.author != blank -%}
-          <p class="sts-testimonial__author">{{ block.settings.author }}</p>
-        {%- endif -%}
-      </article>
-    {%- endfor -%}
+<section class="sts-testimonials" data-sts-testimonials {{ section.shopify_attributes }}>
+  <div class="sts-testimonials__viewport">
+    <div class="sts-testimonials__track" data-sts-review-track>
+      {%- for block in section.blocks -%}
+        <article class="sts-testimonial" data-sts-review {{ block.shopify_attributes }}>
+          <div class="sts-testimonial__stars" aria-hidden="true">★★★★★</div>
+          {%- if block.settings.quote != blank -%}
+            <p class="sts-testimonial__quote">{{ block.settings.quote }}</p>
+          {%- endif -%}
+          {%- if block.settings.author != blank -%}
+            <p class="sts-testimonial__author">{{ block.settings.author }}</p>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
   </div>
+
+  <div class="sts-testimonials__dots" data-sts-review-dots aria-label="Reviews"></div>
 
   <div class="sts-testimonials__google">
     <a
@@ -30,12 +34,86 @@
   </div>
 </section>
 
+<script>
+  (function () {
+    const root = document.currentScript.previousElementSibling;
+    if (!root || !root.hasAttribute('data-sts-testimonials')) return;
+
+    const track = root.querySelector('[data-sts-review-track]');
+    const items = Array.from(root.querySelectorAll('[data-sts-review]'));
+    const dotsWrap = root.querySelector('[data-sts-review-dots]');
+    if (!track || !dotsWrap || items.length === 0) return;
+
+    let index = 0;
+    let perView = 1;
+    let pageCount = 1;
+    let dots = [];
+
+    function measure() {
+      perView = window.matchMedia('(min-width: 750px)').matches ? 3 : 1;
+      pageCount = Math.max(1, items.length - perView + 1);
+      if (index > pageCount - 1) index = pageCount - 1;
+      buildDots();
+      goTo(index, false);
+    }
+
+    function buildDots() {
+      dotsWrap.innerHTML = '';
+      if (pageCount < 2) {
+        dotsWrap.style.display = 'none';
+        dots = [];
+        return;
+      }
+      dotsWrap.style.display = '';
+      for (let i = 0; i < pageCount; i++) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'sts-testimonials__dot' + (i === index ? ' is-active' : '');
+        btn.setAttribute('aria-label', 'Go to reviews ' + (i + 1));
+        btn.addEventListener('click', () => goTo(i, true));
+        dotsWrap.appendChild(btn);
+      }
+      dots = Array.from(dotsWrap.querySelectorAll('.sts-testimonials__dot'));
+    }
+
+    function goTo(next) {
+      index = ((next % pageCount) + pageCount) % pageCount;
+      const offset = (100 / perView) * index;
+      track.style.transform = 'translateX(-' + offset + '%)';
+
+      items.forEach((item, i) => {
+        item.classList.remove('is-center', 'is-side', 'is-hidden');
+        if (i < index || i >= index + perView) {
+          item.classList.add('is-hidden');
+          return;
+        }
+        if (perView === 1) {
+          item.classList.add('is-center');
+          return;
+        }
+        if (i === index || i === index + perView - 1) {
+          item.classList.add('is-side');
+        } else {
+          item.classList.add('is-center');
+        }
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === index);
+      });
+    }
+
+    measure();
+    window.addEventListener('resize', measure);
+  })();
+</script>
+
 {% schema %}
 {
   "name": "STS Testimonials",
   "tag": "section",
   "class": "section-sts-testimonials",
-  "max_blocks": 6,
+  "max_blocks": 8,
   "blocks": [
     {
       "type": "quote",
@@ -93,6 +171,20 @@
           "settings": {
             "quote": "Best wines based on our taste — no guessing. Booking my future visits already. Thank you!",
             "author": "Christine"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "A beautiful cellar experience with thoughtful recommendations. Every bottle we took home was outstanding.",
+            "author": "Sarah Mitchell"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "From tasting to shipping, everything felt personal and carefully handled. We'll be back for the next vintage.",
+            "author": "David & Emma"
           }
         }
       ]

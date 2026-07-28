@@ -100,9 +100,23 @@
             "quote": "Best wines based on our taste — no guessing. Booking my future visits already. Thank you!",
             "author": "Christine"
           }
+        },
+        "quote_4": {
+          "type": "quote",
+          "settings": {
+            "quote": "A beautiful cellar experience with thoughtful recommendations. Every bottle we took home was outstanding.",
+            "author": "Sarah Mitchell"
+          }
+        },
+        "quote_5": {
+          "type": "quote",
+          "settings": {
+            "quote": "From tasting to shipping, everything felt personal and carefully handled. We'll be back for the next vintage.",
+            "author": "David & Emma"
+          }
         }
       },
-      "block_order": ["quote_1", "quote_2", "quote_3"],
+      "block_order": ["quote_1", "quote_2", "quote_3", "quote_4", "quote_5"],
       "settings": {
         "google_label": "Add Google review",
         "google_link": ""
