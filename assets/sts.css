@@ -1094,19 +1094,80 @@ body.template-product .price {
 body.template-product .product-form__submit {
   background: var(--sts-gold) !important;
   color: var(--sts-ink) !important;
-  border-color: var(--sts-gold) !important;
-  border-radius: 4px !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: var(--sts-radius-pill) !important;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  min-height: 5.2rem;
+  width: 100%;
 }
 
 body.template-product .shopify-payment-button {
   display: none;
 }
 
+/* Quantity + Add to cart on one row */
+body.template-product .product__info-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 1.2rem;
+}
+
+body.template-product .product__info-container > * {
+  width: 100%;
+}
+
+body.template-product .product__info-container > .product-form__quantity {
+  width: auto;
+  flex: 0 0 auto;
+  margin: 0 !important;
+  max-width: none;
+}
+
+body.template-product .product__info-container > div:has(> product-form),
+body.template-product .product__info-container > product-form {
+  width: auto;
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+body.template-product .product-form,
+body.template-product .product-form__buttons {
+  margin: 0;
+  width: 100%;
+}
+
+body.template-product .product-form__quantity .form__label,
+body.template-product .product-form__quantity .quantity__label {
+  display: none;
+}
+
 body.template-product .product__info-container .product-form__quantity,
 body.template-product .quantity {
-  border-radius: 4px;
+  background: #ffffff;
+  border: 0;
+  border-radius: var(--sts-radius-pill);
+  box-shadow: none;
+  min-height: 5.2rem;
+  align-items: center;
+}
+
+body.template-product .quantity:before {
+  display: none !important;
+}
+
+body.template-product .quantity__button,
+body.template-product .quantity__input {
+  background: transparent;
+  border: 0;
+  color: var(--sts-ink);
+  min-height: 5.2rem;
+}
+
+body.template-product .quantity__input {
+  font-weight: 500;
 }
 
 .sts-product-meta {
