@@ -1022,7 +1022,10 @@ body.template-collection .product-grid {
 .sts-shop-intro__filter {
   min-width: 14rem;
   padding: 1rem 2rem;
-  border: 2px solid var(--sts-gold);
+  border: 2px solid #d4c391 !important;
+  border-width: 2px !important;
+  border-style: solid !important;
+  border-color: #d4c391 !important;
   border-radius: var(--sts-radius-pill);
   color: var(--sts-gold);
   font-size: 1.15rem;
@@ -1033,6 +1036,7 @@ body.template-collection .product-grid {
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
+  box-sizing: border-box;
 }
 
 .sts-shop-intro__filter span {
