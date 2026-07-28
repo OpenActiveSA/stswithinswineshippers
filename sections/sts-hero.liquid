@@ -11,7 +11,15 @@
           alt: section.settings.heading_line_1
       }}
     {%- else -%}
-      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      <img
+        src="{{ 'mainbanner-background.png' | asset_url }}"
+        alt="{{ section.settings.heading_line_1 | escape }}"
+        width="2400"
+        height="1350"
+        loading="eager"
+        fetchpriority="high"
+        class="sts-hero__img"
+      >
     {%- endif -%}
     <div class="sts-hero__overlay"></div>
   </div>
