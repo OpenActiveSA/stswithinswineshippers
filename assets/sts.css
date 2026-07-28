@@ -592,6 +592,20 @@ body.template-index #MainContent {
   background: #d4c391;
 }
 
+.sts-pagination {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.sts-pagination .sts-slider-dots__dot {
+  text-decoration: none;
+}
+
+a.sts-slider-dots__dot.is-active {
+  pointer-events: none;
+  cursor: default;
+}
+
 .sts-btn--hero-primary {
   background: var(--sts-white);
   color: var(--sts-wine);

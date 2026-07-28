@@ -1,5 +1,5 @@
 {% comment %}
-  Renders a set of links for paginated results. Must be used within paginate tags.
+  Renders pagination as STS pill dots (matches hero / collection sliders).
 
   Usage:
   {% paginate results by 2 %}
@@ -8,71 +8,39 @@
 
   Accepts:
   - paginate: {Object}
-  - anchor: {String} (optional) This can be added so that on page reload it takes you to wherever you've placed your anchor tag.
+  - anchor: {String} (optional)
 {% endcomment %}
 
-{{ 'component-pagination.css' | asset_url | stylesheet_tag }}
-
-{%- if paginate.parts.size > 0 -%}
-  <div class="pagination-wrapper" data-page="{{ paginate.current_page }}">
-    <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
-      <ul class="pagination__list list-unstyled" role="list">
-        {%- if paginate.previous -%}
-          <li>
-            <a
-              href="{{ paginate.previous.url }}{{ anchor }}"
-              class="pagination__item pagination__item--next pagination__item-arrow link motion-reduce"
-              aria-label="{{ 'general.pagination.previous' | t }}"
-            >
-              <span class="svg-wrapper">
-                {{- 'icon-caret.svg' | inline_asset_content -}}
-              </span>
-            </a>
-          </li>
-        {%- endif -%}
-
+{%- if paginate.pages > 1 -%}
+  <div class="pagination-wrapper sts-pagination" data-page="{{ paginate.current_page }}">
+    <nav
+      class="pagination sts-slider-dots"
+      role="navigation"
+      aria-label="{{ 'general.pagination.label' | t }}"
+    >
+      <div class="sts-slider-dots__list sts-pagination__dots">
         {%- for part in paginate.parts -%}
-          <li>
-            {%- if part.is_link -%}
-              <a
-                href="{{ part.url }}{{ anchor }}"
-                class="pagination__item link"
-                aria-label="{{ 'general.pagination.page' | t: number: part.title }}"
-              >
-                {{- part.title -}}
-              </a>
-            {%- else -%}
-              {%- if part.title == paginate.current_page -%}
-                <a
-                  role="link"
-                  aria-disabled="true"
-                  class="pagination__item pagination__item--current light"
-                  aria-current="page"
-                  aria-label="{{ 'general.pagination.page' | t: number: part.title }}"
-                >
-                  {{- part.title -}}
-                </a>
-              {%- else -%}
-                <span class="pagination__item">{{ part.title }}</span>
-              {%- endif -%}
-            {%- endif -%}
-          </li>
-        {%- endfor -%}
-
-        {%- if paginate.next -%}
-          <li>
+          {%- if part.is_link -%}
             <a
-              href="{{ paginate.next.url }}{{ anchor }}"
-              class="pagination__item pagination__item--prev pagination__item-arrow link motion-reduce"
-              aria-label="{{ 'general.pagination.next' | t }}"
+              href="{{ part.url }}{{ anchor }}"
+              class="sts-slider-dots__dot"
+              aria-label="{{ 'general.pagination.page' | t: number: part.title }}"
             >
-              <span class="svg-wrapper">
-                {{- 'icon-caret.svg' | inline_asset_content -}}
-              </span>
+              <span class="visually-hidden">{{ part.title }}</span>
             </a>
-          </li>
-        {%- endif -%}
-      </ul>
+          {%- elsif part.title == paginate.current_page -%}
+            <a
+              role="link"
+              aria-disabled="true"
+              class="sts-slider-dots__dot is-active"
+              aria-current="page"
+              aria-label="{{ 'general.pagination.page' | t: number: part.title }}"
+            >
+              <span class="visually-hidden">{{ part.title }}</span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
     </nav>
   </div>
 {%- endif -%}
