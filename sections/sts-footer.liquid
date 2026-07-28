@@ -35,7 +35,7 @@
 
     <div class="sts-footer__brand">
       <a href="{{ routes.root_url }}" class="sts-footer__logo-link" aria-label="{{ shop.name }}">
-        {% render 'sts-logo', on_light: true, class: 'sts-footer__logo' %}
+        {% render 'sts-logo', variant: 'footer', class: 'sts-footer__logo' %}
       </a>
 
       {%- if section.settings.newsletter_enable -%}

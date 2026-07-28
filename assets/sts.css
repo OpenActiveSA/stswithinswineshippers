@@ -55,10 +55,6 @@ h5,
   object-fit: contain;
 }
 
-.sts-logo--on-light {
-  filter: brightness(0);
-}
-
 .sts-footer__logo-link {
   display: inline-block;
   margin-bottom: 2rem;
