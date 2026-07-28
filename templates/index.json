@@ -4,7 +4,8 @@
       "type": "sts-hero",
       "settings": {
         "heading_line_1": "Destination for",
-        "heading_line_2": "Wine Enthusiasts",
+        "heading_line_2": "Wine",
+        "heading_line_3": "Enthusiasts",
         "button_label_1": "VIEW OUR WINES",
         "button_link_1": "shopify://collections/all",
         "button_label_2": "BOOK A VISIT",

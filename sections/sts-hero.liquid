@@ -29,8 +29,15 @@
       {%- if section.settings.heading_line_1 != blank -%}
         <span class="sts-hero__line sts-hero__line--light">{{ section.settings.heading_line_1 }}</span>
       {%- endif -%}
-      {%- if section.settings.heading_line_2 != blank -%}
-        <span class="sts-hero__line sts-hero__line--gold">{{ section.settings.heading_line_2 }}</span>
+      {%- if section.settings.heading_line_2 != blank or section.settings.heading_line_3 != blank -%}
+        <span class="sts-hero__line">
+          {%- if section.settings.heading_line_2 != blank -%}
+            <span class="sts-hero__line--light">{{ section.settings.heading_line_2 }}</span>
+          {%- endif -%}
+          {%- if section.settings.heading_line_3 != blank -%}
+            <span class="sts-hero__line--gold">{% if section.settings.heading_line_2 != blank %} {% endif %}{{ section.settings.heading_line_3 }}</span>
+          {%- endif -%}
+        </span>
       {%- endif -%}
     </h1>
 
@@ -75,8 +82,14 @@
     {
       "type": "text",
       "id": "heading_line_2",
-      "label": "Heading line 2",
-      "default": "Wine Enthusiasts"
+      "label": "Heading line 2 (white)",
+      "default": "Wine"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_3",
+      "label": "Heading accent (gold)",
+      "default": "Enthusiasts"
     },
     {
       "type": "text",
