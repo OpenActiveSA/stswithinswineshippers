@@ -13,11 +13,21 @@
     {%- endfor -%}
   </div>
 
-  {%- if section.settings.google_label != blank -%}
-    <div class="sts-testimonials__google">
-      <a href="{{ section.settings.google_link | default: '#' }}">{{ section.settings.google_label }}</a>
-    </div>
-  {%- endif -%}
+  <div class="sts-testimonials__google">
+    <a
+      href="{{ section.settings.google_link | default: '#' }}"
+      aria-label="{{ section.settings.google_label | default: 'Add Google review' | escape }}"
+    >
+      <img
+        class="sts-testimonials__google-img"
+        src="{{ 'Google-Review.svg' | asset_url }}"
+        alt="{{ section.settings.google_label | default: 'Add Google review' | escape }}"
+        width="263"
+        height="40"
+        loading="lazy"
+      >
+    </a>
+  </div>
 </section>
 
 {% schema %}
@@ -50,8 +60,9 @@
     {
       "type": "text",
       "id": "google_label",
-      "label": "Google review link label",
-      "default": "Add Google review"
+      "label": "Google review accessible label",
+      "default": "Add Google review",
+      "info": "Used for alt text and screen readers. The Google-Review.svg asset is shown visually."
     },
     {
       "type": "url",

@@ -707,10 +707,15 @@ body.template-index #MainContent {
 }
 
 .sts-testimonials__google a {
-  color: var(--sts-white);
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
-  font-size: 1.3rem;
+  display: inline-block;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.sts-testimonials__google-img {
+  display: block;
+  height: 2.8rem;
+  width: auto;
 }
 
 /* —— Collection / shop —— */
