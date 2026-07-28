@@ -678,16 +678,24 @@ body.template-index #MainContent {
   text-align: center;
 }
 
+@media screen and (min-width: 750px) {
+  .sts-testimonials__inner > .sts-testimonial:first-child,
+  .sts-testimonials__inner > .sts-testimonial:last-child {
+    opacity: 0.5;
+  }
+}
+
 .sts-testimonial__stars {
   color: var(--sts-white);
-  letter-spacing: 0.15em;
-  margin-bottom: 1.2rem;
-  font-size: 1.4rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 1.4rem;
+  font-size: 2.4rem;
+  line-height: 1;
 }
 
 .sts-testimonial__quote {
   font-family: var(--sts-font-display);
-  font-size: 1.7rem;
+  font-size: 2.2rem;
   line-height: 1.55;
   margin: 0 0 1.4rem;
   font-weight: 400;
@@ -695,7 +703,7 @@ body.template-index #MainContent {
 
 .sts-testimonial__author {
   font-family: var(--sts-font-body);
-  font-size: 1.2rem;
+  font-size: 1.45rem;
   letter-spacing: 0.08em;
   opacity: 0.95;
 }
