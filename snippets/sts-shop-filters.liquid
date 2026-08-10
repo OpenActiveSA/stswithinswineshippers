@@ -26,13 +26,20 @@
     </summary>
     <ul class="sts-shop-filter__menu" role="list">
       <li>
-        <a href="{{ collection.url }}" class="sts-shop-filter__option">All types</a>
+        {%- if type_filter_found -%}
+          {%- assign clear_type_param = type_filter.param_name -%}
+          <a href="{% render 'sts-filter-href', target_param: clear_type_param %}" class="sts-shop-filter__option">All types</a>
+        {%- else -%}
+          <a href="{{ collection.url }}" class="sts-shop-filter__option">All types</a>
+        {%- endif -%}
       </li>
       {%- if type_filter_found -%}
         {%- for value in type_filter.values -%}
+          {%- assign type_param = type_filter.param_name -%}
+          {%- assign type_value = value.value -%}
           <li>
             <a
-              href="{{ value.url_to_add }}"
+              href="{% render 'sts-filter-href', target_param: type_param, target_value: type_value %}"
               class="sts-shop-filter__option{% if value.active %} is-active{% endif %}"
             >
               {{ value.label | escape }}
@@ -62,13 +69,20 @@
     </summary>
     <ul class="sts-shop-filter__menu" role="list">
       <li>
-        <a href="{{ collection.url }}" class="sts-shop-filter__option">All brands</a>
+        {%- if brand_filter_found -%}
+          {%- assign clear_brand_param = brand_filter.param_name -%}
+          <a href="{% render 'sts-filter-href', target_param: clear_brand_param %}" class="sts-shop-filter__option">All brands</a>
+        {%- else -%}
+          <a href="{{ collection.url }}" class="sts-shop-filter__option">All brands</a>
+        {%- endif -%}
       </li>
       {%- if brand_filter_found -%}
         {%- for value in brand_filter.values -%}
+          {%- assign brand_param = brand_filter.param_name -%}
+          {%- assign brand_value = value.value -%}
           <li>
             <a
-              href="{{ value.url_to_add }}"
+              href="{% render 'sts-filter-href', target_param: brand_param, target_value: brand_value %}"
               class="sts-shop-filter__option{% if value.active %} is-active{% endif %}"
             >
               {{ value.label | escape }}
@@ -98,13 +112,20 @@
     </summary>
     <ul class="sts-shop-filter__menu" role="list">
       <li>
-        <a href="{{ collection.url }}" class="sts-shop-filter__option">All vintages</a>
+        {%- if vintage_filter_found -%}
+          {%- assign clear_vintage_param = vintage_filter.param_name -%}
+          <a href="{% render 'sts-filter-href', target_param: clear_vintage_param %}" class="sts-shop-filter__option">All vintages</a>
+        {%- else -%}
+          <a href="{{ collection.url }}" class="sts-shop-filter__option">All vintages</a>
+        {%- endif -%}
       </li>
       {%- if vintage_filter_found -%}
         {%- for value in vintage_filter.values -%}
+          {%- assign vintage_param = vintage_filter.param_name -%}
+          {%- assign vintage_value = value.value -%}
           <li>
             <a
-              href="{{ value.url_to_add }}"
+              href="{% render 'sts-filter-href', target_param: vintage_param, target_value: vintage_value %}"
               class="sts-shop-filter__option{% if value.active %} is-active{% endif %}"
             >
               {{ value.label | escape }}
@@ -130,5 +151,3 @@
     </ul>
   </details>
 </div>
-
-<script src="{{ 'sts-shop-filters.js' | asset_url }}" defer></script>

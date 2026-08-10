@@ -1,0 +1,32 @@
+{%- comment -%}
+  Build a collection filter URL that sets one filter value (or clears it)
+  while keeping other active filters. Single-select within the target param.
+  Params: target_param, target_value (blank = clear that filter)
+{%- endcomment -%}
+{%- liquid
+  assign query_string = ''
+  for f in collection.filters
+    if f.param_name == target_param
+      if target_value != blank
+        assign encoded = target_value | url_encode
+        if query_string != blank
+          assign query_string = query_string | append: '&'
+        endif
+        assign query_string = query_string | append: f.param_name | append: '=' | append: encoded
+      endif
+    else
+      for v in f.active_values
+        assign encoded = v.value | url_encode
+        if query_string != blank
+          assign query_string = query_string | append: '&'
+        endif
+        assign query_string = query_string | append: f.param_name | append: '=' | append: encoded
+      endfor
+    endif
+  endfor
+-%}
+{%- if query_string != blank -%}
+  {{- collection.url -}}?{{- query_string -}}
+{%- else -%}
+  {{- collection.url -}}
+{%- endif -%}
