@@ -411,9 +411,10 @@
           document.addEventListener(
             'click',
             function (event) {
-              var summary = event.target.closest('details.sts-shop-filter > summary');
+              var summary = event.target.closest('summary');
               if (!summary) return;
-              var details = summary.parentElement;
+              var details = summary.closest('details.sts-shop-filter');
+              if (!details) return;
               closeOtherFilters(details);
             },
             true
