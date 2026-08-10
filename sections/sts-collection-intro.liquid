@@ -18,8 +18,6 @@
     padding-left: 2rem;
     padding-right: 2rem;
     overflow: visible !important;
-    position: relative;
-    z-index: 40;
   }
 
   #shopify-section-{{ section.id }} .sts-shop-intro__title {
@@ -48,7 +46,7 @@
     flex-wrap: wrap;
     gap: 1.4rem;
     justify-content: center;
-    overflow: visible !important;
+    align-items: flex-start;
     position: relative;
     z-index: 50;
   }
@@ -56,91 +54,42 @@
   #shopify-section-{{ section.id }} .sts-shop-filter {
     position: relative;
     min-width: 14rem;
-    z-index: 51;
   }
 
-  #shopify-section-{{ section.id }} .sts-shop-filter[open] {
-    z-index: 60;
-  }
-
-  #shopify-section-{{ section.id }} .sts-shop-filter__button {
+  #shopify-section-{{ section.id }} .sts-shop-filter__select {
+    -webkit-appearance: none;
+    appearance: none;
     cursor: pointer;
-    list-style: none;
+    width: 100%;
     min-width: 14rem;
-    padding: 1rem 2rem;
+    min-height: 4.4rem;
+    padding: 1rem 3.2rem 1rem 2rem;
     border: 2px solid #d4c391 !important;
     border-radius: 999px;
-    color: #d4c391;
+    color: #d4c391 !important;
     font-family: inherit;
     font-size: 1.15rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    background: transparent;
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23d4c391' d='M1.4 1.4L6 6l4.6-4.6L12 2.8 6 8.8 0 2.8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1.4rem center;
+    background-size: 1.2rem;
     box-sizing: border-box;
-    width: 100%;
   }
 
-  #shopify-section-{{ section.id }} .sts-shop-filter__button::-webkit-details-marker {
-    display: none;
+  #shopify-section-{{ section.id }} .sts-shop-filter__select:focus {
+    outline: 1px solid #d4c391;
+    outline-offset: 2px;
   }
 
-  #shopify-section-{{ section.id }} .sts-shop-filter__button::marker {
-    content: '';
-    display: none;
-  }
-
-  #shopify-section-{{ section.id }} .sts-shop-filter__button span {
-    color: #d4c391;
-    pointer-events: none;
-  }
-
-  #shopify-section-{{ section.id }} .sts-shop-filter__menu {
-    display: none;
-    position: absolute;
-    left: 50%;
-    top: calc(100% + 0.8rem);
-    transform: translateX(-50%);
-    z-index: 70;
-    min-width: max(100%, 18rem);
-    max-height: 28rem;
-    overflow: auto;
-    margin: 0;
-    padding: 0.8rem 0;
-    list-style: none;
-    text-align: left;
-    background: #1c1c1a;
-    border: 1px solid #d4c391;
-    border-radius: 1.2rem;
-    box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.45);
-  }
-
-  #shopify-section-{{ section.id }} .sts-shop-filter[open] .sts-shop-filter__menu {
-    display: block;
-  }
-
-  #shopify-section-{{ section.id }} .sts-shop-filter__menu a {
-    display: block;
-    padding: 0.85rem 1.6rem;
-    color: #ffffff !important;
-    text-decoration: none;
-    font-size: 1.3rem;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
-  }
-
-  #shopify-section-{{ section.id }} .sts-shop-filter__menu a:hover,
-  #shopify-section-{{ section.id }} .sts-shop-filter__menu a.is-active {
-    color: #d4c391 !important;
-  }
-
-  #shopify-section-{{ section.id }} .sts-shop-filter__empty {
-    padding: 0.85rem 1.6rem;
-    color: rgba(255, 255, 255, 0.65);
-    font-size: 1.2rem;
+  #shopify-section-{{ section.id }} .sts-shop-filter__select option {
+    color: #1c1c1a;
+    background: #ffffff;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    font-size: 1.4rem;
   }
 {%- endstyle -%}
 
@@ -215,150 +164,114 @@
 
   {%- if section.settings.show_filter_labels -%}
     <div class="sts-shop-intro__filters" data-sts-filters>
-      <details class="sts-shop-filter">
-        <summary class="sts-shop-filter__button">
-          TYPE
-          <span aria-hidden="true">▾</span>
-        </summary>
-        <ul class="sts-shop-filter__menu">
-          <li>
-            <a href="{{ collection.url }}">All types</a>
-          </li>
+      <div class="sts-shop-filter">
+        <label class="visually-hidden" for="sts-filter-type-{{ section.id }}">Filter by type</label>
+        <select
+          id="sts-filter-type-{{ section.id }}"
+          class="sts-shop-filter__select"
+          data-sts-filter-select
+          aria-label="Filter by type"
+        >
+          <option value="">TYPE</option>
+          <option value="{{ collection.url }}">All types</option>
           {%- if type_option_list.size > 0 and type_options != blank -%}
             {%- for type_name in type_option_list -%}
               {%- if type_name != blank -%}
-                <li>
-                  {%- assign type_encoded = type_name | url_encode -%}
-                  {%- assign type_link = collection.url | append: '?filter.p.product_type=' | append: type_encoded -%}
-                  {%- if type_filter != blank -%}
-                    {%- for value in type_filter.values -%}
-                      {%- if value.label == type_name -%}
-                        {%- assign type_link = value.url_to_add -%}
-                      {%- endif -%}
-                    {%- endfor -%}
-                  {%- endif -%}
-                  {%- if collection.all_tags contains type_name -%}
-                    {%- assign type_handle = type_name | handleize -%}
-                    {%- assign type_link = collection.url | append: '/' | append: type_handle -%}
-                  {%- endif -%}
-                  <a
-                    href="{{ type_link }}"
-                    {% if current_tags contains type_name %}class="is-active"{% endif %}
-                  >
-                    {{ type_name | escape }}
-                  </a>
-                </li>
+                {%- assign type_encoded = type_name | url_encode -%}
+                {%- assign type_link = collection.url | append: '?filter.p.product_type=' | append: type_encoded -%}
+                {%- if type_filter != blank -%}
+                  {%- for value in type_filter.values -%}
+                    {%- if value.label == type_name -%}
+                      {%- assign type_link = value.url_to_add -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+                {%- if collection.all_tags contains type_name -%}
+                  {%- assign type_handle = type_name | handleize -%}
+                  {%- assign type_link = collection.url | append: '/' | append: type_handle -%}
+                {%- endif -%}
+                <option
+                  value="{{ type_link }}"
+                  {% if current_tags contains type_name %}selected{% endif %}
+                >
+                  {{ type_name | escape }}
+                </option>
               {%- endif -%}
             {%- endfor -%}
           {%- elsif type_filter != blank -%}
             {%- for value in type_filter.values -%}
-              <li>
-                <a href="{{ value.url_to_add }}" {% if value.active %}class="is-active"{% endif %}>
-                  {{ value.label | escape }}
-                </a>
-              </li>
+              <option value="{{ value.url_to_add }}" {% if value.active %}selected{% endif %}>
+                {{ value.label | escape }}
+              </option>
             {%- endfor -%}
-          {%- else -%}
-            <li class="sts-shop-filter__empty">No types found yet</li>
           {%- endif -%}
-        </ul>
-      </details>
+        </select>
+      </div>
 
-      <details class="sts-shop-filter">
-        <summary class="sts-shop-filter__button">
-          BRAND
-          <span aria-hidden="true">▾</span>
-        </summary>
-        <ul class="sts-shop-filter__menu">
-          <li>
-            <a href="{{ collection.url }}">All brands</a>
-          </li>
+      <div class="sts-shop-filter">
+        <label class="visually-hidden" for="sts-filter-brand-{{ section.id }}">Filter by brand</label>
+        <select
+          id="sts-filter-brand-{{ section.id }}"
+          class="sts-shop-filter__select"
+          data-sts-filter-select
+          aria-label="Filter by brand"
+        >
+          <option value="">BRAND</option>
+          <option value="{{ collection.url }}">All brands</option>
           {%- if brand_filter != blank -%}
             {%- for value in brand_filter.values -%}
-              <li>
-                <a href="{{ value.url_to_add }}" {% if value.active %}class="is-active"{% endif %}>
-                  {{ value.label | escape }}
-                </a>
-              </li>
+              <option value="{{ value.url_to_add }}" {% if value.active %}selected{% endif %}>
+                {{ value.label | escape }}
+              </option>
             {%- endfor -%}
           {%- elsif collection.all_vendors.size > 0 -%}
             {%- for vendor in collection.all_vendors -%}
-              <li>
-                <a href="{{ collection.url }}?filter.p.vendor={{ vendor | url_encode }}">
-                  {{ vendor | escape }}
-                </a>
-              </li>
+              {%- assign vendor_encoded = vendor | url_encode -%}
+              <option value="{{ collection.url }}?filter.p.vendor={{ vendor_encoded }}">
+                {{ vendor | escape }}
+              </option>
             {%- endfor -%}
-          {%- else -%}
-            <li class="sts-shop-filter__empty">No brands found yet</li>
           {%- endif -%}
-        </ul>
-      </details>
+        </select>
+      </div>
 
-      <details class="sts-shop-filter">
-        <summary class="sts-shop-filter__button">
-          VINTAGE
-          <span aria-hidden="true">▾</span>
-        </summary>
-        <ul class="sts-shop-filter__menu">
-          <li>
-            <a href="{{ collection.url }}">All vintages</a>
-          </li>
+      <div class="sts-shop-filter">
+        <label class="visually-hidden" for="sts-filter-vintage-{{ section.id }}">Filter by vintage</label>
+        <select
+          id="sts-filter-vintage-{{ section.id }}"
+          class="sts-shop-filter__select"
+          data-sts-filter-select
+          aria-label="Filter by vintage"
+        >
+          <option value="">VINTAGE</option>
+          <option value="{{ collection.url }}">All vintages</option>
           {%- if vintage_filter != blank -%}
             {%- for value in vintage_filter.values -%}
-              <li>
-                <a href="{{ value.url_to_add }}" {% if value.active %}class="is-active"{% endif %}>
-                  {{ value.label | escape }}
-                </a>
-              </li>
+              <option value="{{ value.url_to_add }}" {% if value.active %}selected{% endif %}>
+                {{ value.label | escape }}
+              </option>
             {%- endfor -%}
           {%- else -%}
-            {%- assign vintage_found = false -%}
             {%- for tag in collection.all_tags -%}
               {%- assign year_num = tag | plus: 0 -%}
               {%- if tag.size == 4 and year_num >= 1990 and year_num <= 2035 -%}
-                {%- assign vintage_found = true -%}
-                <li>
-                  <a
-                    href="{{ collection.url }}/{{ tag | handleize }}"
-                    {% if current_tags contains tag %}class="is-active"{% endif %}
-                  >
-                    {{ tag | escape }}
-                  </a>
-                </li>
+                {%- assign tag_handle = tag | handleize -%}
+                <option
+                  value="{{ collection.url }}/{{ tag_handle }}"
+                  {% if current_tags contains tag %}selected{% endif %}
+                >
+                  {{ tag | escape }}
+                </option>
               {%- endif -%}
             {%- endfor -%}
-            {%- unless vintage_found -%}
-              <li class="sts-shop-filter__empty">No vintages tagged yet</li>
-            {%- endunless -%}
           {%- endif -%}
-        </ul>
-      </details>
+        </select>
+      </div>
     </div>
   {%- endif -%}
 </div>
 
-<script>
-  (function () {
-    var script = document.currentScript;
-    var root = script && script.previousElementSibling;
-    if (!root || !root.hasAttribute('data-sts-shop-intro')) {
-      root = document.querySelector('[data-sts-shop-intro]');
-    }
-    if (!root) return;
-
-    var filtersRoot = root.querySelector('[data-sts-filters]');
-    if (!filtersRoot) return;
-
-    filtersRoot.addEventListener('toggle', function (event) {
-      var target = event.target;
-      if (!target || target.tagName !== 'DETAILS' || !target.open) return;
-      filtersRoot.querySelectorAll('details.sts-shop-filter[open]').forEach(function (el) {
-        if (el !== target) el.removeAttribute('open');
-      });
-    });
-  })();
-</script>
+<script src="{{ 'sts-shop-filters.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
@@ -384,7 +297,7 @@
       "id": "show_filter_labels",
       "label": "Show filter dropdowns",
       "default": true,
-      "info": "Uses native browser dropdowns. Enable Product type + Brand in Search & Discovery for full filter links."
+      "info": "Native select dropdowns for Type, Brand, and Vintage."
     },
     {
       "type": "range",
