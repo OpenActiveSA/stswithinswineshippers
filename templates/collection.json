@@ -1,7 +1,7 @@
 {
   "sections": {
-    "sts_intro": {
-      "type": "sts-shop-intro",
+    "sts_collection_hero": {
+      "type": "sts-collection-hero",
       "settings": {
         "heading": "Shop wines with personality",
         "text": "<p>From bold reds to crisp whites, every bottle is chosen for its unique story and quality. Explore our collection and uncover something unexpected.</p>",
@@ -30,5 +30,5 @@
       }
     }
   },
-  "order": ["sts_intro", "product-grid"]
+  "order": ["sts_collection_hero", "product-grid"]
 }

@@ -1,0 +1,111 @@
+{% comment %} Shared shop collection filters — native selects {% endcomment %}
+{%- liquid
+  assign type_filter_found = false
+  assign brand_filter_found = false
+  assign vintage_filter_found = false
+
+  for filter in collection.filters
+    assign label = filter.label | downcase
+    if label == 'type' or label == 'product type'
+      assign type_filter = filter
+      assign type_filter_found = true
+    elsif label == 'brand' or label == 'vendor'
+      assign brand_filter = filter
+      assign brand_filter_found = true
+    elsif label == 'vintage' or label == 'year'
+      assign vintage_filter = filter
+      assign vintage_filter_found = true
+    endif
+  endfor
+-%}
+
+<div class="sts-shop-intro__filters" data-sts-filters>
+  <div class="sts-shop-filter">
+    <label class="visually-hidden" for="sts-filter-type-{{ filter_id }}">Filter by type</label>
+    <select
+      id="sts-filter-type-{{ filter_id }}"
+      class="sts-shop-filter__select"
+      data-sts-filter-select
+      aria-label="Filter by type"
+    >
+      <option value="">TYPE</option>
+      <option value="{{ collection.url }}">All types</option>
+      {%- if type_filter_found -%}
+        {%- for value in type_filter.values -%}
+          <option value="{{ value.url_to_add }}" {% if value.active %}selected{% endif %}>
+            {{ value.label | escape }}
+          </option>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for product_type in collection.all_types -%}
+          {%- assign type_encoded = product_type | url_encode -%}
+          <option value="{{ collection.url }}?filter.p.product_type={{ type_encoded }}">
+            {{ product_type | escape }}
+          </option>
+        {%- endfor -%}
+      {%- endif -%}
+    </select>
+  </div>
+
+  <div class="sts-shop-filter">
+    <label class="visually-hidden" for="sts-filter-brand-{{ filter_id }}">Filter by brand</label>
+    <select
+      id="sts-filter-brand-{{ filter_id }}"
+      class="sts-shop-filter__select"
+      data-sts-filter-select
+      aria-label="Filter by brand"
+    >
+      <option value="">BRAND</option>
+      <option value="{{ collection.url }}">All brands</option>
+      {%- if brand_filter_found -%}
+        {%- for value in brand_filter.values -%}
+          <option value="{{ value.url_to_add }}" {% if value.active %}selected{% endif %}>
+            {{ value.label | escape }}
+          </option>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for vendor in collection.all_vendors -%}
+          {%- assign vendor_encoded = vendor | url_encode -%}
+          <option value="{{ collection.url }}?filter.p.vendor={{ vendor_encoded }}">
+            {{ vendor | escape }}
+          </option>
+        {%- endfor -%}
+      {%- endif -%}
+    </select>
+  </div>
+
+  <div class="sts-shop-filter">
+    <label class="visually-hidden" for="sts-filter-vintage-{{ filter_id }}">Filter by vintage</label>
+    <select
+      id="sts-filter-vintage-{{ filter_id }}"
+      class="sts-shop-filter__select"
+      data-sts-filter-select
+      aria-label="Filter by vintage"
+    >
+      <option value="">VINTAGE</option>
+      <option value="{{ collection.url }}">All vintages</option>
+      {%- if vintage_filter_found -%}
+        {%- for value in vintage_filter.values -%}
+          <option value="{{ value.url_to_add }}" {% if value.active %}selected{% endif %}>
+            {{ value.label | escape }}
+          </option>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for tag in collection.all_tags -%}
+          {%- assign year_num = tag | plus: 0 -%}
+          {%- if tag.size == 4 and year_num >= 1990 and year_num <= 2035 -%}
+            {%- assign tag_handle = tag | handleize -%}
+            <option
+              value="{{ collection.url }}/{{ tag_handle }}"
+              {% if current_tags contains tag %}selected{% endif %}
+            >
+              {{ tag | escape }}
+            </option>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </select>
+  </div>
+</div>
+
+<script src="{{ 'sts-shop-filters.js' | asset_url }}" defer></script>
