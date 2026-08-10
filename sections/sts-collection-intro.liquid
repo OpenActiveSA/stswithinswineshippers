@@ -180,12 +180,18 @@
           {%- elsif collection.all_types.size > 0 -%}
             {%- for product_type in collection.all_types -%}
               <li>
-                <a
-                  href="{{ collection.url }}?filter.p.product_type={{ product_type | url_encode }}"
-                  {% if product_type == active_type or product_type == current_tags.first %}class="is-active"{% endif %}
-                >
-                  {{ product_type | escape }}
-                </a>
+                {%- if collection.all_tags contains product_type -%}
+                  <a
+                    href="{{ collection.url }}/{{ product_type | handleize }}"
+                    {% if current_tags contains product_type %}class="is-active"{% endif %}
+                  >
+                    {{ product_type | escape }}
+                  </a>
+                {%- else -%}
+                  <a href="{{ collection.url }}?filter.p.product_type={{ product_type | url_encode }}">
+                    {{ product_type | escape }}
+                  </a>
+                {%- endif -%}
               </li>
             {%- endfor -%}
           {%- else -%}
