@@ -2,26 +2,47 @@
   assign type_filter_found = false
   assign brand_filter_found = false
   assign vintage_filter_found = false
+  assign type_label = 'TYPE'
+  assign brand_label = 'BRAND'
+  assign vintage_label = 'VINTAGE'
 
   for filter in collection.filters
     assign label = filter.label | downcase
     if label == 'type' or label == 'product type'
       assign type_filter = filter
       assign type_filter_found = true
+      for value in filter.active_values
+        assign type_label = value.label
+      endfor
     elsif label == 'brand' or label == 'vendor'
       assign brand_filter = filter
       assign brand_filter_found = true
+      for value in filter.active_values
+        assign brand_label = value.label
+      endfor
     elsif label == 'vintage' or label == 'year'
       assign vintage_filter = filter
       assign vintage_filter_found = true
+      for value in filter.active_values
+        assign vintage_label = value.label
+      endfor
     endif
   endfor
+
+  if vintage_label == 'VINTAGE' and current_tags.size > 0
+    for tag in current_tags
+      assign year_num = tag | plus: 0
+      if tag.size == 4 and year_num >= 1990 and year_num <= 2035
+        assign vintage_label = tag
+      endif
+    endfor
+  endif
 -%}
 
 <div class="sts-shop-intro__filters" data-sts-filters>
-  <details class="sts-shop-filter">
+  <details class="sts-shop-filter{% if type_label != 'TYPE' %} has-selection{% endif %}">
     <summary class="sts-shop-filter__button">
-      <span class="sts-shop-filter__label">TYPE</span>
+      <span class="sts-shop-filter__label" data-default="TYPE">{{ type_label | escape }}</span>
       <span class="sts-shop-filter__caret" aria-hidden="true"></span>
     </summary>
     <ul class="sts-shop-filter__menu" role="list">
@@ -62,9 +83,9 @@
     </ul>
   </details>
 
-  <details class="sts-shop-filter">
+  <details class="sts-shop-filter{% if brand_label != 'BRAND' %} has-selection{% endif %}">
     <summary class="sts-shop-filter__button">
-      <span class="sts-shop-filter__label">BRAND</span>
+      <span class="sts-shop-filter__label" data-default="BRAND">{{ brand_label | escape }}</span>
       <span class="sts-shop-filter__caret" aria-hidden="true"></span>
     </summary>
     <ul class="sts-shop-filter__menu" role="list">
@@ -105,9 +126,9 @@
     </ul>
   </details>
 
-  <details class="sts-shop-filter">
+  <details class="sts-shop-filter{% if vintage_label != 'VINTAGE' %} has-selection{% endif %}">
     <summary class="sts-shop-filter__button">
-      <span class="sts-shop-filter__label">VINTAGE</span>
+      <span class="sts-shop-filter__label" data-default="VINTAGE">{{ vintage_label | escape }}</span>
       <span class="sts-shop-filter__caret" aria-hidden="true"></span>
     </summary>
     <ul class="sts-shop-filter__menu" role="list">

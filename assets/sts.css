@@ -1110,6 +1110,19 @@ body.template-collection .sts-shop-filter__label {
   color: #d4c391;
 }
 
+body.template-collection .sts-shop-filter.has-selection .sts-shop-filter__button {
+  letter-spacing: 0.08em;
+  min-width: auto;
+  max-width: 28rem;
+}
+
+body.template-collection .sts-shop-filter.has-selection .sts-shop-filter__label {
+  max-width: 20rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 body.template-collection .sts-shop-filter__caret {
   width: 0.9rem;
   height: 0.9rem;

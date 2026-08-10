@@ -60,6 +60,68 @@
     });
   }
 
+  function urlsMatch(optionHref) {
+    try {
+      var optionUrl = new URL(optionHref, window.location.origin);
+      var current = window.location;
+      if (optionUrl.pathname !== current.pathname) return false;
+
+      var optionParams = optionUrl.searchParams;
+      var currentParams = new URLSearchParams(current.search);
+      var keys = {};
+
+      optionParams.forEach(function (_value, key) {
+        keys[key] = true;
+      });
+      currentParams.forEach(function (_value, key) {
+        keys[key] = true;
+      });
+
+      return Object.keys(keys).every(function (key) {
+        return optionParams.get(key) === currentParams.get(key);
+      });
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function syncFilterLabels(root) {
+    (root || document).querySelectorAll('.sts-shop-filter').forEach(function (filter) {
+      var label = filter.querySelector('.sts-shop-filter__label');
+      if (!label) return;
+
+      if (!label.getAttribute('data-default')) {
+        var fallback = label.textContent.trim() || 'Filter';
+        if (/^(TYPE|BRAND|VINTAGE)$/i.test(fallback)) {
+          label.setAttribute('data-default', fallback.toUpperCase());
+        } else {
+          label.setAttribute('data-default', fallback);
+        }
+      }
+
+      var selectedText = '';
+      var active = filter.querySelector('a.sts-shop-filter__option.is-active');
+      if (active) {
+        selectedText = active.textContent.trim();
+      } else {
+        filter.querySelectorAll('a.sts-shop-filter__option[href]').forEach(function (option) {
+          var href = option.getAttribute('href') || '';
+          var text = option.textContent.trim();
+          if (!href || /^all\s/i.test(text)) return;
+          if (urlsMatch(href)) selectedText = text;
+        });
+      }
+
+      if (selectedText) {
+        label.textContent = selectedText;
+        filter.classList.add('has-selection');
+      } else {
+        label.textContent = label.getAttribute('data-default');
+        filter.classList.remove('has-selection');
+      }
+    });
+  }
+
   function enhanceSelect(select) {
     if (!select || select.dataset.stsEnhanced === 'true') return;
     select.dataset.stsEnhanced = 'true';
@@ -72,13 +134,16 @@
     menu.className = 'sts-shop-filter__menu';
     menu.setAttribute('role', 'list');
 
+    var selectedLabel = '';
     Array.from(select.options).forEach(function (opt) {
       if (!opt.value && opt.index === 0) return;
       var li = document.createElement('li');
       var a = document.createElement('a');
-      a.className = 'sts-shop-filter__option' + (opt.selected && opt.value ? ' is-active' : '');
+      var isSelected = !!(opt.selected && opt.value);
+      a.className = 'sts-shop-filter__option' + (isSelected ? ' is-active' : '');
       a.href = opt.value ? normalizeFilterUrl(opt.value) : '#';
       a.textContent = opt.textContent.trim();
+      if (isSelected) selectedLabel = a.textContent;
       if (!opt.value) {
         a.addEventListener('click', function (e) {
           e.preventDefault();
@@ -92,11 +157,15 @@
     button.type = 'button';
     button.className = 'sts-shop-filter__button';
     button.setAttribute('aria-expanded', 'false');
-    var labelText = (select.options[0] && select.options[0].textContent.trim()) || 'Filter';
+    var defaultLabel = (select.options[0] && select.options[0].textContent.trim()) || 'Filter';
+    var labelText = selectedLabel || defaultLabel;
     button.innerHTML =
-      '<span class="sts-shop-filter__label">' +
+      '<span class="sts-shop-filter__label" data-default="' +
+      defaultLabel.replace(/"/g, '&quot;') +
+      '">' +
       labelText +
       '</span><span class="sts-shop-filter__caret" aria-hidden="true"></span>';
+    if (selectedLabel) wrap.classList.add('has-selection');
 
     button.addEventListener('click', function (event) {
       event.preventDefault();
@@ -159,6 +228,7 @@
     document.querySelectorAll('select.sts-shop-filter__select, [data-sts-filter-select]').forEach(enhanceSelect);
     bindNativeFallback();
     bindDetails();
+    syncFilterLabels(document);
   }
 
   if (document.readyState === 'loading') {
