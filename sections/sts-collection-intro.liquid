@@ -1,11 +1,12 @@
 {%- style -%}
-  #shopify-section-{{ section.id }}.section-sts-shop-intro,
-  #shopify-section-{{ section.id }} {
-    margin: 0;
-    padding: 0;
+  #shopify-section-{{ section.id }},
+  #shopify-section-{{ section.id }}.shopify-section,
+  #shopify-section-{{ section.id }}.section-sts-shop-intro {
+    margin: 0 !important;
+    padding: 0 !important;
     overflow: visible !important;
-    position: relative;
-    z-index: 5;
+    position: relative !important;
+    z-index: 40 !important;
   }
 
   #shopify-section-{{ section.id }} .sts-shop-intro {
@@ -17,6 +18,8 @@
     padding-left: 2rem;
     padding-right: 2rem;
     overflow: visible !important;
+    position: relative;
+    z-index: 40;
   }
 
   #shopify-section-{{ section.id }} .sts-shop-intro__title {
@@ -47,21 +50,22 @@
     justify-content: center;
     overflow: visible !important;
     position: relative;
-    z-index: 20;
+    z-index: 50;
   }
 
   #shopify-section-{{ section.id }} .sts-shop-filter {
     position: relative;
     min-width: 14rem;
-    z-index: 21;
+    z-index: 51;
   }
 
-  #shopify-section-{{ section.id }} .sts-shop-filter.is-open {
-    z-index: 30;
+  #shopify-section-{{ section.id }} .sts-shop-filter[open] {
+    z-index: 60;
   }
 
   #shopify-section-{{ section.id }} .sts-shop-filter__button {
     cursor: pointer;
+    list-style: none;
     min-width: 14rem;
     padding: 1rem 2rem;
     border: 2px solid #d4c391 !important;
@@ -80,6 +84,15 @@
     width: 100%;
   }
 
+  #shopify-section-{{ section.id }} .sts-shop-filter__button::-webkit-details-marker {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__button::marker {
+    content: '';
+    display: none;
+  }
+
   #shopify-section-{{ section.id }} .sts-shop-filter__button span {
     color: #d4c391;
     pointer-events: none;
@@ -91,7 +104,7 @@
     left: 50%;
     top: calc(100% + 0.8rem);
     transform: translateX(-50%);
-    z-index: 40;
+    z-index: 70;
     min-width: max(100%, 18rem);
     max-height: 28rem;
     overflow: auto;
@@ -105,7 +118,7 @@
     box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.45);
   }
 
-  #shopify-section-{{ section.id }} .sts-shop-filter.is-open .sts-shop-filter__menu {
+  #shopify-section-{{ section.id }} .sts-shop-filter[open] .sts-shop-filter__menu {
     display: block;
   }
 
@@ -132,9 +145,9 @@
 {%- endstyle -%}
 
 {%- liquid
-  assign type_filter = false
-  assign brand_filter = false
-  assign vintage_filter = false
+  assign type_filter = blank
+  assign brand_filter = blank
+  assign vintage_filter = blank
 
   for filter in collection.filters
     assign label = filter.label | downcase
@@ -148,7 +161,7 @@
   endfor
 
   assign type_options = ''
-  assign known_types = 'Red Wine,White Wine,Rosé,Rose,Sparkling,Sweet,Sweet Wine,Fortified,Armagnac,Cognac,Eau-de-Vie,Orange' | split: ','
+  assign known_types = 'Red Wine,White Wine,Rosé,Rose,Sparkling,Sweet,Sweet Wine,Fortified,Armagnac,Cognac,Eau-de-Vie,Orange Wine,Orange' | split: ','
 
   for type_name in known_types
     if collection.all_tags contains type_name
@@ -170,7 +183,7 @@
     endunless
   endfor
 
-  if type_filter
+  if type_filter != blank
     for value in type_filter.values
       unless type_options contains value.label
         if type_options == blank
@@ -201,14 +214,13 @@
   {%- endif -%}
 
   {%- if section.settings.show_filter_labels -%}
-    <div class="sts-shop-intro__filters">
-      {%- comment -%} TYPE {%- endcomment -%}
-      <div class="sts-shop-filter" data-sts-filter>
-        <button type="button" class="sts-shop-filter__button" aria-expanded="false" aria-haspopup="listbox">
+    <div class="sts-shop-intro__filters" data-sts-filters>
+      <details class="sts-shop-filter">
+        <summary class="sts-shop-filter__button">
           TYPE
           <span aria-hidden="true">▾</span>
-        </button>
-        <ul class="sts-shop-filter__menu" role="listbox">
+        </summary>
+        <ul class="sts-shop-filter__menu">
           <li>
             <a href="{{ collection.url }}">All types</a>
           </li>
@@ -216,54 +228,52 @@
             {%- for type_name in type_option_list -%}
               {%- if type_name != blank -%}
                 <li>
-                  {%- if collection.all_tags contains type_name -%}
-                    <a
-                      href="{{ collection.url }}/{{ type_name | handleize }}"
-                      {% if current_tags contains type_name %}class="is-active"{% endif %}
-                    >
-                      {{ type_name | escape }}
-                    </a>
-                  {%- elsif type_filter -%}
-                    {%- assign matched = false -%}
+                  {%- assign type_encoded = type_name | url_encode -%}
+                  {%- assign type_link = collection.url | append: '?filter.p.product_type=' | append: type_encoded -%}
+                  {%- if type_filter != blank -%}
                     {%- for value in type_filter.values -%}
                       {%- if value.label == type_name -%}
-                        <a href="{{ value.url_to_add }}" {% if value.active %}class="is-active"{% endif %}>
-                          {{ type_name | escape }}
-                        </a>
-                        {%- assign matched = true -%}
-                        {%- break -%}
+                        {%- assign type_link = value.url_to_add -%}
                       {%- endif -%}
                     {%- endfor -%}
-                    {%- unless matched -%}
-                      <a href="{{ collection.url }}?filter.p.product_type={{ type_name | url_encode }}">
-                        {{ type_name | escape }}
-                      </a>
-                    {%- endunless -%}
-                  {%- else -%}
-                    <a href="{{ collection.url }}?filter.p.product_type={{ type_name | url_encode }}">
-                      {{ type_name | escape }}
-                    </a>
                   {%- endif -%}
+                  {%- if collection.all_tags contains type_name -%}
+                    {%- assign type_handle = type_name | handleize -%}
+                    {%- assign type_link = collection.url | append: '/' | append: type_handle -%}
+                  {%- endif -%}
+                  <a
+                    href="{{ type_link }}"
+                    {% if current_tags contains type_name %}class="is-active"{% endif %}
+                  >
+                    {{ type_name | escape }}
+                  </a>
                 </li>
               {%- endif -%}
+            {%- endfor -%}
+          {%- elsif type_filter != blank -%}
+            {%- for value in type_filter.values -%}
+              <li>
+                <a href="{{ value.url_to_add }}" {% if value.active %}class="is-active"{% endif %}>
+                  {{ value.label | escape }}
+                </a>
+              </li>
             {%- endfor -%}
           {%- else -%}
             <li class="sts-shop-filter__empty">No types found yet</li>
           {%- endif -%}
         </ul>
-      </div>
+      </details>
 
-      {%- comment -%} BRAND {%- endcomment -%}
-      <div class="sts-shop-filter" data-sts-filter>
-        <button type="button" class="sts-shop-filter__button" aria-expanded="false" aria-haspopup="listbox">
+      <details class="sts-shop-filter">
+        <summary class="sts-shop-filter__button">
           BRAND
           <span aria-hidden="true">▾</span>
-        </button>
-        <ul class="sts-shop-filter__menu" role="listbox">
+        </summary>
+        <ul class="sts-shop-filter__menu">
           <li>
             <a href="{{ collection.url }}">All brands</a>
           </li>
-          {%- if brand_filter -%}
+          {%- if brand_filter != blank -%}
             {%- for value in brand_filter.values -%}
               <li>
                 <a href="{{ value.url_to_add }}" {% if value.active %}class="is-active"{% endif %}>
@@ -274,7 +284,7 @@
           {%- elsif collection.all_vendors.size > 0 -%}
             {%- for vendor in collection.all_vendors -%}
               <li>
-                <a href="{{ routes.root_url }}collections/vendors?q={{ vendor | url_encode }}">
+                <a href="{{ collection.url }}?filter.p.vendor={{ vendor | url_encode }}">
                   {{ vendor | escape }}
                 </a>
               </li>
@@ -283,19 +293,18 @@
             <li class="sts-shop-filter__empty">No brands found yet</li>
           {%- endif -%}
         </ul>
-      </div>
+      </details>
 
-      {%- comment -%} VINTAGE {%- endcomment -%}
-      <div class="sts-shop-filter" data-sts-filter>
-        <button type="button" class="sts-shop-filter__button" aria-expanded="false" aria-haspopup="listbox">
+      <details class="sts-shop-filter">
+        <summary class="sts-shop-filter__button">
           VINTAGE
           <span aria-hidden="true">▾</span>
-        </button>
-        <ul class="sts-shop-filter__menu" role="listbox">
+        </summary>
+        <ul class="sts-shop-filter__menu">
           <li>
             <a href="{{ collection.url }}">All vintages</a>
           </li>
-          {%- if vintage_filter -%}
+          {%- if vintage_filter != blank -%}
             {%- for value in vintage_filter.values -%}
               <li>
                 <a href="{{ value.url_to_add }}" {% if value.active %}class="is-active"{% endif %}>
@@ -324,50 +333,29 @@
             {%- endunless -%}
           {%- endif -%}
         </ul>
-      </div>
+      </details>
     </div>
   {%- endif -%}
 </div>
 
 <script>
   (function () {
-    const root = document.querySelector('#shopify-section-{{ section.id }} [data-sts-shop-intro]');
+    var script = document.currentScript;
+    var root = script && script.previousElementSibling;
+    if (!root || !root.hasAttribute('data-sts-shop-intro')) {
+      root = document.querySelector('[data-sts-shop-intro]');
+    }
     if (!root) return;
 
-    const filters = Array.from(root.querySelectorAll('[data-sts-filter]'));
+    var filtersRoot = root.querySelector('[data-sts-filters]');
+    if (!filtersRoot) return;
 
-    function closeAll(except) {
-      filters.forEach((filter) => {
-        if (filter === except) return;
-        filter.classList.remove('is-open');
-        const btn = filter.querySelector('.sts-shop-filter__button');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
+    filtersRoot.addEventListener('toggle', function (event) {
+      var target = event.target;
+      if (!target || target.tagName !== 'DETAILS' || !target.open) return;
+      filtersRoot.querySelectorAll('details.sts-shop-filter[open]').forEach(function (el) {
+        if (el !== target) el.removeAttribute('open');
       });
-    }
-
-    filters.forEach((filter) => {
-      const button = filter.querySelector('.sts-shop-filter__button');
-      if (!button) return;
-
-      button.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        const willOpen = !filter.classList.contains('is-open');
-        closeAll();
-        if (willOpen) {
-          filter.classList.add('is-open');
-          button.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-
-    document.addEventListener('click', (event) => {
-      if (event.target.closest('[data-sts-filter]')) return;
-      closeAll();
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeAll();
     });
   })();
 </script>
@@ -396,7 +384,7 @@
       "id": "show_filter_labels",
       "label": "Show filter dropdowns",
       "default": true,
-      "info": "TYPE uses wine tags / product types. For best results enable Product type + Vendor in Search & Discovery filters."
+      "info": "Uses native browser dropdowns. Enable Product type + Brand in Search & Discovery for full filter links."
     },
     {
       "type": "range",

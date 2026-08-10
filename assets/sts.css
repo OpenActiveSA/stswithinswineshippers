@@ -1038,32 +1038,22 @@ body.template-collection .product-grid {
   flex-wrap: wrap;
   gap: 1.4rem;
   justify-content: center;
+  overflow: visible !important;
+  position: relative;
+  z-index: 50;
 }
 
-.sts-shop-intro__filter {
-  min-width: 14rem;
-  padding: 1rem 2rem;
-  border: 2px solid #d4c391 !important;
-  border-width: 2px !important;
-  border-style: solid !important;
-  border-color: #d4c391 !important;
-  border-radius: var(--sts-radius-pill);
-  color: var(--sts-gold);
-  font-size: 1.15rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  background: transparent;
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  box-sizing: border-box;
+.section-sts-shop-intro,
+.shopify-section.section-sts-shop-intro {
+  overflow: visible !important;
+  position: relative;
+  z-index: 40;
 }
 
-.sts-shop-intro__filter span {
-  color: var(--sts-gold);
-  font-size: 1rem;
-  line-height: 1;
+body.template-collection #ProductGridContainer,
+body.template-collection .product-grid-container {
+  position: relative;
+  z-index: 1;
 }
 
 /* —— Product page —— */
