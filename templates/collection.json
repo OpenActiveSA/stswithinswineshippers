@@ -1,12 +1,11 @@
 {
   "sections": {
     "sts_intro": {
-      "type": "sts-collection-intro",
+      "type": "sts-shop-intro",
       "settings": {
         "heading": "Shop wines with personality",
         "text": "<p>From bold reds to crisp whites, every bottle is chosen for its unique story and quality. Explore our collection and uncover something unexpected.</p>",
         "show_filter_labels": true,
-        "padding_top": 45,
         "padding_bottom": 56
       }
     },

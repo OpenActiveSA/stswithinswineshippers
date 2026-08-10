@@ -1,7 +1,5 @@
 {%- style -%}
-  #shopify-section-{{ section.id }},
-  #shopify-section-{{ section.id }}.shopify-section,
-  #shopify-section-{{ section.id }}.section-sts-shop-intro {
+  #shopify-section-{{ section.id }} {
     margin: 0 !important;
     padding: 0 !important;
     overflow: visible !important;
@@ -13,10 +11,7 @@
     background: #1c1c1a !important;
     color: #ffffff;
     text-align: center;
-    padding-top: 45px !important;
-    padding-bottom: {{ section.settings.padding_bottom | default: 56 }}px !important;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: 45px 2rem {{ section.settings.padding_bottom | default: 56 }}px !important;
     overflow: visible !important;
   }
 
@@ -47,12 +42,9 @@
     gap: 1.4rem;
     justify-content: center;
     align-items: flex-start;
-    position: relative;
-    z-index: 50;
   }
 
   #shopify-section-{{ section.id }} .sts-shop-filter {
-    position: relative;
     min-width: 14rem;
   }
 
@@ -71,17 +63,12 @@
     font-size: 1.15rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    background-color: transparent;
+    background-color: #1c1c1a;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23d4c391' d='M1.4 1.4L6 6l4.6-4.6L12 2.8 6 8.8 0 2.8z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1.4rem center;
     background-size: 1.2rem;
     box-sizing: border-box;
-  }
-
-  #shopify-section-{{ section.id }} .sts-shop-filter__select:focus {
-    outline: 1px solid #d4c391;
-    outline-offset: 2px;
   }
 
   #shopify-section-{{ section.id }} .sts-shop-filter__select option {
@@ -94,57 +81,23 @@
 {%- endstyle -%}
 
 {%- liquid
-  assign type_filter = blank
-  assign brand_filter = blank
-  assign vintage_filter = blank
+  assign type_filter_found = false
+  assign brand_filter_found = false
+  assign vintage_filter_found = false
 
   for filter in collection.filters
     assign label = filter.label | downcase
     if label == 'type' or label == 'product type'
       assign type_filter = filter
+      assign type_filter_found = true
     elsif label == 'brand' or label == 'vendor'
       assign brand_filter = filter
+      assign brand_filter_found = true
     elsif label == 'vintage' or label == 'year'
       assign vintage_filter = filter
+      assign vintage_filter_found = true
     endif
   endfor
-
-  assign type_options = ''
-  assign known_types = 'Red Wine,White Wine,Rosé,Rose,Sparkling,Sweet,Sweet Wine,Fortified,Armagnac,Cognac,Eau-de-Vie,Orange Wine,Orange' | split: ','
-
-  for type_name in known_types
-    if collection.all_tags contains type_name
-      if type_options == blank
-        assign type_options = type_name
-      else
-        assign type_options = type_options | append: '|' | append: type_name
-      endif
-    endif
-  endfor
-
-  for product_type in collection.all_types
-    unless type_options contains product_type
-      if type_options == blank
-        assign type_options = product_type
-      else
-        assign type_options = type_options | append: '|' | append: product_type
-      endif
-    endunless
-  endfor
-
-  if type_filter != blank
-    for value in type_filter.values
-      unless type_options contains value.label
-        if type_options == blank
-          assign type_options = value.label
-        else
-          assign type_options = type_options | append: '|' | append: value.label
-        endif
-      endunless
-    endfor
-  endif
-
-  assign type_option_list = type_options | split: '|'
 -%}
 
 <div class="sts-shop-intro" data-sts-shop-intro>
@@ -163,7 +116,7 @@
   {%- endif -%}
 
   {%- if section.settings.show_filter_labels -%}
-    <div class="sts-shop-intro__filters" data-sts-filters>
+    <div class="sts-shop-intro__filters">
       <div class="sts-shop-filter">
         <label class="visually-hidden" for="sts-filter-type-{{ section.id }}">Filter by type</label>
         <select
@@ -174,34 +127,17 @@
         >
           <option value="">TYPE</option>
           <option value="{{ collection.url }}">All types</option>
-          {%- if type_option_list.size > 0 and type_options != blank -%}
-            {%- for type_name in type_option_list -%}
-              {%- if type_name != blank -%}
-                {%- assign type_encoded = type_name | url_encode -%}
-                {%- assign type_link = collection.url | append: '?filter.p.product_type=' | append: type_encoded -%}
-                {%- if type_filter != blank -%}
-                  {%- for value in type_filter.values -%}
-                    {%- if value.label == type_name -%}
-                      {%- assign type_link = value.url_to_add -%}
-                    {%- endif -%}
-                  {%- endfor -%}
-                {%- endif -%}
-                {%- if collection.all_tags contains type_name -%}
-                  {%- assign type_handle = type_name | handleize -%}
-                  {%- assign type_link = collection.url | append: '/' | append: type_handle -%}
-                {%- endif -%}
-                <option
-                  value="{{ type_link }}"
-                  {% if current_tags contains type_name %}selected{% endif %}
-                >
-                  {{ type_name | escape }}
-                </option>
-              {%- endif -%}
-            {%- endfor -%}
-          {%- elsif type_filter != blank -%}
+          {%- if type_filter_found -%}
             {%- for value in type_filter.values -%}
               <option value="{{ value.url_to_add }}" {% if value.active %}selected{% endif %}>
                 {{ value.label | escape }}
+              </option>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for product_type in collection.all_types -%}
+              {%- assign type_encoded = product_type | url_encode -%}
+              <option value="{{ collection.url }}?filter.p.product_type={{ type_encoded }}">
+                {{ product_type | escape }}
               </option>
             {%- endfor -%}
           {%- endif -%}
@@ -218,13 +154,13 @@
         >
           <option value="">BRAND</option>
           <option value="{{ collection.url }}">All brands</option>
-          {%- if brand_filter != blank -%}
+          {%- if brand_filter_found -%}
             {%- for value in brand_filter.values -%}
               <option value="{{ value.url_to_add }}" {% if value.active %}selected{% endif %}>
                 {{ value.label | escape }}
               </option>
             {%- endfor -%}
-          {%- elsif collection.all_vendors.size > 0 -%}
+          {%- else -%}
             {%- for vendor in collection.all_vendors -%}
               {%- assign vendor_encoded = vendor | url_encode -%}
               <option value="{{ collection.url }}?filter.p.vendor={{ vendor_encoded }}">
@@ -245,7 +181,7 @@
         >
           <option value="">VINTAGE</option>
           <option value="{{ collection.url }}">All vintages</option>
-          {%- if vintage_filter != blank -%}
+          {%- if vintage_filter_found -%}
             {%- for value in vintage_filter.values -%}
               <option value="{{ value.url_to_add }}" {% if value.active %}selected{% endif %}>
                 {{ value.label | escape }}
@@ -275,7 +211,7 @@
 
 {% schema %}
 {
-  "name": "STS Collection intro",
+  "name": "STS Shop intro",
   "tag": "section",
   "class": "section-sts-shop-intro",
   "settings": [
@@ -283,8 +219,7 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Shop wines with personality",
-      "info": "Leave blank to use the collection title"
+      "default": "Shop wines with personality"
     },
     {
       "type": "richtext",
@@ -296,18 +231,7 @@
       "type": "checkbox",
       "id": "show_filter_labels",
       "label": "Show filter dropdowns",
-      "default": true,
-      "info": "Native select dropdowns for Type, Brand, and Vintage."
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 160,
-      "step": 1,
-      "unit": "px",
-      "label": "Padding top",
-      "default": 45
+      "default": true
     },
     {
       "type": "range",
@@ -322,7 +246,7 @@
   ],
   "presets": [
     {
-      "name": "STS Collection intro"
+      "name": "STS Shop intro"
     }
   ]
 }
