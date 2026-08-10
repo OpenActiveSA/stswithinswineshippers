@@ -130,16 +130,27 @@
   }
 
   function bindDetails() {
-    document.querySelectorAll('[data-sts-filters]').forEach(function (filtersRoot) {
-      if (filtersRoot.dataset.stsFiltersBound === 'true') return;
-      filtersRoot.dataset.stsFiltersBound = 'true';
-      filtersRoot.addEventListener('toggle', function (event) {
-        var target = event.target;
-        if (!target || target.tagName !== 'DETAILS' || !target.open) return;
-        filtersRoot.querySelectorAll('details.sts-shop-filter[open]').forEach(function (el) {
-          if (el !== target) el.removeAttribute('open');
-        });
+    document.querySelectorAll('details.sts-shop-filter').forEach(function (details) {
+      if (details.dataset.stsDetailsBound === 'true') return;
+      details.dataset.stsDetailsBound = 'true';
+
+      details.addEventListener('toggle', function () {
+        if (!details.open) return;
+        closeAll(details);
       });
+
+      var summary = details.querySelector('summary');
+      if (summary) {
+        summary.addEventListener('click', function () {
+          // Close siblings immediately on click so only one menu stays open
+          document.querySelectorAll('details.sts-shop-filter[open]').forEach(function (el) {
+            if (el !== details) el.removeAttribute('open');
+          });
+          document.querySelectorAll('.sts-shop-filter.is-open').forEach(function (el) {
+            if (el !== details) el.classList.remove('is-open');
+          });
+        });
+      }
     });
   }
 
