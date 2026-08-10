@@ -43,13 +43,17 @@
     justify-content: center;
   }
 
-  #shopify-section-{{ section.id }} .sts-shop-intro__filter {
+  #shopify-section-{{ section.id }} .sts-shop-filter {
+    position: relative;
+    min-width: 14rem;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__summary {
+    list-style: none;
+    cursor: pointer;
     min-width: 14rem;
     padding: 1rem 2rem;
     border: 2px solid #d4c391 !important;
-    border-width: 2px !important;
-    border-style: solid !important;
-    border-color: #d4c391 !important;
     border-radius: 999px;
     color: #d4c391;
     font-size: 1.15rem;
@@ -61,12 +65,78 @@
     justify-content: space-between;
     gap: 1.5rem;
     box-sizing: border-box;
+    width: 100%;
   }
 
-  #shopify-section-{{ section.id }} .sts-shop-intro__filter span {
+  #shopify-section-{{ section.id }} .sts-shop-filter__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__summary span {
+    color: #d4c391;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__menu {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 0.8rem);
+    transform: translateX(-50%);
+    z-index: 5;
+    min-width: 100%;
+    max-height: 28rem;
+    overflow: auto;
+    margin: 0;
+    padding: 0.8rem 0;
+    list-style: none;
+    text-align: left;
+    background: #1c1c1a;
+    border: 1px solid #d4c391;
+    border-radius: 1.2rem;
+    box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.35);
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__menu a {
+    display: block;
+    padding: 0.85rem 1.6rem;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.3rem;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__menu a:hover,
+  #shopify-section-{{ section.id }} .sts-shop-filter__menu a.is-active {
     color: #d4c391;
   }
 {%- endstyle -%}
+
+{%- liquid
+  assign type_filter = nil
+  assign brand_filter = nil
+  assign vintage_filter = nil
+
+  for filter in collection.filters
+    assign label = filter.label | downcase
+    if label == 'type' or label == 'product type' or label contains 'type'
+      assign type_filter = filter
+    elsif label == 'brand' or label == 'vendor' or label contains 'brand' or label contains 'vendor'
+      assign brand_filter = filter
+    elsif label == 'vintage' or label == 'year' or label contains 'vintage'
+      assign vintage_filter = filter
+    endif
+  endfor
+
+  assign active_type = ''
+  if current_tags.size > 0
+    for tag in current_tags
+      assign tag_down = tag | downcase
+      if tag_down contains 'wine' or tag_down == 'sparkling' or tag_down == 'rosé' or tag_down == 'rose' or tag_down == 'sweet' or tag_down == 'fortified' or tag_down == 'armagnac' or tag_down == 'cognac' or tag_down == 'eau-de-vie'
+        assign active_type = tag
+      endif
+    endfor
+  endif
+-%}
 
 <div class="sts-shop-intro">
   <h1 class="sts-shop-intro__title">
@@ -84,13 +154,151 @@
   {%- endif -%}
 
   {%- if section.settings.show_filter_labels -%}
-    <div class="sts-shop-intro__filters" aria-hidden="true">
-      <span class="sts-shop-intro__filter">TYPE <span>▾</span></span>
-      <span class="sts-shop-intro__filter">BRAND <span>▾</span></span>
-      <span class="sts-shop-intro__filter">VINTAGE <span>▾</span></span>
+    <div class="sts-shop-intro__filters">
+      {%- comment -%} TYPE {%- endcomment -%}
+      <details class="sts-shop-filter">
+        <summary class="sts-shop-filter__summary">
+          TYPE
+          <span>▾</span>
+        </summary>
+        <ul class="sts-shop-filter__menu">
+          <li>
+            <a href="{{ collection.url }}">All types</a>
+          </li>
+          {%- if type_filter -%}
+            {%- for value in type_filter.values -%}
+              <li>
+                <a
+                  href="{{ value.url_to_add }}"
+                  {% if value.active %}class="is-active"{% endif %}
+                >
+                  {{ value.label | escape }}
+                  {%- if value.count -%} ({{ value.count }}){%- endif -%}
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- elsif collection.all_types.size > 0 -%}
+            {%- for product_type in collection.all_types -%}
+              <li>
+                <a
+                  href="{{ collection.url }}?filter.p.product_type={{ product_type | url_encode }}"
+                  {% if product_type == active_type or product_type == current_tags.first %}class="is-active"{% endif %}
+                >
+                  {{ product_type | escape }}
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- comment -%} Tag fallback for wine categories {%- endcomment -%}
+            {%- assign type_tags = 'Red Wine,White Wine,Rosé,Sparkling,Sweet,Fortified,Armagnac,Cognac,Eau-de-Vie' | split: ',' -%}
+            {%- for type_tag in type_tags -%}
+              {%- if collection.all_tags contains type_tag -%}
+                <li>
+                  <a
+                    href="{{ collection.url }}/{{ type_tag | handleize }}"
+                    {% if current_tags contains type_tag %}class="is-active"{% endif %}
+                  >
+                    {{ type_tag | escape }}
+                  </a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </details>
+
+      {%- comment -%} BRAND {%- endcomment -%}
+      <details class="sts-shop-filter">
+        <summary class="sts-shop-filter__summary">
+          BRAND
+          <span>▾</span>
+        </summary>
+        <ul class="sts-shop-filter__menu">
+          <li>
+            <a href="{{ collection.url }}">All brands</a>
+          </li>
+          {%- if brand_filter -%}
+            {%- for value in brand_filter.values -%}
+              <li>
+                <a
+                  href="{{ value.url_to_add }}"
+                  {% if value.active %}class="is-active"{% endif %}
+                >
+                  {{ value.label | escape }}
+                  {%- if value.count -%} ({{ value.count }}){%- endif -%}
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for vendor in collection.all_vendors -%}
+              <li>
+                <a href="{{ collection.url }}?filter.p.vendor={{ vendor | url_encode }}">
+                  {{ vendor | escape }}
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </details>
+
+      {%- comment -%} VINTAGE {%- endcomment -%}
+      <details class="sts-shop-filter">
+        <summary class="sts-shop-filter__summary">
+          VINTAGE
+          <span>▾</span>
+        </summary>
+        <ul class="sts-shop-filter__menu">
+          <li>
+            <a href="{{ collection.url }}">All vintages</a>
+          </li>
+          {%- if vintage_filter -%}
+            {%- for value in vintage_filter.values -%}
+              <li>
+                <a
+                  href="{{ value.url_to_add }}"
+                  {% if value.active %}class="is-active"{% endif %}
+                >
+                  {{ value.label | escape }}
+                  {%- if value.count -%} ({{ value.count }}){%- endif -%}
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for tag in collection.all_tags -%}
+              {%- assign year_num = tag | plus: 0 -%}
+              {%- if tag.size == 4 and year_num >= 1990 and year_num <= 2035 -%}
+                <li>
+                  <a
+                    href="{{ collection.url }}/{{ tag | handleize }}"
+                    {% if current_tags contains tag %}class="is-active"{% endif %}
+                  >
+                    {{ tag | escape }}
+                  </a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </details>
     </div>
   {%- endif -%}
 </div>
+
+<script>
+  (function () {
+    const root = document.currentScript.previousElementSibling;
+    if (!root || !root.classList.contains('sts-shop-intro')) return;
+    const filters = root.querySelectorAll('.sts-shop-filter');
+    filters.forEach((details) => {
+      details.addEventListener('toggle', () => {
+        if (!details.open) return;
+        filters.forEach((other) => {
+          if (other !== details) other.open = false;
+        });
+      });
+    });
+  })();
+</script>
 
 {% schema %}
 {
@@ -114,9 +322,9 @@
     {
       "type": "checkbox",
       "id": "show_filter_labels",
-      "label": "Show decorative filter labels",
+      "label": "Show filter dropdowns",
       "default": true,
-      "info": "Real filters appear below once enabled in Search & Discovery"
+      "info": "TYPE uses Product type (or wine tags). Enable Product type in Search & Discovery for best results."
     },
     {
       "type": "range",
