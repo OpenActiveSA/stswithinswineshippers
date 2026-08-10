@@ -395,6 +395,10 @@
       };
     </script>
 
+    {%- if template.name == 'collection' -%}
+      <script src="{{ 'sts-shop-filters.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
