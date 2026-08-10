@@ -1,0 +1,320 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    position: relative !important;
+    z-index: 40 !important;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-intro {
+    background: #1c1c1a !important;
+    color: #ffffff;
+    text-align: center;
+    padding: 45px 2rem {{ section.settings.padding_bottom | default: 56 }}px !important;
+    overflow: visible !important;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-intro__title {
+    font-family: var(--sts-font-display, 'DM Sans', system-ui, sans-serif) !important;
+    font-size: clamp(3.2rem, 5.5vw, 5.2rem) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+    margin: 0 auto 1.8rem !important;
+    max-width: 71rem !important;
+    width: 100%;
+    color: #ffffff !important;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-intro__text,
+  #shopify-section-{{ section.id }} .sts-shop-intro__text p {
+    max-width: 58rem;
+    margin: 0 auto 3rem;
+    color: rgba(255, 255, 255, 0.92) !important;
+    font-size: 1.5rem;
+    line-height: 1.65;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-intro__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    z-index: 50;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter {
+    position: relative;
+    min-width: 14rem;
+    z-index: 51;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter[open] {
+    z-index: 60;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__button {
+    list-style: none;
+    cursor: pointer;
+    min-width: 14rem;
+    min-height: 4.4rem;
+    padding: 1rem 2rem;
+    border: 2px solid #d4c391 !important;
+    border-radius: 999px;
+    color: #d4c391;
+    font-family: inherit;
+    font-size: 1.15rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__button::-webkit-details-marker {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__button::marker {
+    content: '';
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__label {
+    color: #d4c391;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__caret {
+    width: 0.9rem;
+    height: 0.9rem;
+    border-right: 1.5px solid #d4c391;
+    border-bottom: 1.5px solid #d4c391;
+    transform: rotate(45deg) translateY(-0.15rem);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter[open] .sts-shop-filter__caret {
+    transform: rotate(225deg) translateY(-0.1rem);
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__menu {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 0.8rem);
+    transform: translateX(-50%);
+    z-index: 70;
+    min-width: max(100%, 18rem);
+    max-height: 28rem;
+    overflow: auto;
+    margin: 0;
+    padding: 0.8rem 0;
+    list-style: none;
+    text-align: left;
+    background: #1c1c1a;
+    border: 1px solid #d4c391;
+    border-radius: 1.2rem;
+    box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.45);
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter[open] .sts-shop-filter__menu {
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__option {
+    display: block;
+    padding: 0.85rem 1.6rem;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-size: 1.3rem;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__option:hover,
+  #shopify-section-{{ section.id }} .sts-shop-filter__option.is-active {
+    color: #d4c391 !important;
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign type_filter_found = false
+  assign brand_filter_found = false
+  assign vintage_filter_found = false
+
+  for filter in collection.filters
+    assign label = filter.label | downcase
+    if label == 'type' or label == 'product type'
+      assign type_filter = filter
+      assign type_filter_found = true
+    elsif label == 'brand' or label == 'vendor'
+      assign brand_filter = filter
+      assign brand_filter_found = true
+    elsif label == 'vintage' or label == 'year'
+      assign vintage_filter = filter
+      assign vintage_filter_found = true
+    endif
+  endfor
+-%}
+
+<div class="sts-shop-intro" data-sts-shop-intro>
+  <h1 class="sts-shop-intro__title">
+    {%- if section.settings.heading != blank -%}
+      {{ section.settings.heading }}
+    {%- else -%}
+      {{ collection.title | escape }}
+    {%- endif -%}
+  </h1>
+
+  {%- if section.settings.text != blank -%}
+    <div class="sts-shop-intro__text rte">{{ section.settings.text }}</div>
+  {%- elsif collection.description != blank -%}
+    <div class="sts-shop-intro__text rte">{{ collection.description }}</div>
+  {%- endif -%}
+
+  {%- if section.settings.show_filter_labels -%}
+    <div class="sts-shop-intro__filters" data-sts-filters>
+      <details class="sts-shop-filter">
+        <summary class="sts-shop-filter__button">
+          <span class="sts-shop-filter__label">TYPE</span>
+          <span class="sts-shop-filter__caret" aria-hidden="true"></span>
+        </summary>
+        <ul class="sts-shop-filter__menu" role="list">
+          <li><a href="{{ collection.url }}" class="sts-shop-filter__option">All types</a></li>
+          {%- if type_filter_found -%}
+            {%- for value in type_filter.values -%}
+              <li>
+                <a href="{{ value.url_to_add }}" class="sts-shop-filter__option{% if value.active %} is-active{% endif %}">
+                  {{ value.label | escape }}
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for product_type in collection.all_types -%}
+              {%- assign type_encoded = product_type | url_encode -%}
+              <li>
+                <a href="{{ collection.url }}?filter.p.product_type={{ type_encoded }}" class="sts-shop-filter__option">
+                  {{ product_type | escape }}
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </details>
+
+      <details class="sts-shop-filter">
+        <summary class="sts-shop-filter__button">
+          <span class="sts-shop-filter__label">BRAND</span>
+          <span class="sts-shop-filter__caret" aria-hidden="true"></span>
+        </summary>
+        <ul class="sts-shop-filter__menu" role="list">
+          <li><a href="{{ collection.url }}" class="sts-shop-filter__option">All brands</a></li>
+          {%- if brand_filter_found -%}
+            {%- for value in brand_filter.values -%}
+              <li>
+                <a href="{{ value.url_to_add }}" class="sts-shop-filter__option{% if value.active %} is-active{% endif %}">
+                  {{ value.label | escape }}
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for vendor in collection.all_vendors -%}
+              {%- assign vendor_encoded = vendor | url_encode -%}
+              <li>
+                <a href="{{ collection.url }}?filter.p.vendor={{ vendor_encoded }}" class="sts-shop-filter__option">
+                  {{ vendor | escape }}
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </details>
+
+      <details class="sts-shop-filter">
+        <summary class="sts-shop-filter__button">
+          <span class="sts-shop-filter__label">VINTAGE</span>
+          <span class="sts-shop-filter__caret" aria-hidden="true"></span>
+        </summary>
+        <ul class="sts-shop-filter__menu" role="list">
+          <li><a href="{{ collection.url }}" class="sts-shop-filter__option">All vintages</a></li>
+          {%- if vintage_filter_found -%}
+            {%- for value in vintage_filter.values -%}
+              <li>
+                <a href="{{ value.url_to_add }}" class="sts-shop-filter__option{% if value.active %} is-active{% endif %}">
+                  {{ value.label | escape }}
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for tag in collection.all_tags -%}
+              {%- assign year_num = tag | plus: 0 -%}
+              {%- if tag.size == 4 and year_num >= 1990 and year_num <= 2035 -%}
+                {%- assign tag_handle = tag | handleize -%}
+                <li>
+                  <a
+                    href="{{ collection.url }}/{{ tag_handle }}"
+                    class="sts-shop-filter__option{% if current_tags contains tag %} is-active{% endif %}"
+                  >
+                    {{ tag | escape }}
+                  </a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </details>
+    </div>
+  {%- endif -%}
+</div>
+
+<script src="{{ 'sts-shop-filters.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "STS Shop intro",
+  "tag": "section",
+  "class": "section-sts-shop-intro",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop wines with personality"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>From bold reds to crisp whites, every bottle is chosen for its unique story and quality. Explore our collection and uncover something unexpected.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filter_labels",
+      "label": "Show filter dropdowns",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 56
+    }
+  ],
+  "presets": [
+    {
+      "name": "STS Shop intro"
+    }
+  ]
+}
+{% endschema %}
