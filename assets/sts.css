@@ -1056,6 +1056,11 @@ body.template-collection .product-grid-container {
   z-index: 1;
 }
 
+/* Ensure shop filter menus sit above the cream product grid */
+body.template-collection .sts-shop-filter__menu {
+  z-index: 80;
+}
+
 /* —— Product page —— */
 body.template-product {
   background: var(--sts-cream);

@@ -1,18 +1,31 @@
 (function () {
-  function bindFilterSelects(root) {
+  function closeOthers(filtersRoot, except) {
+    if (!filtersRoot) return;
+    filtersRoot.querySelectorAll('details.sts-shop-filter[open]').forEach(function (el) {
+      if (el !== except) el.removeAttribute('open');
+    });
+  }
+
+  function bindFilters(root) {
     if (!root) return;
-    root.querySelectorAll('[data-sts-filter-select]').forEach(function (select) {
-      if (select.dataset.stsBound === 'true') return;
-      select.dataset.stsBound = 'true';
-      select.addEventListener('change', function () {
-        var url = select.value;
-        if (url) window.location.assign(url);
-      });
+    var filtersRoot = root.querySelector('[data-sts-filters]') || root;
+    if (filtersRoot.dataset.stsFiltersBound === 'true') return;
+    filtersRoot.dataset.stsFiltersBound = 'true';
+
+    filtersRoot.addEventListener('toggle', function (event) {
+      var target = event.target;
+      if (!target || target.tagName !== 'DETAILS' || !target.open) return;
+      closeOthers(filtersRoot, target);
+    });
+
+    document.addEventListener('click', function (event) {
+      if (event.target.closest('[data-sts-filters]')) return;
+      closeOthers(filtersRoot, null);
     });
   }
 
   function init() {
-    document.querySelectorAll('[data-sts-shop-intro]').forEach(bindFilterSelects);
+    document.querySelectorAll('[data-sts-shop-intro]').forEach(bindFilters);
   }
 
   if (document.readyState === 'loading') {
@@ -22,6 +35,6 @@
   }
 
   document.addEventListener('shopify:section:load', function (event) {
-    bindFilterSelects(event.target.querySelector('[data-sts-shop-intro]'));
+    bindFilters(event.target.querySelector('[data-sts-shop-intro]'));
   });
 })();

@@ -1,4 +1,3 @@
-{%- comment -%} Fallback if Shopify still references this section type {%- endcomment -%}
 {%- style -%}
   #shopify-section-{{ section.id }} {
     margin: 0 !important;
@@ -13,6 +12,7 @@
     color: #ffffff;
     text-align: center;
     padding: 45px 2rem {{ section.settings.padding_bottom | default: 56 }}px !important;
+    overflow: visible !important;
   }
 
   #shopify-section-{{ section.id }} .sts-shop-intro__title {
@@ -41,40 +41,99 @@
     flex-wrap: wrap;
     gap: 1.4rem;
     justify-content: center;
+    position: relative;
+    z-index: 50;
   }
 
   #shopify-section-{{ section.id }} .sts-shop-filter {
+    position: relative;
     min-width: 14rem;
   }
 
-  #shopify-section-{{ section.id }} .sts-shop-filter__select {
-    -webkit-appearance: none;
-    appearance: none;
+  #shopify-section-{{ section.id }} .sts-shop-filter[open] {
+    z-index: 60;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__button {
+    list-style: none;
     cursor: pointer;
-    width: 100%;
     min-width: 14rem;
     min-height: 4.4rem;
-    padding: 1rem 3.2rem 1rem 2rem;
+    padding: 1rem 2rem;
     border: 2px solid #d4c391 !important;
     border-radius: 999px;
-    color: #d4c391 !important;
+    color: #d4c391;
     font-family: inherit;
     font-size: 1.15rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    background-color: #1c1c1a;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23d4c391' d='M1.4 1.4L6 6l4.6-4.6L12 2.8 6 8.8 0 2.8z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1.4rem center;
-    background-size: 1.2rem;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
     box-sizing: border-box;
+    width: 100%;
   }
 
-  #shopify-section-{{ section.id }} .sts-shop-filter__select option {
-    color: #1c1c1a;
-    background: #ffffff;
-    text-transform: none;
-    font-size: 1.4rem;
+  #shopify-section-{{ section.id }} .sts-shop-filter__button::-webkit-details-marker {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__button::marker {
+    content: '';
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__caret {
+    width: 0.9rem;
+    height: 0.9rem;
+    border-right: 1.5px solid #d4c391;
+    border-bottom: 1.5px solid #d4c391;
+    transform: rotate(45deg) translateY(-0.15rem);
+    transition: transform 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter[open] .sts-shop-filter__caret {
+    transform: rotate(225deg) translateY(-0.1rem);
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__menu {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 0.8rem);
+    transform: translateX(-50%);
+    z-index: 70;
+    min-width: max(100%, 18rem);
+    max-height: 28rem;
+    overflow: auto;
+    margin: 0;
+    padding: 0.8rem 0;
+    list-style: none;
+    text-align: left;
+    background: #1c1c1a;
+    border: 1px solid #d4c391;
+    border-radius: 1.2rem;
+    box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.45);
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter[open] .sts-shop-filter__menu {
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__option {
+    display: block;
+    padding: 0.85rem 1.6rem;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-size: 1.3rem;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .sts-shop-filter__option:hover,
+  #shopify-section-{{ section.id }} .sts-shop-filter__option.is-active {
+    color: #d4c391 !important;
   }
 {%- endstyle -%}
 
