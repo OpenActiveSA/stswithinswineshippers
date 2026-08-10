@@ -396,7 +396,37 @@
     </script>
 
     {%- if template.name == 'collection' -%}
-      <script src="{{ 'sts-shop-filters.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'sts-collection-filters.js' | asset_url }}" defer="defer"></script>
+      <script>
+        (function () {
+          function closeOtherFilters(except) {
+            document.querySelectorAll('details.sts-shop-filter[open]').forEach(function (el) {
+              if (el !== except) el.removeAttribute('open');
+            });
+            document.querySelectorAll('.sts-shop-filter.is-open').forEach(function (el) {
+              if (el !== except) el.classList.remove('is-open');
+            });
+          }
+
+          document.addEventListener(
+            'click',
+            function (event) {
+              var summary = event.target.closest('details.sts-shop-filter > summary');
+              if (!summary) return;
+              var details = summary.parentElement;
+              closeOtherFilters(details);
+            },
+            true
+          );
+
+          document.addEventListener('toggle', function (event) {
+            var details = event.target;
+            if (!details || details.tagName !== 'DETAILS' || !details.classList.contains('sts-shop-filter')) return;
+            if (!details.open) return;
+            closeOtherFilters(details);
+          }, true);
+        })();
+      </script>
     {%- endif -%}
 
     {%- if settings.predictive_search_enabled -%}
