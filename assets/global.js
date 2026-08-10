@@ -1458,3 +1458,58 @@ class CartPerformance {
     );
   }
 }
+
+/* STS: collection filter accordion + loader */
+(function () {
+  function onReady(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  function closeOtherFilters(except) {
+    document.querySelectorAll('details.sts-shop-filter[open]').forEach(function (el) {
+      if (el !== except) el.removeAttribute('open');
+    });
+    document.querySelectorAll('.sts-shop-filter.is-open').forEach(function (el) {
+      if (el !== except) el.classList.remove('is-open');
+    });
+  }
+
+  function bindAccordion() {
+    if (!document.body || !document.body.classList.contains('template-collection')) return;
+
+    document.addEventListener(
+      'click',
+      function (event) {
+        var summary = event.target.closest('summary');
+        if (!summary) return;
+        var details = summary.closest('details.sts-shop-filter');
+        if (!details) return;
+        closeOtherFilters(details);
+      },
+      true
+    );
+
+    document.addEventListener(
+      'toggle',
+      function (event) {
+        var details = event.target;
+        if (!details || details.tagName !== 'DETAILS') return;
+        if (!details.classList.contains('sts-shop-filter') || !details.open) return;
+        closeOtherFilters(details);
+      },
+      true
+    );
+
+    // Load full filter helper from theme CDN
+    if (!document.querySelector('script[data-sts-collection-filters]')) {
+      var script = document.createElement('script');
+      script.src = '/cdn/shop/t/3/assets/sts-collection-filters.js';
+      script.defer = true;
+      script.setAttribute('data-sts-collection-filters', 'true');
+      document.head.appendChild(script);
+    }
+  }
+
+  onReady(bindAccordion);
+})();
