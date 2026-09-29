@@ -46,7 +46,19 @@
         "heading": "Fine wine shipping. Handled properly.",
         "text": "<p>Wine shipping requires more than standard freight services. It demands specialist knowledge, careful handling and a deep understanding of international wine logistics. STS Wine Shippers provides end-to-end solutions for wineries, distributors and wine businesses across South Africa and around the world.</p>",
         "button_label": "OUR STORY",
-        "button_link": ""
+        "button_link": "",
+        "fallback_image": "sts-highlight-13.jpg"
+      }
+    },
+    "sts_gallery": {
+      "type": "sts-photo-gallery",
+      "settings": {
+        "heading": "The cellar & terrace",
+        "text": "<p>Wine by the glass, bottles to take home, and a terrace for lingering. Photographed at St Swithins in the City.</p>",
+        "background": "#f5f1ea",
+        "padding_top": 64,
+        "padding_bottom": 72,
+        "compact": false
       }
     },
     "red_selection": {
@@ -127,6 +139,7 @@
     "sts_hero",
     "finest_selection",
     "sts_shipping",
+    "sts_gallery",
     "red_selection",
     "sts_testimonials"
   ]

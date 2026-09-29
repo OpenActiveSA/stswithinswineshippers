@@ -9,6 +9,17 @@
         "padding_bottom": 56
       }
     },
+    "sts_photos": {
+      "type": "sts-photo-gallery",
+      "settings": {
+        "heading": "",
+        "text": "",
+        "background": "#f5f1ea",
+        "padding_top": 8,
+        "padding_bottom": 8,
+        "compact": true
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -30,5 +41,5 @@
       }
     }
   },
-  "order": ["sts_intro", "product-grid"]
+  "order": ["sts_intro", "sts_photos", "product-grid"]
 }

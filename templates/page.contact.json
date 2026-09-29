@@ -1,5 +1,15 @@
 {
   "sections": {
+    "visit_banner": {
+      "type": "sts-image-banner",
+      "settings": {
+        "heading": "Visit St Swithins",
+        "text": "<p>Wine by the bottle and the case, tastings, and a terrace for a glass without removing the cork. Come and see us in the City.</p>",
+        "button_label": "VIEW OUR WINES",
+        "button_link": "shopify://collections/all",
+        "fallback_image": "sts-highlight-06.jpg"
+      }
+    },
     "main": {
       "type": "main-page",
       "settings": {
@@ -16,10 +26,23 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "sts_gallery": {
+      "type": "sts-photo-gallery",
+      "settings": {
+        "heading": "Inside the shop",
+        "text": "<p>The cellar, the terrace, and the people who make a visit here worth lingering over.</p>",
+        "background": "#f5f1ea",
+        "padding_top": 48,
+        "padding_bottom": 72,
+        "compact": false
+      }
     }
   },
   "order": [
+    "visit_banner",
     "main",
-    "form"
+    "form",
+    "sts_gallery"
   ]
 }

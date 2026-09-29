@@ -11,8 +11,9 @@
           alt: section.settings.heading
       }}
     {%- else -%}
+      {%- assign fallback_image = section.settings.fallback_image | default: 'sts-highlight-13.jpg' -%}
       <img
-        src="{{ 'background-second-home-section.png' | asset_url }}"
+        src="{{ fallback_image | asset_url }}"
         alt="{{ section.settings.heading | escape }}"
         width="2000"
         height="900"
@@ -48,6 +49,13 @@
       "type": "image_picker",
       "id": "image",
       "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "fallback_image",
+      "label": "Theme fallback image filename",
+      "default": "sts-highlight-13.jpg",
+      "info": "Used when no image is picked. Files live in the theme assets folder."
     },
     {
       "type": "text",

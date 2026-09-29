@@ -158,7 +158,7 @@
 {%- endstyle -%}
 
 {%- liquid
-  assign slide_files = 'mainbanner-background.png,mainbanner2-background.png,mainbanner3-background.png,mainbanner4-background.png' | split: ','
+  assign slide_files = 'sts-highlight-06.jpg,sts-highlight-15.jpg,sts-highlight-45.jpg,sts-highlight-28.jpg' | split: ','
   assign slide_count = 0
   if section.blocks.size > 0
     for block in section.blocks
@@ -373,7 +373,7 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image",
-          "info": "Optional. If no slides are added, the 4 theme asset banners are used."
+          "info": "Optional. If no slides are added, cellar and terrace photos from the theme are used."
         }
       ]
     }
