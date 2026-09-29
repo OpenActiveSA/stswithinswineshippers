@@ -53,9 +53,10 @@
         "heading": "Inside the shop",
         "text": "<p>The cellar, the terrace, and the team.</p>",
         "background": "#f5f1ea",
-        "padding_top": 24,
-        "padding_bottom": 72,
-        "compact": false
+        "padding_top": 16,
+        "padding_bottom": 48,
+        "compact": false,
+        "gap": 4
       }
     }
   },
