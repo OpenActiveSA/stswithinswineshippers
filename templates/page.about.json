@@ -1,10 +1,11 @@
 {
+  "name": "About",
   "sections": {
     "banner": {
       "type": "sts-image-banner",
       "settings": {
-        "heading": "The City's finest wine shop",
-        "text": "<p>An all-weather tasting terrace on historic St Swithin's Lane, a stone's throw from the Bank of England and Cannon Street.</p>",
+        "heading": "About",
+        "text": "<p>The City of London's finest wine shop, with an all-weather tasting terrace on historic St Swithin's Lane.</p>",
         "button_label": "PLAN A VISIT",
         "button_link": "/pages/visit",
         "fallback_image": "sts-highlight-15.jpg"

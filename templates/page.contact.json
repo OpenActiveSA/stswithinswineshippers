@@ -1,4 +1,5 @@
 {
+  "name": "Contact",
   "sections": {
     "banner": {
       "type": "sts-image-banner",

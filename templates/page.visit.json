@@ -1,4 +1,5 @@
 {
+  "name": "Visit",
   "sections": {
     "banner": {
       "type": "sts-image-banner",

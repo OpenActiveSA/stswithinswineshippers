@@ -43,10 +43,10 @@
     "sts_shipping": {
       "type": "sts-image-banner",
       "settings": {
-        "heading": "Fine wine shipping. Handled properly.",
-        "text": "<p>Wine shipping requires more than standard freight services. It demands specialist knowledge, careful handling and a deep understanding of international wine logistics. STS Wine Shippers provides end-to-end solutions for wineries, distributors and wine businesses across South Africa and around the world.</p>",
+        "heading": "The City's finest wine shop",
+        "text": "<p>Welcome to St Swithins Wine Shippers, a destination for wine enthusiasts on historic St Swithin's Lane — Enomatics, Coravin, and an all-weather tasting terrace a stone's throw from the Bank of England.</p>",
         "button_label": "OUR STORY",
-        "button_link": "",
+        "button_link": "/pages/about",
         "fallback_image": "sts-highlight-13.jpg"
       }
     },

@@ -1,0 +1,75 @@
+{%- comment -%}
+  Appends About / Visit / Contact when the Shopify menu does not already include them.
+  variant: desktop | drawer
+{%- endcomment -%}
+
+{%- liquid
+  assign extras = 'About|/pages/about,Visit|/pages/visit,Contact|/pages/contact' | split: ','
+-%}
+
+{%- for extra in extras -%}
+  {%- assign parts = extra | split: '|' -%}
+  {%- assign extra_title = parts.first | strip -%}
+  {%- assign extra_path = parts.last | strip -%}
+  {%- assign extra_handle = extra_path | split: '/' | last -%}
+  {%- assign already = false -%}
+
+  {%- for link in section.settings.menu.links -%}
+    {%- assign link_url = link.url | downcase -%}
+    {%- if link_url contains extra_path or link.handle == extra_handle or link.title == extra_title -%}
+      {%- assign already = true -%}
+    {%- endif -%}
+    {%- for childlink in link.links -%}
+      {%- assign child_url = childlink.url | downcase -%}
+      {%- if child_url contains extra_path or childlink.handle == extra_handle or childlink.title == extra_title -%}
+        {%- assign already = true -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
+
+  {%- unless already -%}
+    {%- if pages[extra_handle].title != blank -%}
+      {%- assign extra_href = pages[extra_handle].url -%}
+    {%- else -%}
+      {%- assign extra_href = extra_path -%}
+    {%- endif -%}
+    {%- assign is_current = false -%}
+    {%- if request.path == extra_path or page.handle == extra_handle -%}
+      {%- assign is_current = true -%}
+    {%- endif -%}
+
+    {%- if variant == 'drawer' -%}
+      <li>
+        <a
+          id="HeaderDrawer-{{ extra_handle }}"
+          href="{{ extra_href }}"
+          class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if is_current %} menu-drawer__menu-item--active{% endif %}"
+          {% if is_current %}
+            aria-current="page"
+          {% endif %}
+        >
+          {{ extra_title | escape }}
+        </a>
+      </li>
+    {%- else -%}
+      <li>
+        <a
+          id="HeaderMenu-{{ extra_handle }}"
+          href="{{ extra_href }}"
+          class="header__menu-item list-menu__item link link--text focus-inset"
+          {% if is_current %}
+            aria-current="page"
+          {% endif %}
+        >
+          <span
+            {%- if is_current %}
+              class="header__active-menu-item"
+            {% endif %}
+          >
+            {{- extra_title | escape -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+  {%- endunless -%}
+{%- endfor -%}
