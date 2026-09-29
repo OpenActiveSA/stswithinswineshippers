@@ -21,9 +21,16 @@
               <ul class="sts-footer__list">
                 {%- assign placeholders = block.settings.placeholder_links | split: ',' -%}
                 {%- for item in placeholders -%}
-                  {%- assign label = item | strip -%}
-                  {%- if label != blank -%}
-                    <li><a href="#">{{ label }}</a></li>
+                  {%- assign pair = item | strip -%}
+                  {%- if pair != blank -%}
+                    {%- assign parts = pair | split: '|' -%}
+                    {%- assign label = parts[0] | strip -%}
+                    {%- if parts.size > 1 -%}
+                      {%- assign href = parts[1] | strip -%}
+                    {%- else -%}
+                      {%- assign href = '#' -%}
+                    {%- endif -%}
+                    <li><a href="{{ href }}">{{ label }}</a></li>
                   {%- endif -%}
                 {%- endfor -%}
               </ul>
@@ -133,8 +140,8 @@
           "type": "text",
           "id": "placeholder_links",
           "label": "Placeholder links (comma-separated)",
-          "default": "Our Story, Meet the Team, Wine Blog, FAQs",
-          "info": "Used when no menu is selected"
+          "default": "Our Story|/pages/about, Visit|/pages/visit, Contact|/pages/contact",
+          "info": "Used when no menu is selected. Optional format: Label|/pages/handle"
         }
       ]
     }

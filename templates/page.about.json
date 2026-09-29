@@ -1,0 +1,92 @@
+{
+  "sections": {
+    "banner": {
+      "type": "sts-image-banner",
+      "settings": {
+        "heading": "The City's finest wine shop",
+        "text": "<p>An all-weather tasting terrace on historic St Swithin's Lane, a stone's throw from the Bank of England and Cannon Street.</p>",
+        "button_label": "PLAN A VISIT",
+        "button_link": "/pages/visit",
+        "fallback_image": "sts-highlight-15.jpg"
+      }
+    },
+    "intro": {
+      "type": "sts-prose",
+      "settings": {
+        "eyebrow": "About us",
+        "heading": "A destination for wine enthusiasts",
+        "text": "<p>Welcome to St Swithins Wine Shippers, the City of London's finest wine shop with an all-weather tasting terrace on historic St Swithin's Lane. A destination for wine enthusiasts and connoisseurs alike, with Enomatics and Coravin.</p>",
+        "button_label": "VIEW OUR WINES",
+        "button_link": "shopify://collections/all",
+        "alignment": "center",
+        "background": "#f5f1ea",
+        "padding_top": 56,
+        "padding_bottom": 24
+      }
+    },
+    "features": {
+      "type": "sts-feature-cards",
+      "blocks": {
+        "enomatics": {
+          "type": "feature",
+          "settings": {
+            "heading": "Enomatics",
+            "text": "<p>48 wines on taste every weekday from our state-of-the-art Enomatic machines, where you can try a little, or a lot, of a truly diverse array of wines from around the world.</p>"
+          }
+        },
+        "coravin": {
+          "type": "feature",
+          "settings": {
+            "heading": "Coravin",
+            "text": "<p>Rare, and very rare, Grand Cru wines by the glass from our Coravin extractor. Your chance to taste some of the great names and historic vintages.</p>"
+          }
+        },
+        "terrace": {
+          "type": "feature",
+          "settings": {
+            "heading": "Tasting terrace",
+            "text": "<p>Platters and nibbles to match your wine, served all day out on our tasting terrace.</p>"
+          }
+        },
+        "gifts": {
+          "type": "feature",
+          "settings": {
+            "heading": "Wine gifts",
+            "text": "<p>Hundreds of bottles for everyday or special occasions, plus gifts for connoisseurs: Riedel glassware and decanters, wine books, corkscrews, cigars, and Coravin machines.</p>"
+          }
+        }
+      },
+      "block_order": ["enomatics", "coravin", "terrace", "gifts"],
+      "settings": {
+        "columns": 2,
+        "background": "#ebe6dc",
+        "padding_top": 32,
+        "padding_bottom": 56
+      }
+    },
+    "food": {
+      "type": "sts-split",
+      "settings": {
+        "fallback_image": "sts-highlight-35.jpg",
+        "image_position": "right",
+        "heading": "Food",
+        "text": "<p>We serve a tempting range of platters and pots on our tasting terrace throughout the day. Each platter is accompanied by our fresh bread selection. Take a table on the all-weather terrace and enjoy a charcuterie board or artisan cheeses to complement wines by the glass or by the bottle.</p>",
+        "background": "#f5f1ea",
+        "padding_top": 48,
+        "padding_bottom": 24
+      }
+    },
+    "gallery": {
+      "type": "sts-photo-gallery",
+      "settings": {
+        "heading": "Inside St Swithins",
+        "text": "<p>The cellar, the terrace, and the people who make a visit here worth lingering over.</p>",
+        "background": "#f5f1ea",
+        "padding_top": 32,
+        "padding_bottom": 72,
+        "compact": false
+      }
+    }
+  },
+  "order": ["banner", "intro", "features", "food", "gallery"]
+}

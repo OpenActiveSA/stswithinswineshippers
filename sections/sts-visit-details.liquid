@@ -1,0 +1,144 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} .sts-visit {
+    background: {{ section.settings.background }};
+    color: #ffffff;
+    padding: {{ section.settings.padding_top }}px 2rem {{ section.settings.padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .sts-visit__inner {
+    width: min(110rem, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+
+  #shopify-section-{{ section.id }} .sts-visit__item h2 {
+    margin: 0 0 0.8rem;
+    font-size: 1.25rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #d4c391;
+  }
+
+  #shopify-section-{{ section.id }} .sts-visit__item p,
+  #shopify-section-{{ section.id }} .sts-visit__item a {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .sts-visit__item a:hover {
+    color: #d4c391;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sts-visit__inner {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+    }
+  }
+{%- endstyle -%}
+
+<section class="sts-visit" {{ section.shopify_attributes }}>
+  <div class="sts-visit__inner">
+    {%- if section.settings.hours != blank -%}
+      <div class="sts-visit__item">
+        <h2>Hours</h2>
+        <p>{{ section.settings.hours }}</p>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.address != blank -%}
+      <div class="sts-visit__item">
+        <h2>Find us</h2>
+        <p>{{ section.settings.address }}</p>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.phone != blank or section.settings.email != blank -%}
+      <div class="sts-visit__item">
+        <h2>Enquire</h2>
+        {%- if section.settings.phone != blank -%}
+          <p><a href="tel:{{ section.settings.phone | replace: ' ', '' }}">{{ section.settings.phone }}</a></p>
+        {%- endif -%}
+        {%- if section.settings.email != blank -%}
+          <p><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.manager != blank -%}
+      <div class="sts-visit__item">
+        <h2>General manager</h2>
+        <p>{{ section.settings.manager }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "STS Visit details",
+  "tag": "section",
+  "class": "section-sts-visit",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Hours",
+      "default": "Monday to Friday, 12pm–10pm"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Address",
+      "default": "11-12 St Swithin's Lane, London EC4N 8AL. Close to Bank and Cannon Street stations."
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone",
+      "default": "+44 20 7621 9972"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "info@stswithinswineshippers.com"
+    },
+    {
+      "type": "text",
+      "id": "manager",
+      "label": "General manager",
+      "default": "Frederic Ahuir"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#1c1c1a"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 24,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 24,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 56
+    }
+  ],
+  "presets": [{ "name": "STS Visit details" }]
+}
+{% endschema %}

@@ -1,48 +1,63 @@
 {
   "sections": {
-    "visit_banner": {
+    "banner": {
       "type": "sts-image-banner",
       "settings": {
-        "heading": "Visit St Swithins",
-        "text": "<p>Wine by the bottle and the case, tastings, and a terrace for a glass without removing the cork. Come and see us in the City.</p>",
-        "button_label": "VIEW OUR WINES",
-        "button_link": "shopify://collections/all",
-        "fallback_image": "sts-highlight-06.jpg"
+        "heading": "Contact",
+        "text": "<p>We are situated on St Swithin's Lane, close to Bank and Cannon Street. Open Monday to Friday, 12pm–10pm.</p>",
+        "button_label": "VISIT US",
+        "button_link": "/pages/visit",
+        "fallback_image": "sts-highlight-13.jpg"
       }
     },
-    "main": {
-      "type": "main-page",
+    "intro": {
+      "type": "sts-prose",
       "settings": {
-        "padding_top": 36,
-        "padding_bottom": 36
+        "eyebrow": "Groups & reservations",
+        "heading": "Enquire for groups and reservations",
+        "text": "<p>Please email info@stswithinswineshippers.com or call 020 7621 9972. General manager: Frederic Ahuir.</p>",
+        "button_label": "",
+        "button_link": "",
+        "alignment": "center",
+        "background": "#f5f1ea",
+        "padding_top": 56,
+        "padding_bottom": 24
+      }
+    },
+    "details": {
+      "type": "sts-visit-details",
+      "settings": {
+        "hours": "Monday to Friday, 12pm–10pm",
+        "address": "11-12 St Swithin's Lane, London EC4N 8AL",
+        "phone": "+44 20 7621 9972",
+        "email": "info@stswithinswineshippers.com",
+        "manager": "Frederic Ahuir",
+        "background": "#1c1c1a",
+        "padding_top": 56,
+        "padding_bottom": 56
       }
     },
     "form": {
       "type": "contact-form",
       "settings": {
-        "heading": "",
-        "heading_size": "h1",
+        "heading": "Send a message",
+        "heading_size": "h2",
         "color_scheme": "scheme-1",
-        "padding_top": 36,
+        "padding_top": 48,
         "padding_bottom": 36
       }
     },
-    "sts_gallery": {
+    "gallery": {
       "type": "sts-photo-gallery",
       "settings": {
         "heading": "Inside the shop",
-        "text": "<p>The cellar, the terrace, and the people who make a visit here worth lingering over.</p>",
+        "text": "<p>The cellar, the terrace, and the team.</p>",
         "background": "#f5f1ea",
-        "padding_top": 48,
+        "padding_top": 24,
         "padding_bottom": 72,
         "compact": false
       }
     }
   },
-  "order": [
-    "visit_banner",
-    "main",
-    "form",
-    "sts_gallery"
-  ]
+  "order": ["banner", "intro", "details", "form", "gallery"]
 }

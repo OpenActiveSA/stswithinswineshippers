@@ -1,0 +1,77 @@
+{
+  "sections": {
+    "banner": {
+      "type": "sts-image-banner",
+      "settings": {
+        "heading": "Visit",
+        "text": "<p>The City's finest wine shop with an all-weather tasting terrace.</p>",
+        "button_label": "BOOK A TABLE",
+        "button_link": "/pages/contact",
+        "fallback_image": "sts-highlight-06.jpg"
+      }
+    },
+    "intro": {
+      "type": "sts-prose",
+      "settings": {
+        "eyebrow": "St Swithin's Lane",
+        "heading": "Come in for a glass, a bottle, or an afternoon on the terrace",
+        "text": "<p>We are on historic St Swithin's Lane, close to Bank and Cannon Street stations. The shop is open Monday to Friday, 12pm–10pm.</p>",
+        "button_label": "",
+        "button_link": "",
+        "alignment": "center",
+        "background": "#f5f1ea",
+        "padding_top": 56,
+        "padding_bottom": 16
+      }
+    },
+    "details": {
+      "type": "sts-visit-details",
+      "settings": {
+        "hours": "Monday to Friday, 12pm–10pm",
+        "address": "11-12 St Swithin's Lane, London EC4N 8AL. Close to Bank and Cannon Street stations.",
+        "phone": "+44 20 7621 9972",
+        "email": "info@stswithinswineshippers.com",
+        "manager": "Frederic Ahuir",
+        "background": "#1c1c1a",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "gifts": {
+      "type": "sts-split",
+      "settings": {
+        "fallback_image": "sts-highlight-02.jpg",
+        "image_position": "left",
+        "heading": "Wine gifts",
+        "text": "<p>A bottle of wine to take home for dinner? A special bottle for a special occasion? All our wines can be gift-wrapped. Or perhaps a presentation box of vintage Champagne with its own glasses, a beautiful decanter, an antique corkscrew, a wine compendium, or a Coravin machine.</p>",
+        "background": "#f5f1ea",
+        "padding_top": 56,
+        "padding_bottom": 24
+      }
+    },
+    "coravin": {
+      "type": "sts-split",
+      "settings": {
+        "fallback_image": "sts-highlight-28.jpg",
+        "image_position": "right",
+        "heading": "Coravin",
+        "text": "<p>Aspiration in a glass. With our Coravin extraction you can sample rare wines that previously were beyond reach. A surgical-quality needle pierces the cork, extracts your measure, and leaves the cork to re-form. Taste a great vintage — a Domaine de la Romanée-Conti or a Château Lafite — by the glass.</p>",
+        "background": "#f5f1ea",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "gallery": {
+      "type": "sts-photo-gallery",
+      "settings": {
+        "heading": "The cellar & terrace",
+        "text": "<p>Wine by the glass, bottles to take home, and a terrace for lingering.</p>",
+        "background": "#f5f1ea",
+        "padding_top": 32,
+        "padding_bottom": 72,
+        "compact": false
+      }
+    }
+  },
+  "order": ["banner", "intro", "details", "gifts", "coravin", "gallery"]
+}
