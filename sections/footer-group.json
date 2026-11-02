@@ -8,26 +8,26 @@
         "about": {
           "type": "menu",
           "settings": {
-            "heading": "ABOUT",
+            "heading": "About us",
             "placeholder_links": "Home|/, Our Story|/pages/about, Visit|/pages/visit, Contact|/pages/contact"
           }
         },
         "information": {
           "type": "menu",
           "settings": {
-            "heading": "INFORMATION",
+            "heading": "Legal",
             "placeholder_links": "Terms & Conditions|/pages/terms, Privacy Policy|/pages/privacy-policy, Cookie Policy|/pages/cookie-policy"
           }
         },
         "visit": {
           "type": "menu",
           "settings": {
-            "heading": "VISIT",
+            "heading": "Visit us",
             "placeholder_links": "Wine Bar|/pages/visit, Tasting Terrace|/pages/visit, Book a Table|/pages/visit, Private Events|/pages/private-events, Contact|/pages/contact"
           }
         }
       },
-      "block_order": ["about", "information", "visit"],
+      "block_order": ["about", "visit", "information"],
       "settings": {
         "newsletter_enable": true,
         "newsletter_placeholder": "Enter email address...",
