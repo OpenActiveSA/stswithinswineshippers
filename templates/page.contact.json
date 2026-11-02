@@ -4,9 +4,9 @@
     "contact": {
       "type": "sts-contact",
       "settings": {
-        "eyebrow": "Get in touch",
-        "heading": "Contact",
-        "form_heading": "Send a message",
+        "eyebrow": "",
+        "heading": "Get in touch",
+        "form_heading": "",
         "hours": "Monday to Friday, 12pm–10pm",
         "address": "11-12 St Swithin's Lane, London EC4N 8AL",
         "phone": "+44 20 7621 9972",

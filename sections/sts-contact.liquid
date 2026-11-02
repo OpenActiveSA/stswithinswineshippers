@@ -7,12 +7,11 @@
   }
 
   #shopify-section-{{ section.id }} .sts-contact__inner {
-    width: min(110rem, 100%);
+    width: min(76rem, 100%);
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 4.8rem;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
   }
 
   #shopify-section-{{ section.id }} .sts-contact__eyebrow {
@@ -65,12 +64,10 @@
     color: var(--sts-gold);
   }
 
-  #shopify-section-{{ section.id }} .sts-contact__form .title {
-    margin: 0 0 2.4rem;
-    font-family: var(--sts-font-display, 'DM Sans', system-ui, sans-serif);
-    font-size: clamp(2.4rem, 3vw, 3.2rem);
-    font-weight: 400;
-    color: var(--sts-ink);
+  #shopify-section-{{ section.id }} .sts-contact__form {
+    background: #ffffff;
+    border-radius: 2rem;
+    padding: 3.2rem 2.4rem;
   }
 
   #shopify-section-{{ section.id }} .sts-contact__form .contact {
@@ -79,9 +76,8 @@
   }
 
   @media screen and (min-width: 750px) {
-    #shopify-section-{{ section.id }} .sts-contact__inner {
-      grid-template-columns: minmax(24rem, 0.8fr) minmax(0, 1.4fr);
-      gap: 7rem;
+    #shopify-section-{{ section.id }} .sts-contact__form {
+      padding: 4rem 4.4rem;
     }
   }
 {%- endstyle -%}
@@ -180,8 +176,8 @@
   "class": "section-sts-contact",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Get in touch" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Contact" },
-    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Send a message" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get in touch" },
+    { "type": "text", "id": "form_heading", "label": "Form heading" },
     { "type": "text", "id": "hours", "label": "Hours", "default": "Monday to Friday, 12pm–10pm" },
     { "type": "textarea", "id": "address", "label": "Address", "default": "11-12 St Swithin's Lane, London EC4N 8AL" },
     { "type": "text", "id": "phone", "label": "Phone", "default": "+44 20 7621 9972" },

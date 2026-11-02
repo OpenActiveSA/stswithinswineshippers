@@ -1719,12 +1719,11 @@ body.template-product .quantity__input {
 
 /* —— Contact —— */
 .sts-contact__inner {
-  width: min(110rem, 100%);
+  width: min(76rem, 100%);
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 4.8rem;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
 }
 
 .sts-contact__eyebrow {
@@ -1777,12 +1776,10 @@ body.template-product .quantity__input {
   color: var(--sts-gold);
 }
 
-.sts-contact__form .title {
-  margin: 0 0 2.4rem;
-  font-family: var(--sts-font-display, 'DM Sans', system-ui, sans-serif);
-  font-size: clamp(2.4rem, 3vw, 3.2rem);
-  font-weight: 400;
-  color: var(--sts-ink);
+.sts-contact__form {
+  background: #ffffff;
+  border-radius: 2rem;
+  padding: 3.2rem 2.4rem;
 }
 
 .sts-contact__form .contact {
@@ -1791,9 +1788,8 @@ body.template-product .quantity__input {
 }
 
 @media screen and (min-width: 750px) {
-  .sts-contact__inner {
-    grid-template-columns: minmax(24rem, 0.8fr) minmax(0, 1.4fr);
-    gap: 7rem;
+  .sts-contact__form {
+    padding: 4rem 4.4rem;
   }
 }
 
