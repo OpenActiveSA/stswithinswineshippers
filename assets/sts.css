@@ -2129,6 +2129,10 @@ body.template-product .quantity__input {
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
   }
+
+  .sts-footer__col:first-child {
+    grid-column-start: 2;
+  }
 }
 
 .sts-footer__heading {
