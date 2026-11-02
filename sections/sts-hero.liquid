@@ -231,7 +231,7 @@
         assign hero_link_1 = section.settings.button_link_1
         if hero_link_1 == blank or settings.hide_shopping and hero_link_1 contains 'collections'
           if settings.hide_shopping
-            assign hero_link_1 = '/about'
+            assign hero_link_1 = '/pages/about'
           else
             assign hero_link_1 = routes.all_products_collection_url
           endif

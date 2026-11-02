@@ -7,7 +7,7 @@
         "heading": "Contact",
         "text": "<p>We are situated on St Swithin's Lane, close to Bank and Cannon Street. Open Monday to Friday, 12pm–10pm.</p>",
         "button_label": "VISIT US",
-        "button_link": "/visit",
+        "button_link": "/pages/visit",
         "fallback_image": "sts-highlight-13.jpg"
       }
     },
