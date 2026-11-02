@@ -1,23 +1,30 @@
 {%- comment -%}
-  Always outputs About, Visit, and Contact at /about, /visit, and /contact.
+  Always outputs Home, About, Visit, and Contact.
 {%- endcomment -%}
 
 {%- liquid
-  assign extras = 'About|about,Visit|visit,Contact|contact' | split: ','
+  assign extras = 'Home|home,About|about,Visit|visit,Contact|contact' | split: ','
 -%}
 
 {%- for extra in extras -%}
   {%- assign parts = extra | split: '|' -%}
   {%- assign extra_title = parts.first | strip -%}
   {%- assign extra_handle = parts.last | strip -%}
-  {%- assign extra_href = '/' | append: extra_handle -%}
-  {%- assign extra_pages = '/pages/' | append: extra_handle -%}
   {%- assign is_current = false -%}
-  {%- if request.path == extra_href
-    or request.path == extra_pages
-    or page.handle == extra_handle
-  -%}
-    {%- assign is_current = true -%}
+  {%- if extra_handle == 'home' -%}
+    {%- assign extra_href = routes.root_url -%}
+    {%- if template.name == 'index' -%}
+      {%- assign is_current = true -%}
+    {%- endif -%}
+  {%- else -%}
+    {%- assign extra_href = '/' | append: extra_handle -%}
+    {%- assign extra_pages = '/pages/' | append: extra_handle -%}
+    {%- if request.path == extra_href
+      or request.path == extra_pages
+      or page.handle == extra_handle
+    -%}
+      {%- assign is_current = true -%}
+    {%- endif -%}
   {%- endif -%}
 
   {%- if variant == 'drawer' -%}
