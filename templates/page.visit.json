@@ -67,7 +67,7 @@
       "settings": {
         "heading": "The cellar & terrace",
         "text": "<p>Wine by the glass, bottles to take home, and a terrace for lingering.</p>",
-        "background": "#f5f1ea",
+        "background": "#ffffff",
         "padding_top": 32,
         "padding_bottom": 72,
         "compact": false,
