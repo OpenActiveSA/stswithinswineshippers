@@ -21,7 +21,7 @@
         "enomatics": {
           "type": "feature",
           "settings": {
-            "fallback_image": "sts-highlight-28.jpg",
+            "fallback_image": "sts-highlight-40.jpg",
             "icon": "grape",
             "heading": "Enomatics",
             "text": "<p>48 wines on taste every weekday from our state-of-the-art Enomatic machines, where you can try a little, or a lot, of a truly diverse array of wines from around the world.</p>",
@@ -32,7 +32,7 @@
         "coravin": {
           "type": "feature",
           "settings": {
-            "fallback_image": "sts-highlight-13.jpg",
+            "fallback_image": "sts-feature-coravin.jpg",
             "icon": "barrel",
             "heading": "Coravin",
             "text": "<p>Rare, and very rare, Grand Cru wines by the glass from our Coravin extractor. Your chance to taste some of the great names and historic vintages.</p>",
@@ -54,7 +54,7 @@
         "gifts": {
           "type": "feature",
           "settings": {
-            "fallback_image": "sts-highlight-25.jpg",
+            "fallback_image": "sts-feature-gift.jpg",
             "icon": "gift",
             "heading": "Wine gifts",
             "text": "<p>Hundreds of bottles for everyday or special occasions, plus gifts for connoisseurs: Riedel glassware and decanters, wine books, corkscrews, cigars, and Coravin machines.</p>",
