@@ -71,6 +71,49 @@
       grid-template-columns: repeat(4, 1fr);
     }
   }
+
+  #shopify-section-{{ section.id }} .sts-gallery.is-compact .sts-gallery__scroller {
+    display: flex;
+    gap: {{ gallery_gap }}px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 {{ gallery_gap }}px 0.4rem;
+  }
+
+  #shopify-section-{{ section.id }} .sts-gallery.is-compact .sts-gallery__scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .sts-gallery.is-compact .sts-gallery__item {
+    flex: 0 0 72vw;
+    width: 72vw;
+    max-width: 28rem;
+    scroll-snap-align: start;
+    grid-column: auto;
+  }
+
+  #shopify-section-{{ section.id }} .sts-gallery.is-compact .sts-gallery__item--wide {
+    flex-basis: min(88vw, 42rem);
+    width: min(88vw, 42rem);
+    max-width: 42rem;
+    grid-column: auto;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sts-gallery.is-compact .sts-gallery__item {
+      flex-basis: 24rem;
+      width: 24rem;
+      max-width: none;
+    }
+
+    #shopify-section-{{ section.id }} .sts-gallery.is-compact .sts-gallery__item--wide {
+      flex-basis: 38rem;
+      width: 38rem;
+    }
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -81,11 +124,7 @@
     endif
   endfor
   assign default_files = 'sts-highlight-06.jpg,sts-highlight-02.jpg,sts-highlight-01.jpg,sts-highlight-07.jpg,sts-highlight-10.jpg,sts-highlight-45.jpg,sts-highlight-35.jpg,sts-highlight-40.jpg,sts-highlight-50.jpg,sts-highlight-20.jpg,sts-highlight-25.jpg,sts-highlight-30.jpg' | split: ','
-  assign compact_files = 'sts-highlight-06.jpg,sts-highlight-13.jpg,sts-highlight-35.jpg,sts-highlight-65.jpg' | split: ','
   assign landscape_names = 'sts-highlight-01.jpg,sts-highlight-15.jpg,sts-highlight-30.jpg,sts-highlight-45.jpg,sts-highlight-50.jpg'
-  if section.settings.compact
-    assign default_files = compact_files
-  endif
 -%}
 
 <section class="sts-gallery{% if section.settings.compact %} is-compact{% endif %}" {{ section.shopify_attributes }}>
@@ -101,7 +140,7 @@
       </div>
     {%- endif -%}
 
-    <div class="sts-gallery__grid">
+    {%- capture gallery_items -%}
       {%- if uploaded_count > 0 -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'photo' and block.settings.image != blank -%}
@@ -111,9 +150,9 @@
               {%- assign is_wide = true -%}
             {%- endif -%}
             {%- if is_wide -%}
-              {%- assign photo_sizes = '(min-width: 750px) 50vw, 100vw' -%}
+              {%- assign photo_sizes = '(min-width: 750px) 40vw, 90vw' -%}
             {%- else -%}
-              {%- assign photo_sizes = '(min-width: 750px) 25vw, 50vw' -%}
+              {%- assign photo_sizes = '(min-width: 750px) 24rem, 72vw' -%}
             {%- endif -%}
             <figure class="sts-gallery__item{% if is_wide %} sts-gallery__item--wide{% endif %}" {{ block.shopify_attributes }}>
               {{
@@ -139,16 +178,86 @@
             <img
               src="{{ file_name | asset_url }}"
               alt="{{ section.settings.heading | default: shop.name | escape }}"
-              width="{% if is_wide %}1024{% else %}1024{% endif %}"
+              width="1024"
               height="{% if is_wide %}683{% else %}1536{% endif %}"
               loading="lazy"
             >
           </figure>
         {%- endfor -%}
       {%- endif -%}
-    </div>
+    {%- endcapture -%}
+
+    {%- if section.settings.compact -%}
+      <div class="sts-gallery__scroller" data-sts-gallery-scroll>
+        {{ gallery_items }}
+        {{ gallery_items }}
+      </div>
+    {%- else -%}
+      <div class="sts-gallery__grid">
+        {{ gallery_items }}
+      </div>
+    {%- endif -%}
   </div>
 </section>
+
+{%- if section.settings.compact -%}
+  <script>
+    (function () {
+      var root = document.getElementById('shopify-section-{{ section.id }}');
+      if (!root) return;
+      var scroller = root.querySelector('[data-sts-gallery-scroll]');
+      if (!scroller) return;
+
+      var paused = false;
+      var speed = 0.35;
+      var interacting = false;
+
+      function pause() {
+        paused = true;
+      }
+      function resume() {
+        if (!interacting) paused = false;
+      }
+
+      scroller.addEventListener('pointerenter', pause);
+      scroller.addEventListener('pointerleave', function () {
+        interacting = false;
+        resume();
+      });
+      scroller.addEventListener('pointerdown', function () {
+        interacting = true;
+        pause();
+      });
+      window.addEventListener('pointerup', function () {
+        interacting = false;
+        resume();
+      });
+      scroller.addEventListener(
+        'touchstart',
+        function () {
+          interacting = true;
+          pause();
+        },
+        { passive: true }
+      );
+
+      function tick() {
+        if (!paused) {
+          scroller.scrollLeft += speed;
+          var half = scroller.scrollWidth / 2;
+          if (half > 0 && scroller.scrollLeft >= half) {
+            scroller.scrollLeft -= half;
+          }
+        }
+        requestAnimationFrame(tick);
+      }
+
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        requestAnimationFrame(tick);
+      }
+    })();
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -208,7 +317,7 @@
     {
       "type": "checkbox",
       "id": "compact",
-      "label": "Compact row (4 photos)",
+      "label": "Scrolling photo row",
       "default": false
     }
   ],
