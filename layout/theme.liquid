@@ -38,12 +38,15 @@
           '/pages/contact': 'contact'
         };
         var handle = handles[path];
-        if (!handle) return;
-        document.documentElement.classList.add('sts-pretty', 'sts-pretty--' + handle);
-        var titles = { about: 'About', visit: 'Visit', contact: 'Contact' };
-        document.title = titles[handle] + ' – ' + {{ shop.name | json }};
-        var canonical = document.querySelector('link[rel="canonical"]');
-        if (canonical) canonical.href = location.origin + path;
+        if (handle) {
+          document.documentElement.classList.add('sts-pretty', 'sts-pretty--' + handle);
+          var titles = { about: 'About', visit: 'Visit', contact: 'Contact' };
+          document.title = titles[handle] + ' – ' + {{ shop.name | json }};
+          var canonical = document.querySelector('link[rel="canonical"]');
+          if (canonical) canonical.href = location.origin + path;
+        }
+        var nav = handle || (path === '/' ? 'home' : null);
+        if (nav) document.documentElement.classList.add('sts-nav-' + nav);
       })();
     </script>
     <style>

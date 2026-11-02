@@ -242,13 +242,49 @@ h5,
 .header__inline-menu .header__menu-item:hover span::after,
 .header__inline-menu .header__menu-item:focus-visible span::after,
 .header__inline-menu details[open] > .header__menu-item span::after,
-.header__inline-menu .header__active-menu-item::after {
+.header__inline-menu .header__active-menu-item::after,
+.header__inline-menu .header__menu-item.is-active span::after,
+.header__inline-menu .header__menu-item[aria-current='page'] span::after {
   transform: scaleX(1);
+  background: #d4c391;
 }
 
-.header__inline-menu .header__active-menu-item {
-  color: var(--sts-gold);
+.header-wrapper .header__inline-menu .header__menu-item.is-active,
+.header-wrapper .header__inline-menu .header__menu-item.is-active span,
+.header-wrapper .header__inline-menu .header__menu-item[aria-current='page'],
+.header-wrapper .header__inline-menu .header__menu-item[aria-current='page'] span,
+.header__inline-menu .header__active-menu-item,
+html.sts-nav-home #HeaderMenu-home,
+html.sts-nav-home #HeaderMenu-home span,
+html.sts-nav-about #HeaderMenu-about,
+html.sts-nav-about #HeaderMenu-about span,
+html.sts-nav-visit #HeaderMenu-visit,
+html.sts-nav-visit #HeaderMenu-visit span,
+html.sts-nav-contact #HeaderMenu-contact,
+html.sts-nav-contact #HeaderMenu-contact span {
+  color: #d4c391;
   text-decoration: none !important;
+}
+
+html.sts-nav-home #HeaderMenu-home span::after,
+html.sts-nav-about #HeaderMenu-about span::after,
+html.sts-nav-visit #HeaderMenu-visit span::after,
+html.sts-nav-contact #HeaderMenu-contact span::after {
+  transform: scaleX(1);
+  background: #d4c391;
+}
+
+.header-wrapper .menu-drawer__menu-item.is-active,
+.header-wrapper .menu-drawer__menu-item--active,
+.header-wrapper .menu-drawer__menu-item[aria-current='page'],
+html.sts-nav-home #HeaderDrawer-home,
+html.sts-nav-about #HeaderDrawer-about,
+html.sts-nav-visit #HeaderDrawer-visit,
+html.sts-nav-contact #HeaderDrawer-contact {
+  color: #d4c391;
+  text-decoration: underline;
+  text-underline-offset: 0.35rem;
+  background: transparent;
 }
 
 /* Switch to drawer sooner so 5-item nav does not wrap */

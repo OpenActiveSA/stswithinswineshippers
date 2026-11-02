@@ -11,14 +11,21 @@
   {%- assign extra_title = parts.first | strip -%}
   {%- assign extra_handle = parts.last | strip -%}
   {%- assign is_current = false -%}
+  {%- assign current_path = request.path | default: '' | downcase -%}
   {%- if extra_handle == 'home' -%}
     {%- assign extra_href = '/' -%}
-    {%- if template.name == 'index' -%}
+    {%- if template.name == 'index' or current_path == '/' or current_path == '' -%}
       {%- assign is_current = true -%}
     {%- endif -%}
   {%- else -%}
     {%- assign extra_href = '/pages/' | append: extra_handle -%}
-    {%- if request.path == extra_href or page.handle == extra_handle -%}
+    {%- assign extra_href_slash = extra_href | append: '/' -%}
+    {%- if page.handle == extra_handle
+      or template.suffix == extra_handle
+      or current_path == extra_href
+      or current_path == extra_href_slash
+      or current_path contains extra_href
+    -%}
       {%- assign is_current = true -%}
     {%- endif -%}
   {%- endif -%}
@@ -28,7 +35,7 @@
       <a
         id="HeaderDrawer-{{ extra_handle }}"
         href="{{ extra_href }}"
-        class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if is_current %} menu-drawer__menu-item--active{% endif %}"
+        class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if is_current %} menu-drawer__menu-item--active is-active{% endif %}"
         {% if is_current %}
           aria-current="page"
         {% endif %}
@@ -41,7 +48,7 @@
       <a
         id="HeaderMenu-{{ extra_handle }}"
         href="{{ extra_href }}"
-        class="header__menu-item list-menu__item link link--text focus-inset"
+        class="header__menu-item list-menu__item link link--text focus-inset{% if is_current %} is-active{% endif %}"
         {% if is_current %}
           aria-current="page"
         {% endif %}
