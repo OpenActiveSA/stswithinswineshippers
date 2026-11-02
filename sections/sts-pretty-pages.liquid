@@ -130,6 +130,7 @@
     grid-auto-flow: dense;
     gap: 4px;
     padding: 0 4px;
+    align-items: stretch;
   }
   #shopify-section-{{ section.id }} .sts-gallery__item {
     position: relative;
@@ -148,10 +149,16 @@
     height: 100%;
     display: block;
     object-fit: cover;
+    object-position: center;
   }
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .sts-gallery__grid {
       grid-template-columns: repeat(4, 1fr);
+    }
+    #shopify-section-{{ section.id }} .sts-gallery__item--wide {
+      aspect-ratio: auto;
+      height: 100%;
+      align-self: stretch;
     }
   }
 
