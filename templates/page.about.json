@@ -85,7 +85,8 @@
         "background": "#f5f1ea",
         "padding_top": 32,
         "padding_bottom": 72,
-        "compact": false
+        "compact": false,
+        "gap": 4
       }
     }
   },

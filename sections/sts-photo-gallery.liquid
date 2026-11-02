@@ -1,3 +1,6 @@
+{%- liquid
+  assign gallery_gap = section.settings.gap | default: 4
+-%}
 {%- style -%}
   #shopify-section-{{ section.id }} .sts-gallery {
     background: {{ section.settings.background | default: '#f5f1ea' }};
@@ -5,14 +8,15 @@
   }
 
   #shopify-section-{{ section.id }} .sts-gallery__inner {
-    width: min(118rem, calc(100% - 3.2rem));
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
   }
 
   #shopify-section-{{ section.id }} .sts-gallery__intro {
     text-align: center;
     max-width: 62rem;
-    margin: 0 auto 3.6rem;
+    margin: 0 auto 2.4rem;
+    padding: 0 1.6rem;
   }
 
   #shopify-section-{{ section.id }} .sts-gallery__heading {
@@ -33,64 +37,31 @@
   }
 
   #shopify-section-{{ section.id }} .sts-gallery__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: {{ section.settings.gap | default: 12 }}px;
+    column-count: 2;
+    column-gap: {{ gallery_gap }}px;
+    padding: 0 {{ gallery_gap }}px;
   }
 
   #shopify-section-{{ section.id }} .sts-gallery__item {
     position: relative;
+    display: block;
+    width: 100%;
+    margin: 0 0 {{ gallery_gap }}px;
+    break-inside: avoid;
     overflow: hidden;
-    background: #1c1c1a;
-    min-height: 22rem;
+    background: transparent;
   }
 
   #shopify-section-{{ section.id }} .sts-gallery__item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
-    min-height: 22rem;
-    transition: transform 0.6s ease;
-  }
-
-  #shopify-section-{{ section.id }} .sts-gallery__item:hover img {
-    transform: scale(1.04);
-  }
-
-  #shopify-section-{{ section.id }} .sts-gallery.is-compact .sts-gallery__item,
-  #shopify-section-{{ section.id }} .sts-gallery.is-compact .sts-gallery__item img {
-    min-height: 18rem;
+    object-fit: contain;
   }
 
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .sts-gallery__grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: {{ section.settings.gap | default: 12 }}px;
-    }
-
-    #shopify-section-{{ section.id }} .sts-gallery__item {
-      min-height: 28rem;
-    }
-
-    #shopify-section-{{ section.id }} .sts-gallery__item img {
-      min-height: 28rem;
-    }
-
-    #shopify-section-{{ section.id }} .sts-gallery:not(.is-compact) .sts-gallery__item:nth-child(1),
-    #shopify-section-{{ section.id }} .sts-gallery:not(.is-compact) .sts-gallery__item:nth-child(6) {
-      grid-column: span 2;
-      min-height: 42rem;
-    }
-
-    #shopify-section-{{ section.id }} .sts-gallery:not(.is-compact) .sts-gallery__item:nth-child(1) img,
-    #shopify-section-{{ section.id }} .sts-gallery:not(.is-compact) .sts-gallery__item:nth-child(6) img {
-      min-height: 42rem;
-    }
-
-    #shopify-section-{{ section.id }} .sts-gallery.is-compact .sts-gallery__item,
-    #shopify-section-{{ section.id }} .sts-gallery.is-compact .sts-gallery__item img {
-      min-height: 24rem;
+      column-count: 4;
     }
   }
 {%- endstyle -%}
@@ -102,7 +73,7 @@
       assign uploaded_count = uploaded_count | plus: 1
     endif
   endfor
-  assign default_files = 'sts-highlight-06.jpg,sts-highlight-02.jpg,sts-highlight-07.jpg,sts-highlight-10.jpg,sts-highlight-01.jpg,sts-highlight-45.jpg,sts-highlight-35.jpg,sts-highlight-40.jpg,sts-highlight-20.jpg,sts-highlight-25.jpg,sts-highlight-50.jpg,sts-highlight-30.jpg,sts-highlight-65.jpg' | split: ','
+  assign default_files = 'sts-highlight-06.jpg,sts-highlight-02.jpg,sts-highlight-07.jpg,sts-highlight-10.jpg,sts-highlight-01.jpg,sts-highlight-45.jpg,sts-highlight-35.jpg,sts-highlight-40.jpg,sts-highlight-20.jpg,sts-highlight-25.jpg,sts-highlight-50.jpg,sts-highlight-30.jpg' | split: ','
   assign compact_files = 'sts-highlight-06.jpg,sts-highlight-13.jpg,sts-highlight-35.jpg,sts-highlight-65.jpg' | split: ','
   if section.settings.compact
     assign default_files = compact_files
@@ -205,12 +176,12 @@
     {
       "type": "range",
       "id": "gap",
-      "min": 2,
-      "max": 24,
+      "min": 0,
+      "max": 16,
       "step": 2,
       "unit": "px",
       "label": "Gap between photos",
-      "default": 12
+      "default": 4
     },
     {
       "type": "checkbox",

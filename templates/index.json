@@ -30,7 +30,8 @@
         "background": "#f5f1ea",
         "padding_top": 64,
         "padding_bottom": 72,
-        "compact": false
+        "compact": false,
+        "gap": 4
       }
     },
     "sts_testimonials": {
