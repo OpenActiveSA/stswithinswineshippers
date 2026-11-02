@@ -1,5 +1,6 @@
 {%- comment -%}
   Always outputs Home, About, Visit, and Contact.
+  Contact uses /contact-us because Shopify reserves /contact.
 {%- endcomment -%}
 
 {%- liquid
@@ -11,21 +12,30 @@
   {%- assign extra_title = parts.first | strip -%}
   {%- assign extra_handle = parts.last | strip -%}
   {%- assign is_current = false -%}
-  {%- if extra_handle == 'home' -%}
-    {%- assign extra_href = routes.root_url -%}
-    {%- if template.name == 'index' -%}
-      {%- assign is_current = true -%}
-    {%- endif -%}
-  {%- else -%}
-    {%- assign extra_href = '/' | append: extra_handle -%}
-    {%- assign extra_pages = '/pages/' | append: extra_handle -%}
-    {%- if request.path == extra_href
-      or request.path == extra_pages
-      or page.handle == extra_handle
-    -%}
-      {%- assign is_current = true -%}
-    {%- endif -%}
-  {%- endif -%}
+  {%- case extra_handle -%}
+    {%- when 'home' -%}
+      {%- assign extra_href = '/' -%}
+      {%- if template.name == 'index' -%}
+        {%- assign is_current = true -%}
+      {%- endif -%}
+    {%- when 'contact' -%}
+      {%- assign extra_href = '/contact-us' -%}
+      {%- if request.path == '/contact-us'
+        or request.path == '/pages/contact'
+        or page.handle == 'contact'
+      -%}
+        {%- assign is_current = true -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- assign extra_href = '/' | append: extra_handle -%}
+      {%- assign extra_pages = '/pages/' | append: extra_handle -%}
+      {%- if request.path == extra_href
+        or request.path == extra_pages
+        or page.handle == extra_handle
+      -%}
+        {%- assign is_current = true -%}
+      {%- endif -%}
+  {%- endcase -%}
 
   {%- if variant == 'drawer' -%}
     <li>

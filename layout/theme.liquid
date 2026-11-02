@@ -11,25 +11,6 @@
     endif
   endif
 
-  assign sts_pretty_handle = ''
-  assign sts_pretty_parts = request.path | split: '?' | first | downcase | split: '/'
-  for sts_pretty_part in sts_pretty_parts
-    if sts_pretty_part != blank
-      assign sts_pretty_handle = sts_pretty_part
-    endif
-  endfor
-  assign sts_pretty_page = false
-  if sts_pretty_handle == 'visit' or sts_pretty_handle == 'contact' or sts_pretty_handle == 'about'
-    assign sts_pretty_page = true
-  endif
-  assign sts_page_title = page_title
-  if template.name == '404' and sts_pretty_page
-    assign sts_page_title = sts_pretty_handle | capitalize
-  endif
-  assign sts_canonical = canonical_url
-  if sts_pretty_page
-    assign sts_canonical = request.origin | append: '/' | append: sts_pretty_handle
-  endif
 -%}
 <!doctype html>
 <html class="js" lang="{{ request.locale.iso_code }}">
@@ -44,17 +25,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
-    <link rel="canonical" href="{{ sts_canonical }}">
-    {%- if sts_pretty_page and template.name == '404' -%}
-      <meta name="robots" content="index,follow">
-    {%- endif -%}
+    <link rel="canonical" href="{{ canonical_url }}">
     <script>
       (function () {
-        var path = location.pathname.replace(/\/+$/, '') || '/';
-        var map = { '/pages/visit': '/visit', '/pages/contact': '/contact', '/pages/about': '/about' };
-        if (map[path]) history.replaceState(null, '', map[path] + location.search + location.hash);
+        var path = (location.pathname || '/').replace(/\/+$/, '') || '/';
+        var suffix = location.search + location.hash;
+        var rewrite = { '/pages/visit': '/visit', '/pages/about': '/about', '/pages/contact': '/contact-us' };
+        if (rewrite[path]) {
+          path = rewrite[path];
+          history.replaceState(null, '', path + suffix);
+        }
+        var handles = { '/about': 'about', '/visit': 'visit', '/contact-us': 'contact' };
+        var handle = handles[path];
+        if (!handle) return;
+        document.documentElement.classList.add('sts-pretty', 'sts-pretty--' + handle);
+        var titles = { about: 'About', visit: 'Visit', contact: 'Contact' };
+        document.title = titles[handle] + ' – ' + {{ shop.name | json }};
+        var canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) canonical.href = location.origin + path;
       })();
     </script>
+    <style>
+      body.template-404 .shopify-section:has([data-sts-pretty]) {
+        display: none !important;
+      }
+      html.sts-pretty--about body.template-404 .shopify-section:has([data-sts-pretty='about']),
+      html.sts-pretty--visit body.template-404 .shopify-section:has([data-sts-pretty='visit']),
+      html.sts-pretty--contact body.template-404 .shopify-section:has([data-sts-pretty='contact']) {
+        display: block !important;
+      }
+      html.sts-pretty .sts-404-message {
+        display: none !important;
+      }
+    </style>
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -65,10 +68,10 @@
     {%- endunless -%}
 
     <title>
-      {{ sts_page_title }}
+      {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless sts_page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
     {% if page_description %}

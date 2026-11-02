@@ -1,17 +1,9 @@
 {%- comment -%}
-  Outputs "skip" when pretty_route is set and the current URL is not that handle.
+  Skip pretty-route sections on every template except 404.
+  The 404 template cannot read the original path in Liquid, so JS shows the matching page.
 {%- endcomment -%}
 {%- liquid
-  if pretty_route != blank
-    assign pretty_last = ''
-    assign pretty_parts = request.path | split: '?' | first | downcase | split: '/'
-    for pretty_part in pretty_parts
-      if pretty_part != blank
-        assign pretty_last = pretty_part
-      endif
-    endfor
-    if pretty_last != pretty_route
-      echo 'skip'
-    endif
+  if pretty_route != blank and template.name != '404'
+    echo 'skip'
   endif
 -%}
