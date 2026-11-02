@@ -9,7 +9,7 @@
         "phone": "+44 20 7621 9972",
         "email": "info@stswithinswineshippers.com",
         "manager": "Frederic Ahuir",
-        "show_social": true,
+        "show_social": false,
         "background": "#1c1c1a",
         "padding_top": 56,
         "padding_bottom": 56
