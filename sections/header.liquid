@@ -248,6 +248,8 @@
         {%- endcase -%}
       {%- endfor -%}
 
+      {% render 'sts-header-social' %}
+
       {%- unless settings.hide_shopping -%}
         <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
           {% if cart == empty %}

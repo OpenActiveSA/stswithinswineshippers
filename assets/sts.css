@@ -170,6 +170,16 @@ h5,
   align-items: center;
 }
 
+.header__icons > .sts-header-social {
+  display: none;
+}
+
+@media screen and (min-width: 1200px) {
+  .header__icons > .sts-header-social {
+    display: flex;
+  }
+}
+
 .menu-drawer__utility-links {
   padding: 2.4rem 3rem 3.2rem;
   background: transparent;
@@ -325,7 +335,12 @@ h5,
   color: inherit;
 }
 
-.sts-header-social__link:hover {
+.header-wrapper .sts-header-social__link {
+  color: var(--sts-white);
+}
+
+.sts-header-social__link:hover,
+.header-wrapper .sts-header-social__link:hover {
   color: var(--sts-gold);
 }
 
