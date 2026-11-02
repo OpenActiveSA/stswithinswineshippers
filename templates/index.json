@@ -30,11 +30,11 @@
       "type": "sts-photo-gallery",
       "settings": {
         "heading": "The cellar & terrace",
-        "text": "<p>Wine by the glass, bottles to take home, and a terrace for lingering. Photographed at St Swithins in the City.</p>",
+        "text": "<p>Wine by the glass, bottles to take home, and a terrace for lingering.</p>",
         "background": "#ffffff",
-        "padding_top": 64,
-        "padding_bottom": 72,
-        "compact": false,
+        "padding_top": 48,
+        "padding_bottom": 56,
+        "compact": true,
         "gap": 4
       }
     },

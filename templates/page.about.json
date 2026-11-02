@@ -80,10 +80,10 @@
     "gallery": {
       "type": "sts-photo-gallery",
       "settings": {
-        "heading": "Inside St Swithins",
-        "text": "<p>The cellar, the terrace, and the people who make a visit here worth lingering over.</p>",
-        "background": "#f5f1ea",
-        "padding_top": 32,
+        "heading": "The cellar & terrace",
+        "text": "<p>Wine by the glass, bottles to take home, and a terrace for lingering. Photographed at St Swithins in the City.</p>",
+        "background": "#ffffff",
+        "padding_top": 48,
         "padding_bottom": 72,
         "compact": false,
         "gap": 4
