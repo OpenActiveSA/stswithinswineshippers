@@ -410,61 +410,65 @@
 </article>
 
 <article class="sts-pretty-page sts-pretty-page--contact">
-  <section class="sts-visit">
-    <div class="sts-visit__inner">
-      <div class="sts-visit__item">
-        <h2>Hours</h2>
-        <p>Monday to Friday, 12pm–10pm</p>
-      </div>
-      <div class="sts-visit__item">
-        <h2>Find us</h2>
-        <p>11-12 St Swithin's Lane, London EC4N 8AL</p>
-      </div>
-      <div class="sts-visit__item">
-        <h2>Enquire</h2>
-        <p><a href="tel:+442076219972">+44 20 7621 9972</a></p>
-        <p><a href="mailto:info@stswithinswineshippers.com">info@stswithinswineshippers.com</a></p>
-      </div>
-      <div class="sts-visit__item">
-        <h2>General manager</h2>
-        <p>Frederic Ahuir</p>
+  <section class="sts-contact" style="background: #f5f1ea; padding: var(--sts-section-pad) 2rem;">
+    <div class="sts-contact__inner">
+      <aside class="sts-contact__aside">
+        <p class="sts-contact__eyebrow">Get in touch</p>
+        <h1 class="sts-contact__heading">Contact</h1>
+        <div class="sts-contact__item">
+          <h2>Hours</h2>
+          <p>Monday to Friday, 12pm–10pm</p>
+        </div>
+        <div class="sts-contact__item">
+          <h2>Find us</h2>
+          <p>11-12 St Swithin's Lane, London EC4N 8AL</p>
+        </div>
+        <div class="sts-contact__item">
+          <h2>Enquire</h2>
+          <p><a href="tel:+442076219972">+44 20 7621 9972</a></p>
+          <p><a href="mailto:info@stswithinswineshippers.com">info@stswithinswineshippers.com</a></p>
+        </div>
+        <div class="sts-contact__item">
+          <h2>General manager</h2>
+          <p>Frederic Ahuir</p>
+        </div>
+      </aside>
+      <div class="sts-contact__form">
+        <div class="contact">
+          <h2 class="title title-wrapper--no-top-margin">Send a message</h2>
+          {%- form 'contact', id: 'ContactFormPretty', class: 'isolate' -%}
+            {%- if form.posted_successfully? -%}
+              <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
+                {{- 'icon-success.svg' | inline_asset_content -}}
+                {{ 'templates.contact.form.post_success' | t }}
+              </h2>
+            {%- endif -%}
+            <div class="contact__fields">
+              <div class="field">
+                <input class="field__input" autocomplete="name" type="text" id="ContactFormPretty-name" name="contact[name]" placeholder="{{ 'templates.contact.form.name' | t }}">
+                <label class="field__label" for="ContactFormPretty-name">{{ 'templates.contact.form.name' | t }}</label>
+              </div>
+              <div class="field">
+                <input autocomplete="email" type="email" id="ContactFormPretty-email" class="field__input" name="contact[email]" spellcheck="false" autocapitalize="off" aria-required="true" required placeholder="{{ 'templates.contact.form.email' | t }}">
+                <label class="field__label" for="ContactFormPretty-email">{{ 'templates.contact.form.email' | t }} <span aria-hidden="true">*</span></label>
+              </div>
+            </div>
+            <div class="field">
+              <input type="tel" id="ContactFormPretty-phone" class="field__input" autocomplete="tel" name="contact[phone]" placeholder="{{ 'templates.contact.form.phone' | t }}">
+              <label class="field__label" for="ContactFormPretty-phone">{{ 'templates.contact.form.phone' | t }}</label>
+            </div>
+            <div class="field">
+              <textarea rows="8" id="ContactFormPretty-body" class="text-area field__input" name="contact[body]" placeholder="{{ 'templates.contact.form.comment' | t }}"></textarea>
+              <label class="form__label field__label" for="ContactFormPretty-body">{{ 'templates.contact.form.comment' | t }}</label>
+            </div>
+            <div class="contact__button">
+              <button type="submit" class="button">{{ 'templates.contact.form.send' | t }}</button>
+            </div>
+          {%- endform -%}
+        </div>
       </div>
     </div>
   </section>
-  <div class="color-scheme-1 gradient">
-    <div class="contact page-width page-width--narrow section-{{ section.id }}-padding" style="padding: var(--sts-section-pad) 2rem;">
-      <h2 class="title title-wrapper--no-top-margin h2">Send a message</h2>
-      {%- form 'contact', id: 'ContactFormPretty', class: 'isolate' -%}
-        {%- if form.posted_successfully? -%}
-          <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
-            {{- 'icon-success.svg' | inline_asset_content -}}
-            {{ 'templates.contact.form.post_success' | t }}
-          </h2>
-        {%- endif -%}
-        <div class="contact__fields">
-          <div class="field">
-            <input class="field__input" autocomplete="name" type="text" id="ContactFormPretty-name" name="contact[name]" placeholder="{{ 'templates.contact.form.name' | t }}">
-            <label class="field__label" for="ContactFormPretty-name">{{ 'templates.contact.form.name' | t }}</label>
-          </div>
-          <div class="field">
-            <input autocomplete="email" type="email" id="ContactFormPretty-email" class="field__input" name="contact[email]" spellcheck="false" autocapitalize="off" aria-required="true" required placeholder="{{ 'templates.contact.form.email' | t }}">
-            <label class="field__label" for="ContactFormPretty-email">{{ 'templates.contact.form.email' | t }} <span aria-hidden="true">*</span></label>
-          </div>
-        </div>
-        <div class="field">
-          <input type="tel" id="ContactFormPretty-phone" class="field__input" autocomplete="tel" name="contact[phone]" placeholder="{{ 'templates.contact.form.phone' | t }}">
-          <label class="field__label" for="ContactFormPretty-phone">{{ 'templates.contact.form.phone' | t }}</label>
-        </div>
-        <div class="field">
-          <textarea rows="10" id="ContactFormPretty-body" class="text-area field__input" name="contact[body]" placeholder="{{ 'templates.contact.form.comment' | t }}"></textarea>
-          <label class="form__label field__label" for="ContactFormPretty-body">{{ 'templates.contact.form.comment' | t }}</label>
-        </div>
-        <div class="contact__button">
-          <button type="submit" class="button">{{ 'templates.contact.form.send' | t }}</button>
-        </div>
-      {%- endform -%}
-    </div>
-  </div>
 </article>
 
 {% schema %}
