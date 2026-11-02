@@ -12,7 +12,11 @@
   }
   html.sts-pretty--about #shopify-section-{{ section.id }} .sts-pretty-page--about,
   html.sts-pretty--visit #shopify-section-{{ section.id }} .sts-pretty-page--visit,
-  html.sts-pretty--contact #shopify-section-{{ section.id }} .sts-pretty-page--contact {
+  html.sts-pretty--contact #shopify-section-{{ section.id }} .sts-pretty-page--contact,
+  html.sts-pretty--terms #shopify-section-{{ section.id }} .sts-pretty-page--terms,
+  html.sts-pretty--privacy #shopify-section-{{ section.id }} .sts-pretty-page--privacy,
+  html.sts-pretty--cookies #shopify-section-{{ section.id }} .sts-pretty-page--cookies,
+  html.sts-pretty--private-events #shopify-section-{{ section.id }} .sts-pretty-page--private-events {
     display: block;
   }
 
@@ -426,6 +430,60 @@
             </div>
           {%- endform -%}
         </div>
+      </div>
+    </div>
+  </section>
+</article>
+
+<article class="sts-pretty-page sts-pretty-page--terms">
+  <section class="sts-legal">
+    <div class="sts-legal__inner">
+      {% render 'sts-legal-copy', doc: 'terms' %}
+    </div>
+  </section>
+</article>
+
+<article class="sts-pretty-page sts-pretty-page--privacy">
+  <section class="sts-legal">
+    <div class="sts-legal__inner">
+      {% render 'sts-legal-copy', doc: 'privacy' %}
+    </div>
+  </section>
+</article>
+
+<article class="sts-pretty-page sts-pretty-page--cookies">
+  <section class="sts-legal">
+    <div class="sts-legal__inner">
+      {% render 'sts-legal-copy', doc: 'cookies' %}
+    </div>
+  </section>
+</article>
+
+<article class="sts-pretty-page sts-pretty-page--private-events">
+  <section class="sts-prose">
+    <div class="sts-prose__inner">
+      <p class="sts-prose__eyebrow">Visit</p>
+      <h1 class="sts-prose__heading">Private events</h1>
+      <div class="sts-prose__text rte"><p>Host a tasting, after-work drinks, or a client lunch on our all-weather terrace in the City. Enomatics, Coravin, and platters to match the wine. Monday to Friday, 12pm–10pm.</p></div>
+      <div class="sts-prose__actions">
+        <a href="/pages/contact" class="sts-btn sts-btn--solid">Get in touch</a>
+      </div>
+    </div>
+  </section>
+  <section class="sts-split">
+    <div class="sts-split__inner">
+      <div class="sts-split__media">
+        <img src="{{ 'sts-highlight-07.jpg' | asset_url }}" alt="Private events" width="1200" height="900" loading="lazy">
+      </div>
+      <div class="sts-split__copy">
+        <p class="sts-split__eyebrow">The terrace</p>
+        <h2>Your table, our cellar</h2>
+        <p>The tasting terrace sits above the shop on St Swithin’s Lane, a short walk from Bank and Cannon Street. We can shape a visit around a tasting flight, a celebration, or a quieter table with Grand Cru by the glass.</p>
+        <p>Tell us the date, numbers, and how you would like the afternoon or evening to feel. We will come back with availability and a simple plan.</p>
+        <a class="sts-split__link" href="/pages/visit">
+          <span>Book a table</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
       </div>
     </div>
   </section>

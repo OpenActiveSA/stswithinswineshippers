@@ -33,14 +33,35 @@
           '/about': 'about',
           '/visit': 'visit',
           '/get-in-touch': 'contact',
+          '/terms': 'terms',
+          '/privacy-policy': 'privacy',
+          '/privacy': 'privacy',
+          '/cookie-policy': 'cookies',
+          '/cookies': 'cookies',
+          '/private-events': 'private-events',
           '/pages/about': 'about',
           '/pages/visit': 'visit',
-          '/pages/contact': 'contact'
+          '/pages/contact': 'contact',
+          '/pages/terms': 'terms',
+          '/pages/terms-conditions': 'terms',
+          '/pages/privacy-policy': 'privacy',
+          '/pages/privacy': 'privacy',
+          '/pages/cookie-policy': 'cookies',
+          '/pages/cookies': 'cookies',
+          '/pages/private-events': 'private-events'
         };
         var handle = handles[path];
         if (handle) {
           document.documentElement.classList.add('sts-pretty', 'sts-pretty--' + handle);
-          var titles = { about: 'About', visit: 'Visit', contact: 'Contact' };
+          var titles = {
+            about: 'About',
+            visit: 'Visit',
+            contact: 'Contact',
+            terms: 'Terms & Conditions',
+            privacy: 'Privacy Policy',
+            cookies: 'Cookie Policy',
+            'private-events': 'Private Events'
+          };
           document.title = titles[handle] + ' – ' + {{ shop.name | json }};
           var canonical = document.querySelector('link[rel="canonical"]');
           if (canonical) canonical.href = location.origin + path;

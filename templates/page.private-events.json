@@ -1,0 +1,35 @@
+{
+  "name": "Private Events",
+  "sections": {
+    "intro": {
+      "type": "sts-prose",
+      "settings": {
+        "eyebrow": "Visit",
+        "heading": "Private events",
+        "text": "<p>Host a tasting, after-work drinks, or a client lunch on our all-weather terrace in the City. Enomatics, Coravin, and platters to match the wine. Monday to Friday, 12pm–10pm.</p>",
+        "button_label": "Get in touch",
+        "button_link": "/pages/contact",
+        "alignment": "center",
+        "background": "#f5f1ea",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "terrace": {
+      "type": "sts-split",
+      "settings": {
+        "fallback_image": "sts-highlight-07.jpg",
+        "image_position": "left",
+        "eyebrow": "The terrace",
+        "heading": "Your table, our cellar",
+        "text": "<p>The tasting terrace sits above the shop on St Swithin’s Lane, a short walk from Bank and Cannon Street. We can shape a visit around a tasting flight, a celebration, or a quieter table with Grand Cru by the glass.</p><p>Tell us the date, numbers, and how you would like the afternoon or evening to feel. We will come back with availability and a simple plan.</p>",
+        "button_label": "Book a table",
+        "button_link": "/pages/visit",
+        "background": "#ffffff",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    }
+  },
+  "order": ["intro", "terrace"]
+}

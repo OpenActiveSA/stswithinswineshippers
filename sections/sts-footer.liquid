@@ -16,6 +16,7 @@
             {%- if block.settings.menu != blank -%}
               <ul class="sts-footer__list">
                 {%- for link in block.settings.menu.links -%}
+                  {%- if link.url == blank or link.url == '#' -%}{%- continue -%}{%- endif -%}
                   {%- if settings.hide_shopping -%}
                     {%- capture shop_flag -%}{% render 'sts-is-shop-link', url: link.url, title: link.title, handle: link.handle %}{%- endcapture -%}
                     {%- if shop_flag contains '1' -%}{%- continue -%}{%- endif -%}
@@ -36,8 +37,9 @@
                     {%- if parts.size > 1 -%}
                       {%- assign href = parts[1] | strip -%}
                     {%- else -%}
-                      {%- assign href = '#' -%}
+                      {%- continue -%}
                     {%- endif -%}
+                    {%- if href == blank or href == '#' -%}{%- continue -%}{%- endif -%}
                     {%- if settings.hide_shopping -%}
                       {%- capture shop_flag -%}{% render 'sts-is-shop-link', url: href, title: label %}{%- endcapture -%}
                       {%- if shop_flag contains '1' -%}{%- continue -%}{%- endif -%}
@@ -208,14 +210,14 @@
           "type": "menu",
           "settings": {
             "heading": "ABOUT",
-            "placeholder_links": "Our Story, Meet the Team, Wine Blog, FAQs"
+            "placeholder_links": "Home|/, Our Story|/pages/about, Visit|/pages/visit, Contact|/pages/contact"
           }
         },
         {
           "type": "menu",
           "settings": {
             "heading": "INFORMATION",
-            "placeholder_links": "Delivery, Returns Policy, Terms & Conditions, Privacy Policy, Cookie Policy"
+            "placeholder_links": "Terms & Conditions|/pages/terms, Privacy Policy|/pages/privacy-policy, Cookie Policy|/pages/cookie-policy"
           }
         },
         {
@@ -229,7 +231,7 @@
           "type": "menu",
           "settings": {
             "heading": "VISIT",
-            "placeholder_links": "Wine Bar, Tasting Terrace, Wine Tastings, Book a Table, Private Events, Contact"
+            "placeholder_links": "Wine Bar|/pages/visit, Tasting Terrace|/pages/visit, Book a Table|/pages/visit, Private Events|/pages/private-events, Contact|/pages/contact"
           }
         }
       ]

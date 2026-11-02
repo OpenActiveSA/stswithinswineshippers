@@ -1,0 +1,41 @@
+{%- capture pretty_guard -%}
+  {%- render 'sts-pretty-guard', pretty_route: section.settings.pretty_route -%}
+{%- endcapture -%}
+{%- if pretty_guard contains 'skip' -%}
+  <style>#shopify-section-{{ section.id }}{display:none!important}</style>
+{%- else -%}
+{%- render 'sts-pretty-mark', pretty_route: section.settings.pretty_route -%}
+<section class="sts-legal" {{ section.shopify_attributes }}>
+  <div class="sts-legal__inner">
+    {% render 'sts-legal-copy', doc: section.settings.doc %}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "STS Legal page",
+  "tag": "section",
+  "class": "section-sts-legal",
+  "settings": [
+    {
+      "type": "select",
+      "id": "doc",
+      "label": "Document",
+      "options": [
+        { "value": "terms", "label": "Terms & Conditions" },
+        { "value": "privacy", "label": "Privacy Policy" },
+        { "value": "cookies", "label": "Cookie Policy" }
+      ],
+      "default": "terms"
+    },
+    {
+      "type": "text",
+      "id": "pretty_route",
+      "label": "Pretty URL handle",
+      "info": "Leave blank except on the 404 template, where this section only renders at /handle."
+    }
+  ],
+  "presets": [{ "name": "STS Legal page" }]
+}
+{% endschema %}

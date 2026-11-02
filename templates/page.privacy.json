@@ -1,0 +1,12 @@
+{
+  "name": "Privacy Policy",
+  "sections": {
+    "legal": {
+      "type": "sts-legal",
+      "settings": {
+        "doc": "privacy"
+      }
+    }
+  },
+  "order": ["legal"]
+}

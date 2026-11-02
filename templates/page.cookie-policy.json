@@ -1,0 +1,12 @@
+{
+  "name": "Cookie Policy",
+  "sections": {
+    "legal": {
+      "type": "sts-legal",
+      "settings": {
+        "doc": "cookies"
+      }
+    }
+  },
+  "order": ["legal"]
+}

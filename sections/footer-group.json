@@ -9,21 +9,21 @@
           "type": "menu",
           "settings": {
             "heading": "ABOUT",
-            "placeholder_links": "Home|/, Our Story|/pages/about, Visit|/pages/visit, Contact|/pages/contact, Wine Blog"
+            "placeholder_links": "Home|/, Our Story|/pages/about, Visit|/pages/visit, Contact|/pages/contact"
           }
         },
         "information": {
           "type": "menu",
           "settings": {
             "heading": "INFORMATION",
-            "placeholder_links": "Terms & Conditions, Privacy Policy, Cookie Policy"
+            "placeholder_links": "Terms & Conditions|/pages/terms, Privacy Policy|/pages/privacy-policy, Cookie Policy|/pages/cookie-policy"
           }
         },
         "visit": {
           "type": "menu",
           "settings": {
             "heading": "VISIT",
-            "placeholder_links": "Wine Bar|/pages/visit, Tasting Terrace|/pages/visit, Book a Table|/pages/visit, Private Events|/pages/contact, Contact|/pages/contact"
+            "placeholder_links": "Wine Bar|/pages/visit, Tasting Terrace|/pages/visit, Book a Table|/pages/visit, Private Events|/pages/private-events, Contact|/pages/contact"
           }
         }
       },

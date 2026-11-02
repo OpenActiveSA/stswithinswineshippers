@@ -1,0 +1,12 @@
+{
+  "name": "Terms & Conditions",
+  "sections": {
+    "legal": {
+      "type": "sts-legal",
+      "settings": {
+        "doc": "terms"
+      }
+    }
+  },
+  "order": ["legal"]
+}

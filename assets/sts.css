@@ -2015,6 +2015,78 @@ body.template-product .quantity__input {
   }
 }
 
+/* —— Legal pages —— */
+.sts-legal {
+  background: #f5f1ea;
+  padding: var(--sts-section-pad) 2rem;
+  color: var(--sts-ink);
+}
+
+.sts-legal__inner {
+  width: min(76rem, 100%);
+  margin: 0 auto;
+  text-align: left;
+}
+
+.sts-legal__eyebrow {
+  margin: 0 0 1.2rem;
+  color: var(--sts-gold);
+  font-size: 1.2rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.sts-legal__heading {
+  margin: 0 0 0.8rem;
+  font-family: var(--sts-font-display, 'DM Sans', system-ui, sans-serif);
+  font-size: clamp(2.8rem, 4.4vw, 4.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--sts-ink);
+}
+
+.sts-legal__updated {
+  margin: 0 0 2.4rem;
+  color: var(--sts-ink);
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+.sts-legal h2 {
+  margin: 2.8rem 0 1.2rem;
+  font-family: var(--sts-font-display, 'DM Sans', system-ui, sans-serif);
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.sts-legal p,
+.sts-legal li {
+  margin: 0 0 1.4rem;
+  font-size: 1.55rem;
+  line-height: 1.7;
+}
+
+.sts-legal ul {
+  margin: 0 0 1.4rem;
+  padding-left: 1.8rem;
+}
+
+.sts-legal li {
+  margin-bottom: 0.6rem;
+}
+
+.sts-legal a {
+  color: var(--sts-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+
+.sts-legal a:hover {
+  color: var(--sts-gold);
+}
+
 /* —— Footer —— */
 .sts-footer {
   background: var(--sts-cream);
