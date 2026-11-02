@@ -1,20 +1,17 @@
 {%- liquid
-  assign pretty_path = request.path | split: '?' | first | downcase
-  if pretty_path == '/visit' or pretty_path == '/visit/'
-    assign pretty_redirect = '/pages/visit'
-  elsif pretty_path == '/contact' or pretty_path == '/contact/'
-    assign pretty_redirect = '/pages/contact'
-  elsif pretty_path == '/about' or pretty_path == '/about/'
-    assign pretty_redirect = '/pages/about'
+  assign pretty_last = ''
+  assign pretty_parts = request.path | split: '?' | first | downcase | split: '/'
+  for pretty_part in pretty_parts
+    if pretty_part != blank
+      assign pretty_last = pretty_part
+    endif
+  endfor
+  assign pretty_page = false
+  if pretty_last == 'visit' or pretty_last == 'contact' or pretty_last == 'about'
+    assign pretty_page = true
   endif
 -%}
-{%- if pretty_redirect != blank -%}
-  <meta http-equiv="refresh" content="0;url={{ pretty_redirect }}">
-  <script>
-    location.replace({{ pretty_redirect | json }});
-  </script>
-{%- endif -%}
-
+{%- unless pretty_page -%}
 <style type="text/css">
   .template-404 .title + * {
     margin-top: 1rem;
@@ -42,3 +39,4 @@
     </a>
   {%- endif -%}
 </div>
+{%- endunless -%}

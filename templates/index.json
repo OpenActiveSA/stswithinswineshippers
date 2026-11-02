@@ -7,9 +7,9 @@
         "heading_line_2": "Wine",
         "heading_line_3": "Enthusiasts",
         "button_label_1": "OUR STORY",
-        "button_link_1": "/pages/about",
+        "button_link_1": "/about",
         "button_label_2": "BOOK A VISIT",
-        "button_link_2": "/pages/visit"
+        "button_link_2": "/visit"
       }
     },
     "sts_shipping": {
@@ -19,7 +19,7 @@
         "heading": "The City's finest wine shop",
         "text": "<p>Welcome to St Swithins Wine Shippers, a destination for wine enthusiasts on historic St Swithin's Lane — Enomatics, Coravin, and an all-weather tasting terrace a stone's throw from the Bank of England.</p>",
         "button_label": "OUR STORY",
-        "button_link": "/pages/about",
+        "button_link": "/about",
         "alignment": "center",
         "background": "#f5f1ea",
         "padding_top": 72,

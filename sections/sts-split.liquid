@@ -1,3 +1,9 @@
+{%- capture pretty_guard -%}
+  {%- render 'sts-pretty-guard', pretty_route: section.settings.pretty_route -%}
+{%- endcapture -%}
+{%- if pretty_guard contains 'skip' -%}
+  <style>#shopify-section-{{ section.id }}{display:none!important}</style>
+{%- else -%}
 {%- style -%}
   #shopify-section-{{ section.id }} .sts-split {
     background: {{ section.settings.background }};
@@ -86,6 +92,7 @@
     </div>
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {
@@ -149,6 +156,12 @@
       "unit": "px",
       "label": "Padding bottom",
       "default": 48
+    },
+    {
+      "type": "text",
+      "id": "pretty_route",
+      "label": "Pretty URL handle",
+      "info": "Leave blank except on the 404 template, where this section only renders at /handle."
     }
   ],
   "presets": [{ "name": "STS Image with text" }]

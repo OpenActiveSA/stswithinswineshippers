@@ -1,3 +1,9 @@
+{%- capture pretty_guard -%}
+  {%- render 'sts-pretty-guard', pretty_route: section.settings.pretty_route -%}
+{%- endcapture -%}
+{%- if pretty_guard contains 'skip' -%}
+  <style>#shopify-section-{{ section.id }}{display:none!important}</style>
+{%- else -%}
 {{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
@@ -134,6 +140,7 @@
     {%- endform -%}
   </div>
 </div>
+{%- endif -%}
 
 {% schema %}
 {
@@ -207,6 +214,12 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
+    },
+    {
+      "type": "text",
+      "id": "pretty_route",
+      "label": "Pretty URL handle",
+      "info": "Leave blank except on the 404 template, where this section only renders at /handle."
     }
   ],
   "presets": [

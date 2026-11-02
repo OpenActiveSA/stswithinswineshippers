@@ -7,7 +7,7 @@
         "heading": "About",
         "text": "<p>The City of London's finest wine shop, with an all-weather tasting terrace on historic St Swithin's Lane.</p>",
         "button_label": "PLAN A VISIT",
-        "button_link": "/pages/visit",
+        "button_link": "/visit",
         "fallback_image": "sts-highlight-15.jpg"
       }
     },
@@ -18,7 +18,7 @@
         "heading": "A destination for wine enthusiasts",
         "text": "<p>Welcome to St Swithins Wine Shippers, the City of London's finest wine shop with an all-weather tasting terrace on historic St Swithin's Lane. A destination for wine enthusiasts and connoisseurs alike, with Enomatics and Coravin.</p>",
         "button_label": "PLAN A VISIT",
-        "button_link": "/pages/visit",
+        "button_link": "/visit",
         "alignment": "center",
         "background": "#f5f1ea",
         "padding_top": 56,

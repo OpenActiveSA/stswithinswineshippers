@@ -10,6 +10,26 @@
       assign commerce_page = true
     endif
   endif
+
+  assign sts_pretty_handle = ''
+  assign sts_pretty_parts = request.path | split: '?' | first | downcase | split: '/'
+  for sts_pretty_part in sts_pretty_parts
+    if sts_pretty_part != blank
+      assign sts_pretty_handle = sts_pretty_part
+    endif
+  endfor
+  assign sts_pretty_page = false
+  if sts_pretty_handle == 'visit' or sts_pretty_handle == 'contact' or sts_pretty_handle == 'about'
+    assign sts_pretty_page = true
+  endif
+  assign sts_page_title = page_title
+  if template.name == '404' and sts_pretty_page
+    assign sts_page_title = sts_pretty_handle | capitalize
+  endif
+  assign sts_canonical = canonical_url
+  if sts_pretty_page
+    assign sts_canonical = request.origin | append: '/' | append: sts_pretty_handle
+  endif
 -%}
 <!doctype html>
 <html class="js" lang="{{ request.locale.iso_code }}">
@@ -24,7 +44,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
-    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="canonical" href="{{ sts_canonical }}">
+    {%- if sts_pretty_page and template.name == '404' -%}
+      <meta name="robots" content="index,follow">
+    {%- endif -%}
+    <script>
+      (function () {
+        var path = location.pathname.replace(/\/+$/, '') || '/';
+        var map = { '/pages/visit': '/visit', '/pages/contact': '/contact', '/pages/about': '/about' };
+        if (map[path]) history.replaceState(null, '', map[path] + location.search + location.hash);
+      })();
+    </script>
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -35,10 +65,10 @@
     {%- endunless -%}
 
     <title>
-      {{ page_title }}
+      {{ sts_page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- unless sts_page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
     {% if page_description %}

@@ -1,6 +1,12 @@
 {%- liquid
   assign gallery_gap = section.settings.gap | default: 4
 -%}
+{%- capture pretty_guard -%}
+  {%- render 'sts-pretty-guard', pretty_route: section.settings.pretty_route -%}
+{%- endcapture -%}
+{%- if pretty_guard contains 'skip' -%}
+  <style>#shopify-section-{{ section.id }}{display:none!important}</style>
+{%- else -%}
 {%- style -%}
   #shopify-section-{{ section.id }} .sts-gallery {
     background: {{ section.settings.background | default: '#f5f1ea' }};
@@ -258,6 +264,7 @@
     })();
   </script>
 {%- endif -%}
+{%- endif -%}
 
 {% schema %}
 {
@@ -319,6 +326,12 @@
       "id": "compact",
       "label": "Scrolling photo row",
       "default": false
+    },
+    {
+      "type": "text",
+      "id": "pretty_route",
+      "label": "Pretty URL handle",
+      "info": "Leave blank except on the 404 template, where this section only renders at /handle."
     }
   ],
   "blocks": [

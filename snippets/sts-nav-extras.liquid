@@ -1,5 +1,5 @@
 {%- comment -%}
-  Always outputs About, Visit, and Contact with the correct page URLs.
+  Always outputs About, Visit, and Contact at /about, /visit, and /contact.
 {%- endcomment -%}
 
 {%- liquid
@@ -10,10 +10,13 @@
   {%- assign parts = extra | split: '|' -%}
   {%- assign extra_title = parts.first | strip -%}
   {%- assign extra_handle = parts.last | strip -%}
-  {%- assign extra_path = '/pages/' | append: extra_handle -%}
-  {%- assign extra_href = extra_path -%}
+  {%- assign extra_href = '/' | append: extra_handle -%}
+  {%- assign extra_pages = '/pages/' | append: extra_handle -%}
   {%- assign is_current = false -%}
-  {%- if request.path == extra_path or page.handle == extra_handle -%}
+  {%- if request.path == extra_href
+    or request.path == extra_pages
+    or page.handle == extra_handle
+  -%}
     {%- assign is_current = true -%}
   {%- endif -%}
 

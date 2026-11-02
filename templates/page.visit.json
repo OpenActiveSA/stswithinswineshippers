@@ -7,7 +7,7 @@
         "heading": "Visit",
         "text": "<p>The City's finest wine shop with an all-weather tasting terrace.</p>",
         "button_label": "BOOK A TABLE",
-        "button_link": "/pages/visit#sts-booking",
+        "button_link": "/visit#sts-booking",
         "fallback_image": "sts-highlight-06.jpg"
       }
     },
