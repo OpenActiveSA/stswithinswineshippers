@@ -14,11 +14,11 @@
     "intro": {
       "type": "sts-prose",
       "settings": {
-        "eyebrow": "Groups & reservations",
+        "eyebrow": "Get in touch",
         "heading": "Enquire for groups and reservations",
         "text": "<p>Please email info@stswithinswineshippers.com or call 020 7621 9972. General manager: Frederic Ahuir.</p>",
-        "button_label": "BOOK A TABLE",
-        "button_link": "/#sts-booking",
+        "button_label": "",
+        "button_link": "",
         "alignment": "center",
         "background": "#f5f1ea",
         "padding_top": 56,
