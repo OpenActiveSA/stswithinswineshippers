@@ -1,0 +1,33 @@
+{%- liquid
+  assign default_files = 'sts-highlight-06.jpg,sts-highlight-02.jpg,sts-highlight-01.jpg,sts-highlight-07.jpg,sts-highlight-10.jpg,sts-highlight-45.jpg,sts-highlight-35.jpg,sts-highlight-40.jpg,sts-highlight-50.jpg,sts-highlight-20.jpg,sts-highlight-25.jpg,sts-highlight-30.jpg' | split: ','
+  assign landscape_names = 'sts-highlight-01.jpg,sts-highlight-15.jpg,sts-highlight-30.jpg,sts-highlight-45.jpg,sts-highlight-50.jpg'
+  assign gallery_bg = background | default: '#ffffff'
+-%}
+<section class="sts-gallery" style="background: {{ gallery_bg }}; padding: 4.8rem 0 7.2rem;">
+  <div class="sts-gallery__inner">
+    <div class="sts-gallery__intro">
+      <h2 class="sts-gallery__heading">{{ heading }}</h2>
+      {%- if text != blank -%}
+        <div class="sts-gallery__text rte">{{ text }}</div>
+      {%- endif -%}
+    </div>
+    <div class="sts-gallery__grid">
+      {%- for file in default_files -%}
+        {%- assign file_name = file | strip -%}
+        {%- assign is_wide = false -%}
+        {%- if landscape_names contains file_name -%}
+          {%- assign is_wide = true -%}
+        {%- endif -%}
+        <figure class="sts-gallery__item{% if is_wide %} sts-gallery__item--wide{% endif %}">
+          <img
+            src="{{ file_name | asset_url }}"
+            alt="{{ heading | escape }}"
+            width="1024"
+            height="{% if is_wide %}683{% else %}1536{% endif %}"
+            loading="lazy"
+          >
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
