@@ -34,9 +34,38 @@
     color: #d4c391;
   }
 
+  #shopify-section-{{ section.id }} .sts-visit__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    list-style: none;
+    margin: 0.6rem 0 0;
+    padding: 0;
+  }
+
+  #shopify-section-{{ section.id }} .sts-visit__social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    color: #ffffff;
+  }
+
+  #shopify-section-{{ section.id }} .sts-visit__social a:hover {
+    color: #d4c391;
+  }
+
+  #shopify-section-{{ section.id }} .sts-visit__social .svg-wrapper,
+  #shopify-section-{{ section.id }} .sts-visit__social svg {
+    width: 2.2rem;
+    height: 2.2rem;
+    fill: currentColor;
+  }
+
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .sts-visit__inner {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
       gap: 3rem;
     }
   }
@@ -71,6 +100,33 @@
       <div class="sts-visit__item">
         <h2>General manager</h2>
         <p>{{ section.settings.manager }}</p>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.show_social -%}
+      {%- liquid
+        assign instagram_url = settings.social_instagram_link | default: 'https://www.instagram.com/stswithinswine'
+        assign facebook_url = settings.social_facebook_link | default: 'https://www.facebook.com/stswithinswine'
+        assign twitter_url = settings.social_twitter_link | default: 'https://www.twitter.com/stswithinswine'
+      -%}
+      <div class="sts-visit__item">
+        <h2>Follow us</h2>
+        <ul class="sts-visit__social">
+          <li>
+            <a href="{{ instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">
+              {{- 'icon-instagram.svg' | inline_asset_content -}}
+            </a>
+          </li>
+          <li>
+            <a href="{{ facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook">
+              {{- 'icon-facebook.svg' | inline_asset_content -}}
+            </a>
+          </li>
+          <li>
+            <a href="{{ twitter_url }}" target="_blank" rel="noopener" aria-label="X">
+              {{- 'icon-twitter.svg' | inline_asset_content -}}
+            </a>
+          </li>
+        </ul>
       </div>
     {%- endif -%}
   </div>
@@ -111,6 +167,12 @@
       "id": "manager",
       "label": "General manager",
       "default": "Frederic Ahuir"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social links",
+      "default": false
     },
     {
       "type": "color",
