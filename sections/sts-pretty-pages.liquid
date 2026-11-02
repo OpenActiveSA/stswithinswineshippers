@@ -60,49 +60,6 @@
     background: #f5f1ea;
     padding: var(--sts-section-pad) 2rem;
   }
-  #shopify-section-{{ section.id }} .sts-split__inner {
-    width: min(118rem, 100%);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2.4rem;
-    align-items: start;
-  }
-  #shopify-section-{{ section.id }} .sts-split__media {
-    overflow: hidden;
-  }
-  #shopify-section-{{ section.id }} .sts-split__media img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    display: block;
-  }
-  #shopify-section-{{ section.id }} .sts-split__copy {
-    max-width: 54rem;
-  }
-  #shopify-section-{{ section.id }} .sts-split__copy h2 {
-    margin: 0 0 1.4rem;
-    font-family: var(--sts-font-display, 'DM Sans', system-ui, sans-serif);
-    font-size: clamp(2.4rem, 3.5vw, 3.6rem);
-    font-weight: 400;
-    color: var(--sts-ink);
-  }
-  #shopify-section-{{ section.id }} .sts-split__copy p {
-    margin: 0;
-    color: var(--sts-ink);
-    font-size: 1.5rem;
-    line-height: 1.7;
-  }
-  @media screen and (min-width: 750px) {
-    #shopify-section-{{ section.id }} .sts-split__inner {
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-    }
-    #shopify-section-{{ section.id }} .sts-split--image-right .sts-split__media {
-      order: 2;
-    }
-  }
 
   #shopify-section-{{ section.id }} .sts-gallery__intro {
     text-align: center;
@@ -344,8 +301,13 @@
         <img src="{{ 'sts-highlight-35.jpg' | asset_url }}" alt="Food" width="1200" height="900" loading="lazy">
       </div>
       <div class="sts-split__copy">
+        <p class="sts-split__eyebrow">On the terrace</p>
         <h2>Food</h2>
         <p>We serve a tempting range of platters and pots on our tasting terrace throughout the day. Each platter is accompanied by our fresh bread selection. Take a table on the all-weather terrace and enjoy a charcuterie board or artisan cheeses to complement wines by the glass or by the bottle.</p>
+        <a class="sts-split__link" href="/pages/visit">
+          <span>Plan a visit</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
       </div>
     </div>
   </section>

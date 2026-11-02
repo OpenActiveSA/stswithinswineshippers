@@ -76,8 +76,11 @@
       "settings": {
         "fallback_image": "sts-highlight-35.jpg",
         "image_position": "right",
+        "eyebrow": "On the terrace",
         "heading": "Food",
         "text": "<p>We serve a tempting range of platters and pots on our tasting terrace throughout the day. Each platter is accompanied by our fresh bread selection. Take a table on the all-weather terrace and enjoy a charcuterie board or artisan cheeses to complement wines by the glass or by the bottle.</p>",
+        "button_label": "Plan a visit",
+        "button_link": "/pages/visit",
         "background": "#f5f1ea",
         "padding_top": 56,
         "padding_bottom": 56
