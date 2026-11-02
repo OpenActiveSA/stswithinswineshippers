@@ -1,30 +1,6 @@
 {
   "name": "Visit",
   "sections": {
-    "banner": {
-      "type": "sts-image-banner",
-      "settings": {
-        "heading": "Visit",
-        "text": "<p>The City's finest wine shop with an all-weather tasting terrace.</p>",
-        "button_label": "BOOK A TABLE",
-        "button_link": "/pages/visit#sts-booking",
-        "fallback_image": "sts-highlight-06.jpg"
-      }
-    },
-    "intro": {
-      "type": "sts-prose",
-      "settings": {
-        "eyebrow": "St Swithin's Lane",
-        "heading": "Come in for a glass, a bottle, or an afternoon on the terrace",
-        "text": "<p>We are on historic St Swithin's Lane, close to Bank and Cannon Street stations. The shop is open Monday to Friday, 12pm–10pm.</p>",
-        "button_label": "",
-        "button_link": "",
-        "alignment": "center",
-        "background": "#f5f1ea",
-        "padding_top": 56,
-        "padding_bottom": 56
-      }
-    },
     "booking": {
       "type": "sts-resdiary",
       "settings": {
@@ -75,5 +51,5 @@
       }
     }
   },
-  "order": ["banner", "intro", "booking", "details", "gifts", "coravin"]
+  "order": ["booking", "details", "gifts", "coravin"]
 }
