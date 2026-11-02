@@ -162,6 +162,37 @@ h5,
 
 .header--middle-center .header__icons {
   justify-self: end;
+  align-items: center;
+}
+
+.header__icons header-drawer {
+  display: flex;
+  align-items: center;
+}
+
+.menu-drawer__utility-links {
+  padding: 2.4rem 3rem 3.2rem;
+  background: transparent;
+}
+
+.menu-drawer__utility-links .sts-header-social {
+  display: flex;
+}
+
+.menu-drawer__utility-links .sts-header-social__list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.menu-drawer__utility-links .sts-header-social__link {
+  color: #ffffff;
+}
+
+.menu-drawer__utility-links .sts-header-social__link:hover {
+  color: #d4c391;
 }
 
 .sts-header-social {
