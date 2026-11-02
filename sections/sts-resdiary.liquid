@@ -37,7 +37,20 @@
   #shopify-section-{{ section.id }} .sts-resdiary__widget {
     max-width: 60rem;
     margin: 0 auto;
-    min-height: 32rem;
+  }
+
+  #shopify-section-{{ section.id }} .sts-resdiary__frame {
+    display: block;
+    width: 100%;
+    max-width: 60rem;
+    height: 72rem;
+    margin: 0 auto;
+    border: 0;
+    background: #ffffff;
+  }
+
+  #shopify-section-{{ section.id }} .sts-resdiary__fallback {
+    margin: 1.6rem 0 0;
   }
 {%- endstyle -%}
 
@@ -53,19 +66,23 @@
       <div class="sts-resdiary__text rte">{{ section.settings.text }}</div>
     {%- endif -%}
 
-    <div class="sts-resdiary__widget">
-      <div id="rd-widget-frame" style="max-width: 600px; margin: auto;"></div>
-      <input
-        id="rdwidgeturl"
-        name="rdwidgeturl"
-        value="{{ section.settings.widget_url | default: 'https://booking.resdiary.com/widget/Standard/StSwithinsWineShippers/53853' }}"
-        type="hidden"
-      >
+    {%- assign widget_url = section.settings.widget_url | default: 'https://booking.resdiary.com/widget/Standard/StSwithinsWineShippers/53853' -%}
+    <div class="sts-resdiary__widget" id="rd-widget-frame">
+      <iframe
+        class="sts-resdiary__frame"
+        src="{{ widget_url | escape }}"
+        title="{{ section.settings.heading | default: 'Book a table' | escape }}"
+        allowtransparency="true"
+        loading="lazy"
+      ></iframe>
+      <p class="sts-resdiary__fallback">
+        <a href="{{ widget_url }}" class="sts-btn sts-btn--solid" target="_blank" rel="noopener">
+          Open booking
+        </a>
+      </p>
     </div>
   </div>
 </section>
-
-<script src="https://booking.resdiary.com/bundles/WidgetV2Loader.js"></script>
 
 {% schema %}
 {

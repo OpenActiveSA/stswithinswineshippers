@@ -23,7 +23,7 @@
           "type": "menu",
           "settings": {
             "heading": "VISIT",
-            "placeholder_links": "Wine Bar|/pages/visit, Tasting Terrace|/pages/visit, Book a Table|/pages/visit#sts-booking, Private Events|/pages/contact, Contact|/pages/contact"
+            "placeholder_links": "Wine Bar|/pages/visit, Tasting Terrace|/pages/visit, Book a Table|/#sts-booking, Private Events|/pages/contact, Contact|/pages/contact"
           }
         }
       },

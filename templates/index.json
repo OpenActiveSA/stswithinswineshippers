@@ -9,7 +9,7 @@
         "button_label_1": "OUR STORY",
         "button_link_1": "/pages/about",
         "button_label_2": "BOOK A VISIT",
-        "button_link_2": "/pages/visit#sts-booking"
+        "button_link_2": "/#sts-booking"
       }
     },
     "sts_shipping": {
@@ -24,6 +24,18 @@
         "background": "#f5f1ea",
         "padding_top": 72,
         "padding_bottom": 48
+      }
+    },
+    "sts_booking": {
+      "type": "sts-resdiary",
+      "settings": {
+        "eyebrow": "Reservations",
+        "heading": "Book a table",
+        "text": "<p>Reserve a table on the tasting terrace. Monday to Friday, 12pm–10pm.</p>",
+        "widget_url": "https://booking.resdiary.com/widget/Standard/StSwithinsWineShippers/53853",
+        "background": "#f5f1ea",
+        "padding_top": 48,
+        "padding_bottom": 56
       }
     },
     "sts_gallery": {
@@ -87,6 +99,7 @@
   "order": [
     "sts_hero",
     "sts_shipping",
+    "sts_booking",
     "sts_gallery",
     "sts_testimonials"
   ]
