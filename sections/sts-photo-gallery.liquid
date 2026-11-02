@@ -37,31 +37,38 @@
   }
 
   #shopify-section-{{ section.id }} .sts-gallery__grid {
-    column-count: 2;
-    column-gap: {{ gallery_gap }}px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-flow: dense;
+    gap: {{ gallery_gap }}px;
     padding: 0 {{ gallery_gap }}px;
+    align-items: stretch;
   }
 
   #shopify-section-{{ section.id }} .sts-gallery__item {
     position: relative;
     display: block;
-    width: 100%;
-    margin: 0 0 {{ gallery_gap }}px;
-    break-inside: avoid;
+    margin: 0;
     overflow: hidden;
-    background: transparent;
+    aspect-ratio: 2 / 3;
+    background: #ece8e0;
+  }
+
+  #shopify-section-{{ section.id }} .sts-gallery__item--wide {
+    grid-column: span 2;
+    aspect-ratio: 3 / 2;
   }
 
   #shopify-section-{{ section.id }} .sts-gallery__item img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .sts-gallery__grid {
-      column-count: 4;
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 {%- endstyle -%}
@@ -73,8 +80,9 @@
       assign uploaded_count = uploaded_count | plus: 1
     endif
   endfor
-  assign default_files = 'sts-highlight-06.jpg,sts-highlight-02.jpg,sts-highlight-07.jpg,sts-highlight-10.jpg,sts-highlight-01.jpg,sts-highlight-45.jpg,sts-highlight-35.jpg,sts-highlight-40.jpg,sts-highlight-20.jpg,sts-highlight-25.jpg,sts-highlight-50.jpg,sts-highlight-30.jpg' | split: ','
+  assign default_files = 'sts-highlight-06.jpg,sts-highlight-02.jpg,sts-highlight-01.jpg,sts-highlight-07.jpg,sts-highlight-10.jpg,sts-highlight-45.jpg,sts-highlight-35.jpg,sts-highlight-40.jpg,sts-highlight-50.jpg,sts-highlight-20.jpg,sts-highlight-25.jpg,sts-highlight-30.jpg' | split: ','
   assign compact_files = 'sts-highlight-06.jpg,sts-highlight-13.jpg,sts-highlight-35.jpg,sts-highlight-65.jpg' | split: ','
+  assign landscape_names = 'sts-highlight-01.jpg,sts-highlight-15.jpg,sts-highlight-30.jpg,sts-highlight-45.jpg,sts-highlight-50.jpg'
   if section.settings.compact
     assign default_files = compact_files
   endif
@@ -98,14 +106,23 @@
         {%- for block in section.blocks -%}
           {%- if block.type == 'photo' and block.settings.image != blank -%}
             {%- assign photo_alt = block.settings.alt | default: section.settings.heading -%}
-            <figure class="sts-gallery__item" {{ block.shopify_attributes }}>
+            {%- assign is_wide = false -%}
+            {%- if block.settings.image.aspect_ratio > 1.15 -%}
+              {%- assign is_wide = true -%}
+            {%- endif -%}
+            {%- if is_wide -%}
+              {%- assign photo_sizes = '(min-width: 750px) 50vw, 100vw' -%}
+            {%- else -%}
+              {%- assign photo_sizes = '(min-width: 750px) 25vw, 50vw' -%}
+            {%- endif -%}
+            <figure class="sts-gallery__item{% if is_wide %} sts-gallery__item--wide{% endif %}" {{ block.shopify_attributes }}>
               {{
                 block.settings.image
                 | image_url: width: 1600
                 | image_tag:
                   loading: 'lazy',
                   widths: '400, 700, 1000, 1400, 1600',
-                  sizes: '(min-width: 750px) 25vw, 50vw',
+                  sizes: photo_sizes,
                   alt: photo_alt
               }}
             </figure>
@@ -113,12 +130,17 @@
         {%- endfor -%}
       {%- else -%}
         {%- for file in default_files -%}
-          <figure class="sts-gallery__item">
+          {%- assign file_name = file | strip -%}
+          {%- assign is_wide = false -%}
+          {%- if landscape_names contains file_name -%}
+            {%- assign is_wide = true -%}
+          {%- endif -%}
+          <figure class="sts-gallery__item{% if is_wide %} sts-gallery__item--wide{% endif %}">
             <img
-              src="{{ file | strip | asset_url }}"
+              src="{{ file_name | asset_url }}"
               alt="{{ section.settings.heading | default: shop.name | escape }}"
-              width="800"
-              height="1000"
+              width="{% if is_wide %}1024{% else %}1024{% endif %}"
+              height="{% if is_wide %}683{% else %}1536{% endif %}"
               loading="lazy"
             >
           </figure>

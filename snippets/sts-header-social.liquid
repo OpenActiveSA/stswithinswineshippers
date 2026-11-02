@@ -1,0 +1,25 @@
+{%- liquid
+  assign instagram_url = settings.social_instagram_link | default: 'https://www.instagram.com/stswithinswine'
+  assign facebook_url = settings.social_facebook_link | default: 'https://www.facebook.com/stswithinswine'
+  assign twitter_url = settings.social_twitter_link | default: 'https://www.twitter.com/stswithinswine'
+-%}
+
+<nav class="sts-header-social" aria-label="Social">
+  <ul class="sts-header-social__list">
+    <li>
+      <a href="{{ instagram_url }}" class="sts-header-social__link" target="_blank" rel="noopener" aria-label="Instagram">
+        {{- 'icon-instagram.svg' | inline_asset_content -}}
+      </a>
+    </li>
+    <li>
+      <a href="{{ facebook_url }}" class="sts-header-social__link" target="_blank" rel="noopener" aria-label="Facebook">
+        {{- 'icon-facebook.svg' | inline_asset_content -}}
+      </a>
+    </li>
+    <li>
+      <a href="{{ twitter_url }}" class="sts-header-social__link" target="_blank" rel="noopener" aria-label="X">
+        {{- 'icon-twitter.svg' | inline_asset_content -}}
+      </a>
+    </li>
+  </ul>
+</nav>

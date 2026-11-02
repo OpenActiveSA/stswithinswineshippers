@@ -163,6 +163,41 @@ h5,
   justify-self: end;
 }
 
+.sts-header-social {
+  display: flex;
+  align-items: center;
+}
+
+.sts-header-social__list {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sts-header-social__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  color: inherit;
+}
+
+.sts-header-social__link .svg-wrapper,
+.sts-header-social__link svg {
+  width: 2rem;
+  height: 2rem;
+  fill: currentColor;
+  color: inherit;
+}
+
+.sts-header-social__link:hover {
+  color: var(--sts-gold);
+}
+
 .header__inline-menu .list-menu__item {
   font-family: var(--sts-font-body);
   font-size: 1.45rem;
