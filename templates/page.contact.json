@@ -48,19 +48,7 @@
         "padding_top": 48,
         "padding_bottom": 36
       }
-    },
-    "gallery": {
-      "type": "sts-photo-gallery",
-      "settings": {
-        "heading": "Inside the shop",
-        "text": "<p>The cellar, the terrace, and the team.</p>",
-        "background": "#f5f1ea",
-        "padding_top": 16,
-        "padding_bottom": 48,
-        "compact": false,
-        "gap": 4
-      }
     }
   },
-  "order": ["banner", "intro", "details", "form", "gallery"]
+  "order": ["banner", "intro", "details", "form"]
 }
