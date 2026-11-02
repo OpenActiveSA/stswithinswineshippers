@@ -11,11 +11,7 @@
   {%- assign extra_title = parts.first | strip -%}
   {%- assign extra_handle = parts.last | strip -%}
   {%- assign extra_path = '/pages/' | append: extra_handle -%}
-  {%- if pages[extra_handle].url != blank -%}
-    {%- assign extra_href = pages[extra_handle].url -%}
-  {%- else -%}
-    {%- assign extra_href = extra_path -%}
-  {%- endif -%}
+  {%- assign extra_href = extra_path -%}
   {%- assign is_current = false -%}
   {%- if request.path == extra_path or page.handle == extra_handle -%}
     {%- assign is_current = true -%}

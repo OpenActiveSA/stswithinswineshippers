@@ -21,11 +21,8 @@
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+              {%- unless settings.hide_shopping -%}
               {%- for link in section.settings.menu.links -%}
-                {%- if settings.hide_shopping -%}
-                  {%- capture shop_flag -%}{% render 'sts-is-shop-link', url: link.url, title: link.title, handle: link.handle %}{%- endcapture -%}
-                  {%- if shop_flag contains '1' -%}{%- continue -%}{%- endif -%}
-                {%- endif -%}
                 {%- capture core_flag -%}{% render 'sts-is-core-nav', url: link.url, title: link.title, handle: link.handle %}{%- endcapture -%}
                 {%- if core_flag contains '1' -%}{%- continue -%}{%- endif -%}
                 <li>
@@ -143,6 +140,7 @@
                   {%- endif -%}
                 </li>
               {%- endfor -%}
+              {%- endunless -%}
               {% render 'sts-nav-extras', variant: 'drawer' %}
             </ul>
           </nav>
