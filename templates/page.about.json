@@ -21,36 +21,52 @@
         "enomatics": {
           "type": "feature",
           "settings": {
+            "fallback_image": "sts-highlight-28.jpg",
+            "icon": "grape",
             "heading": "Enomatics",
-            "text": "<p>48 wines on taste every weekday from our state-of-the-art Enomatic machines, where you can try a little, or a lot, of a truly diverse array of wines from around the world.</p>"
+            "text": "<p>48 wines on taste every weekday from our state-of-the-art Enomatic machines, where you can try a little, or a lot, of a truly diverse array of wines from around the world.</p>",
+            "link_label": "Discover the wines",
+            "link": "/pages/visit"
           }
         },
         "coravin": {
           "type": "feature",
           "settings": {
+            "fallback_image": "sts-highlight-13.jpg",
+            "icon": "barrel",
             "heading": "Coravin",
-            "text": "<p>Rare, and very rare, Grand Cru wines by the glass from our Coravin extractor. Your chance to taste some of the great names and historic vintages.</p>"
+            "text": "<p>Rare, and very rare, Grand Cru wines by the glass from our Coravin extractor. Your chance to taste some of the great names and historic vintages.</p>",
+            "link_label": "Explore Coravin wines",
+            "link": "/pages/visit"
           }
         },
         "terrace": {
           "type": "feature",
           "settings": {
+            "fallback_image": "sts-highlight-07.jpg",
+            "icon": "glasses",
             "heading": "Tasting terrace",
-            "text": "<p>Platters and nibbles to match your wine, served all day out on our tasting terrace.</p>"
+            "text": "<p>Platters and nibbles to match your wine, served all day out on our tasting terrace.</p>",
+            "link_label": "View the terrace",
+            "link": "/pages/visit"
           }
         },
         "gifts": {
           "type": "feature",
           "settings": {
+            "fallback_image": "sts-highlight-25.jpg",
+            "icon": "gift",
             "heading": "Wine gifts",
-            "text": "<p>Hundreds of bottles for everyday or special occasions, plus gifts for connoisseurs: Riedel glassware and decanters, wine books, corkscrews, cigars, and Coravin machines.</p>"
+            "text": "<p>Hundreds of bottles for everyday or special occasions, plus gifts for connoisseurs: Riedel glassware and decanters, wine books, corkscrews, cigars, and Coravin machines.</p>",
+            "link_label": "Find the perfect gift",
+            "link": "/pages/visit"
           }
         }
       },
       "block_order": ["enomatics", "coravin", "terrace", "gifts"],
       "settings": {
         "columns": 2,
-        "background": "#f5f1ea",
+        "background": "#ffffff",
         "padding_top": 56,
         "padding_bottom": 56
       }

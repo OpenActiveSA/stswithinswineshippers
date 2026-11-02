@@ -52,44 +52,8 @@
   }
 
   #shopify-section-{{ section.id }} .sts-features {
-    background: #f5f1ea;
+    background: #ffffff;
     padding: var(--sts-section-pad) 2rem;
-  }
-  #shopify-section-{{ section.id }} .sts-features__inner {
-    width: min(118rem, 100%);
-    margin: 0 auto;
-  }
-  #shopify-section-{{ section.id }} .sts-features__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3.2rem 5rem;
-  }
-  #shopify-section-{{ section.id }} .sts-features__card {
-    background: transparent;
-    padding: 0 0 0.4rem;
-    border: 0;
-    border-bottom: 1px solid var(--sts-gold);
-  }
-  #shopify-section-{{ section.id }} .sts-features__card h2 {
-    margin: 0 0 1.2rem;
-    font-family: var(--sts-font-display, 'DM Sans', system-ui, sans-serif);
-    font-size: clamp(2.2rem, 3vw, 3rem);
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    text-transform: none;
-    color: var(--sts-ink);
-  }
-  #shopify-section-{{ section.id }} .sts-features__card p {
-    margin: 0 0 1.6rem;
-    color: var(--sts-ink);
-    font-size: 1.5rem;
-    line-height: 1.7;
-    max-width: 46rem;
-  }
-  @media screen and (min-width: 750px) {
-    #shopify-section-{{ section.id }} .sts-features__grid {
-      grid-template-columns: 1fr 1fr;
-    }
   }
 
   #shopify-section-{{ section.id }} .sts-split {
@@ -308,20 +272,60 @@
     <div class="sts-features__inner">
       <div class="sts-features__grid">
         <article class="sts-features__card">
-          <h2>Enomatics</h2>
-          <p>48 wines on taste every weekday from our state-of-the-art Enomatic machines, where you can try a little, or a lot, of a truly diverse array of wines from around the world.</p>
+          <div class="sts-features__media">
+            <img src="{{ 'sts-highlight-28.jpg' | asset_url }}" alt="Enomatics" width="640" height="640" loading="lazy">
+          </div>
+          <div class="sts-features__body">
+            <span class="sts-features__icon" aria-hidden="true">{% render 'sts-feature-icon', icon: 'grape' %}</span>
+            <h2>Enomatics</h2>
+            <p>48 wines on taste every weekday from our state-of-the-art Enomatic machines, where you can try a little, or a lot, of a truly diverse array of wines from around the world.</p>
+            <a class="sts-features__link" href="/pages/visit">
+              <span>Discover the wines</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
         </article>
         <article class="sts-features__card">
-          <h2>Coravin</h2>
-          <p>Rare, and very rare, Grand Cru wines by the glass from our Coravin extractor. Your chance to taste some of the great names and historic vintages.</p>
+          <div class="sts-features__media">
+            <img src="{{ 'sts-highlight-13.jpg' | asset_url }}" alt="Coravin" width="640" height="640" loading="lazy">
+          </div>
+          <div class="sts-features__body">
+            <span class="sts-features__icon" aria-hidden="true">{% render 'sts-feature-icon', icon: 'barrel' %}</span>
+            <h2>Coravin</h2>
+            <p>Rare, and very rare, Grand Cru wines by the glass from our Coravin extractor. Your chance to taste some of the great names and historic vintages.</p>
+            <a class="sts-features__link" href="/pages/visit">
+              <span>Explore Coravin wines</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
         </article>
         <article class="sts-features__card">
-          <h2>Tasting terrace</h2>
-          <p>Platters and nibbles to match your wine, served all day out on our tasting terrace.</p>
+          <div class="sts-features__media">
+            <img src="{{ 'sts-highlight-07.jpg' | asset_url }}" alt="Tasting terrace" width="640" height="640" loading="lazy">
+          </div>
+          <div class="sts-features__body">
+            <span class="sts-features__icon" aria-hidden="true">{% render 'sts-feature-icon', icon: 'glasses' %}</span>
+            <h2>Tasting terrace</h2>
+            <p>Platters and nibbles to match your wine, served all day out on our tasting terrace.</p>
+            <a class="sts-features__link" href="/pages/visit">
+              <span>View the terrace</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
         </article>
         <article class="sts-features__card">
-          <h2>Wine gifts</h2>
-          <p>Hundreds of bottles for everyday or special occasions, plus gifts for connoisseurs: Riedel glassware and decanters, wine books, corkscrews, cigars, and Coravin machines.</p>
+          <div class="sts-features__media">
+            <img src="{{ 'sts-highlight-25.jpg' | asset_url }}" alt="Wine gifts" width="640" height="640" loading="lazy">
+          </div>
+          <div class="sts-features__body">
+            <span class="sts-features__icon" aria-hidden="true">{% render 'sts-feature-icon', icon: 'gift' %}</span>
+            <h2>Wine gifts</h2>
+            <p>Hundreds of bottles for everyday or special occasions, plus gifts for connoisseurs: Riedel glassware and decanters, wine books, corkscrews, cigars, and Coravin machines.</p>
+            <a class="sts-features__link" href="/pages/visit">
+              <span>Find the perfect gift</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
         </article>
       </div>
     </div>
