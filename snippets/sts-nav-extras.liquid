@@ -1,6 +1,6 @@
 {%- comment -%}
   Always outputs Home, About, Visit, and Contact.
-  Contact uses /contact-us because Shopify reserves /contact.
+  Contact uses /pages/contact because Shopify reserves /contact.
 {%- endcomment -%}
 
 {%- liquid
@@ -19,9 +19,8 @@
         {%- assign is_current = true -%}
       {%- endif -%}
     {%- when 'contact' -%}
-      {%- assign extra_href = '/contact-us' -%}
-      {%- if request.path == '/contact-us'
-        or request.path == '/pages/contact'
+      {%- assign extra_href = '/pages/contact' -%}
+      {%- if request.path == '/pages/contact'
         or page.handle == 'contact'
       -%}
         {%- assign is_current = true -%}

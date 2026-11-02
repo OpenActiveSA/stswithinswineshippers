@@ -30,12 +30,12 @@
       (function () {
         var path = (location.pathname || '/').replace(/\/+$/, '') || '/';
         var suffix = location.search + location.hash;
-        var rewrite = { '/pages/visit': '/visit', '/pages/about': '/about', '/pages/contact': '/contact-us' };
+        var rewrite = { '/pages/visit': '/visit', '/pages/about': '/about' };
         if (rewrite[path]) {
           path = rewrite[path];
           history.replaceState(null, '', path + suffix);
         }
-        var handles = { '/about': 'about', '/visit': 'visit', '/contact-us': 'contact' };
+        var handles = { '/about': 'about', '/visit': 'visit', '/pages/contact': 'contact' };
         var handle = handles[path];
         if (!handle) return;
         document.documentElement.classList.add('sts-pretty', 'sts-pretty--' + handle);

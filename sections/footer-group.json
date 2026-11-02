@@ -9,7 +9,7 @@
           "type": "menu",
           "settings": {
             "heading": "ABOUT",
-            "placeholder_links": "Home|/, Our Story|/about, Visit|/visit, Contact|/contact-us, Wine Blog"
+            "placeholder_links": "Home|/, Our Story|/about, Visit|/visit, Contact|/pages/contact, Wine Blog"
           }
         },
         "information": {
@@ -23,7 +23,7 @@
           "type": "menu",
           "settings": {
             "heading": "VISIT",
-            "placeholder_links": "Wine Bar|/visit, Tasting Terrace|/visit, Book a Table|/visit, Private Events|/contact-us, Contact|/contact-us"
+            "placeholder_links": "Wine Bar|/visit, Tasting Terrace|/visit, Book a Table|/visit, Private Events|/pages/contact, Contact|/pages/contact"
           }
         }
       },
