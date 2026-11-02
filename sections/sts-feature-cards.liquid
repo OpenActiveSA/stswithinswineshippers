@@ -19,36 +19,38 @@
   #shopify-section-{{ section.id }} .sts-features__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.6rem;
+    gap: 3.2rem 5rem;
   }
 
   #shopify-section-{{ section.id }} .sts-features__card {
-    background: #ffffff;
-    padding: 2.8rem 2.4rem;
-    border-top: 3px solid #d4c391;
+    background: transparent;
+    padding: 0 0 0.4rem;
+    border: 0;
+    border-bottom: 1px solid var(--sts-gold);
   }
 
   #shopify-section-{{ section.id }} .sts-features__card h2 {
     margin: 0 0 1.2rem;
-    font-size: 1.5rem;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    font-family: var(--sts-font-display, 'DM Sans', system-ui, sans-serif);
+    font-size: clamp(2.2rem, 3vw, 3rem);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: none;
     color: var(--sts-ink);
   }
 
   #shopify-section-{{ section.id }} .sts-features__card p,
   #shopify-section-{{ section.id }} .sts-features__card .rte p {
-    margin: 0;
+    margin: 0 0 1.6rem;
     color: var(--sts-ink);
-    font-size: 1.45rem;
-    line-height: 1.65;
+    font-size: 1.5rem;
+    line-height: 1.7;
+    max-width: 46rem;
   }
 
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .sts-features__grid {
       grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
-      gap: 2rem;
     }
   }
 {%- endstyle -%}
@@ -91,7 +93,7 @@
       "type": "color",
       "id": "background",
       "label": "Background",
-      "default": "#ebe6dc"
+      "default": "#f5f1ea"
     },
     {
       "type": "range",

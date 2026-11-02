@@ -50,7 +50,7 @@
       "block_order": ["enomatics", "coravin", "terrace", "gifts"],
       "settings": {
         "columns": 2,
-        "background": "#ebe6dc",
+        "background": "#f5f1ea",
         "padding_top": 32,
         "padding_bottom": 56
       }
