@@ -6,11 +6,11 @@
   --sts-cream: #f5f1ea;
   --sts-cream-deep: #ebe6dc;
   --sts-card: #e8e4dc;
-  --sts-ink: #1a1a1a;
-  --sts-muted: #6b6560;
+  --sts-ink: #1c1c1a;
+  --sts-muted: #1c1c1a;
   --sts-gold: #d4c391;
   --sts-gold-deep: #c4a574;
-  --sts-wine: #4a1c1c;
+  --sts-wine: #1c1c1a;
   --sts-white: #ffffff;
   --sts-black: #1c1c1a;
   --sts-radius-pill: 999px;
@@ -1684,7 +1684,7 @@ body.template-product .quantity__input {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   margin: 0 0 1.6rem;
-  color: #1a1a1a;
+  color: var(--sts-ink);
 }
 
 .sts-footer__social {
@@ -1701,7 +1701,7 @@ body.template-product .quantity__input {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #1a1a1a;
+  color: var(--sts-ink);
   width: 2.4rem;
   height: 2.4rem;
 }
