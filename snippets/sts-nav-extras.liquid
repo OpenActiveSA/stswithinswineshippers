@@ -1,5 +1,6 @@
 {%- comment -%}
   Always outputs Home, About, Visit, and Contact.
+  Contact uses /get-in-touch because Shopify reserves GET /contact.
 {%- endcomment -%}
 
 {%- liquid
@@ -18,9 +19,8 @@
         {%- assign is_current = true -%}
       {%- endif -%}
     {%- when 'contact' -%}
-      {%- assign extra_href = '/contact' -%}
-      {%- if request.path == '/contact'
-        or request.path == '/contacts'
+      {%- assign extra_href = '/get-in-touch' -%}
+      {%- if request.path == '/get-in-touch'
         or request.path == '/pages/contact'
         or page.handle == 'contact'
       -%}
