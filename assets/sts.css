@@ -1594,8 +1594,8 @@ body.template-product .quantity__input {
 }
 
 .sts-features__icon {
-  width: 3.6rem;
-  height: 3.6rem;
+  width: 5.6rem;
+  height: 5.6rem;
   border-radius: 50%;
   background: #efe6d0;
   background: color-mix(in srgb, var(--sts-gold) 38%, var(--sts-white));
@@ -1603,12 +1603,13 @@ body.template-product .quantity__input {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.4rem;
+  flex-shrink: 0;
 }
 
 .sts-features__icon svg {
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .sts-features__card h2 {
