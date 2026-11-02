@@ -1597,9 +1597,8 @@ body.template-product .quantity__input {
   width: 5.6rem;
   height: 5.6rem;
   border-radius: 50%;
-  background: #efe6d0;
-  background: color-mix(in srgb, var(--sts-gold) 38%, var(--sts-white));
-  color: var(--sts-ink);
+  background: #d4c391;
+  color: #ffffff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
