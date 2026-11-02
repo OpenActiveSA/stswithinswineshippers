@@ -2122,16 +2122,13 @@ body.template-product .quantity__input {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2.5rem 2rem;
+  text-align: center;
 }
 
 @media screen and (min-width: 990px) {
   .sts-footer__menus {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-  }
-
-  .sts-footer__col:first-child {
-    grid-column-start: 2;
   }
 }
 
