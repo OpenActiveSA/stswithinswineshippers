@@ -13,6 +13,7 @@
   --sts-wine: #1c1c1a;
   --sts-white: #ffffff;
   --sts-black: #1c1c1a;
+  --sts-section-pad: 5.6rem;
   --sts-radius-pill: 999px;
   --sts-radius-card: 10px;
   --sts-font-display: 'DM Sans', system-ui, sans-serif;
@@ -920,7 +921,7 @@ a.sts-slider-dots__dot.is-active {
 .sts-testimonials {
   background: var(--sts-gold);
   color: var(--sts-white);
-  padding: 5.5rem 2rem;
+  padding: var(--sts-section-pad) 2rem;
 }
 
 .sts-testimonials__viewport {
@@ -1550,7 +1551,7 @@ body.template-product .quantity__input {
 /* —— Footer —— */
 .sts-footer {
   background: var(--sts-cream);
-  padding: 4rem 2rem 4.5rem;
+  padding: var(--sts-section-pad) 2rem;
   color: var(--sts-ink);
 }
 

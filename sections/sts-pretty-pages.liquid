@@ -18,7 +18,7 @@
 
   #shopify-section-{{ section.id }} .sts-prose {
     background: #f5f1ea;
-    padding: 5.6rem 2rem 2.4rem;
+    padding: var(--sts-section-pad) 2rem;
   }
   #shopify-section-{{ section.id }} .sts-prose__inner {
     width: min(76rem, 100%);
@@ -53,7 +53,7 @@
 
   #shopify-section-{{ section.id }} .sts-features {
     background: #f5f1ea;
-    padding: 3.2rem 2rem 5.6rem;
+    padding: var(--sts-section-pad) 2rem;
   }
   #shopify-section-{{ section.id }} .sts-features__inner {
     width: min(118rem, 100%);
@@ -94,7 +94,7 @@
 
   #shopify-section-{{ section.id }} .sts-split {
     background: #f5f1ea;
-    padding: 4.8rem 2rem 2.4rem;
+    padding: var(--sts-section-pad) 2rem;
   }
   #shopify-section-{{ section.id }} .sts-split__inner {
     width: min(118rem, 100%);
@@ -193,7 +193,7 @@
 
   #shopify-section-{{ section.id }} .sts-resdiary {
     background: #f5f1ea;
-    padding: 4.8rem 2rem 5.6rem;
+    padding: var(--sts-section-pad) 2rem;
   }
   #shopify-section-{{ section.id }} .sts-resdiary__inner {
     width: min(72rem, 100%);
@@ -236,7 +236,7 @@
   #shopify-section-{{ section.id }} .sts-visit {
     background: #1c1c1a;
     color: #ffffff;
-    padding: 5.6rem 2rem;
+    padding: var(--sts-section-pad) 2rem;
   }
   #shopify-section-{{ section.id }} .sts-visit__inner {
     width: min(110rem, 100%);
@@ -476,7 +476,7 @@
     </div>
   </section>
   <div class="color-scheme-1 gradient">
-    <div class="contact page-width page-width--narrow section-{{ section.id }}-padding" style="padding: 4.8rem 2rem 3.6rem;">
+    <div class="contact page-width page-width--narrow section-{{ section.id }}-padding" style="padding: var(--sts-section-pad) 2rem;">
       <h2 class="title title-wrapper--no-top-margin h2">Send a message</h2>
       {%- form 'contact', id: 'ContactFormPretty', class: 'isolate' -%}
         {%- if form.posted_successfully? -%}

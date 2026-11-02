@@ -8,7 +8,7 @@
 {%- style -%}
   #shopify-section-{{ section.id }} .sts-resdiary {
     background: {{ section.settings.background | default: '#f5f1ea' }};
-    padding: {{ section.settings.padding_top | default: 56 }}px 2rem {{ section.settings.padding_bottom | default: 64 }}px;
+    padding: {{ section.settings.padding_top | default: 56 }}px 2rem {{ section.settings.padding_bottom | default: 56 }}px;
   }
 
   #shopify-section-{{ section.id }} .sts-resdiary__inner {
@@ -146,7 +146,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 64
+      "default": 56
     },
     {
       "type": "text",

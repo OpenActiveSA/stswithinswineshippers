@@ -3,7 +3,7 @@
   assign landscape_names = 'sts-highlight-01.jpg,sts-highlight-15.jpg,sts-highlight-30.jpg,sts-highlight-45.jpg,sts-highlight-50.jpg'
   assign gallery_bg = background | default: '#ffffff'
 -%}
-<section class="sts-gallery" style="background: {{ gallery_bg }}; padding: 4.8rem 0 7.2rem;">
+<section class="sts-gallery" style="background: {{ gallery_bg }}; padding: var(--sts-section-pad) 0;">
   <div class="sts-gallery__inner">
     <div class="sts-gallery__intro">
       <h2 class="sts-gallery__heading">{{ heading }}</h2>

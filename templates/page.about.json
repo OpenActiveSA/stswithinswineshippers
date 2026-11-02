@@ -12,7 +12,7 @@
         "alignment": "center",
         "background": "#f5f1ea",
         "padding_top": 56,
-        "padding_bottom": 24
+        "padding_bottom": 56
       }
     },
     "features": {
@@ -51,7 +51,7 @@
       "settings": {
         "columns": 2,
         "background": "#f5f1ea",
-        "padding_top": 32,
+        "padding_top": 56,
         "padding_bottom": 56
       }
     },
@@ -63,8 +63,8 @@
         "heading": "Food",
         "text": "<p>We serve a tempting range of platters and pots on our tasting terrace throughout the day. Each platter is accompanied by our fresh bread selection. Take a table on the all-weather terrace and enjoy a charcuterie board or artisan cheeses to complement wines by the glass or by the bottle.</p>",
         "background": "#f5f1ea",
-        "padding_top": 48,
-        "padding_bottom": 24
+        "padding_top": 56,
+        "padding_bottom": 56
       }
     },
     "gallery": {
@@ -73,8 +73,8 @@
         "heading": "The cellar & terrace",
         "text": "<p>Wine by the glass, bottles to take home, and a terrace for lingering. Photographed at St Swithins in the City.</p>",
         "background": "#ffffff",
-        "padding_top": 48,
-        "padding_bottom": 72,
+        "padding_top": 56,
+        "padding_bottom": 56,
         "compact": false,
         "gap": 4
       }
