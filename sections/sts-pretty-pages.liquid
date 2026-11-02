@@ -195,10 +195,11 @@
     display: block;
     width: 100%;
     max-width: 60rem;
-    height: 72rem;
+    height: 56rem;
     margin: 0 auto;
     border: 0;
-    background: #ffffff;
+    overflow: hidden;
+    background: transparent;
   }
   #shopify-section-{{ section.id }} .sts-resdiary__fallback {
     margin: 1.6rem 0 0;
@@ -357,7 +358,7 @@
       <p class="sts-resdiary__eyebrow">Reservations</p>
       <h2 class="sts-resdiary__heading">Book a table</h2>
       <div class="sts-resdiary__text rte"><p>Reserve a table on the tasting terrace. Monday to Friday, 12pm–10pm. For larger groups, email info@stswithinswineshippers.com or call 020 7621 9972.</p></div>
-      <iframe class="sts-resdiary__frame" src="{{ widget_url }}" title="Book a table" loading="lazy"></iframe>
+      <iframe class="sts-resdiary__frame" src="{{ widget_url }}" title="Book a table" allowtransparency="true" scrolling="no" loading="lazy"></iframe>
       <p class="sts-resdiary__fallback">
         <a href="{{ widget_url }}" class="sts-btn sts-btn--solid" target="_blank" rel="noopener">Open booking</a>
       </p>

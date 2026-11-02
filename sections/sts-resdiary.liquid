@@ -50,10 +50,11 @@
     display: block;
     width: 100%;
     max-width: 60rem;
-    height: 72rem;
+    height: 56rem;
     margin: 0 auto;
     border: 0;
-    background: #ffffff;
+    overflow: hidden;
+    background: transparent;
   }
 
   #shopify-section-{{ section.id }} .sts-resdiary__fallback {
@@ -80,6 +81,7 @@
         src="{{ widget_url | escape }}"
         title="{{ section.settings.heading | default: 'Book a table' | escape }}"
         allowtransparency="true"
+        scrolling="no"
         loading="lazy"
       ></iframe>
       <p class="sts-resdiary__fallback">
@@ -90,6 +92,31 @@
     </div>
   </div>
 </section>
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+    var frame = root.querySelector('.sts-resdiary__frame');
+    if (!frame) return;
+
+    window.addEventListener('message', function (event) {
+      if (!event.origin || event.origin.indexOf('resdiary.com') === -1) return;
+      var data = event.data;
+      if (typeof data === 'string') {
+        try {
+          data = JSON.parse(data);
+        } catch (err) {
+          return;
+        }
+      }
+      if (!data || typeof data !== 'object') return;
+      var height = data.height || data.frameHeight || data.FrameHeight;
+      if (typeof height === 'number' && height > 240) {
+        frame.style.height = Math.ceil(height) + 'px';
+      }
+    });
+  })();
+</script>
 {%- endif -%}
 
 {% schema %}
