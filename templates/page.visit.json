@@ -7,7 +7,7 @@
         "heading": "Visit",
         "text": "<p>The City's finest wine shop with an all-weather tasting terrace.</p>",
         "button_label": "BOOK A TABLE",
-        "button_link": "/pages/contact",
+        "button_link": "/pages/visit#sts-booking",
         "fallback_image": "sts-highlight-06.jpg"
       }
     },
@@ -23,6 +23,18 @@
         "background": "#f5f1ea",
         "padding_top": 56,
         "padding_bottom": 16
+      }
+    },
+    "booking": {
+      "type": "sts-resdiary",
+      "settings": {
+        "eyebrow": "Reservations",
+        "heading": "Book a table",
+        "text": "<p>Reserve a table on the tasting terrace. Monday to Friday, 12pm–10pm. For larger groups, email info@stswithinswineshippers.com or call 020 7621 9972.</p>",
+        "widget_url": "https://booking.resdiary.com/widget/Standard/StSwithinsWineShippers/53853",
+        "background": "#f5f1ea",
+        "padding_top": 48,
+        "padding_bottom": 56
       }
     },
     "details": {
@@ -75,5 +87,5 @@
       }
     }
   },
-  "order": ["banner", "intro", "details", "gifts", "coravin", "gallery"]
+  "order": ["banner", "intro", "booking", "details", "gifts", "coravin", "gallery"]
 }
