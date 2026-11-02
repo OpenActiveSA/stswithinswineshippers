@@ -1,0 +1,16 @@
+{%- comment -%}
+  Prints 1 when a Shopify menu link is About, Visit, or Contact.
+  Those items are rendered separately so a mis-linked admin menu cannot send Visit to Contact.
+{%- endcomment -%}
+{%- liquid
+  assign t = title | default: '' | downcase | strip
+  assign h = handle | default: '' | downcase
+  assign u = url | default: '' | downcase
+  if t == 'about' or t == 'about us' or t == 'our story' or t == 'visit' or t == 'contact' or t == 'contact us'
+    echo '1'
+  elsif h == 'about' or h == 'visit' or h == 'contact'
+    echo '1'
+  elsif u contains '/pages/about' or u contains '/pages/visit' or u contains '/pages/contact'
+    echo '1'
+  endif
+-%}

@@ -26,6 +26,8 @@
                   {%- capture shop_flag -%}{% render 'sts-is-shop-link', url: link.url, title: link.title, handle: link.handle %}{%- endcapture -%}
                   {%- if shop_flag contains '1' -%}{%- continue -%}{%- endif -%}
                 {%- endif -%}
+                {%- capture core_flag -%}{% render 'sts-is-core-nav', url: link.url, title: link.title, handle: link.handle %}{%- endcapture -%}
+                {%- if core_flag contains '1' -%}{%- continue -%}{%- endif -%}
                 <li>
                   {%- if link.links != blank -%}
                     <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
