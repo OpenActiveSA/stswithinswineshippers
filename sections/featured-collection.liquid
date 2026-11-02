@@ -1,3 +1,8 @@
+{%- if settings.hide_shopping -%}
+  <style>
+    #shopify-section-{{ section.id }} { display: none !important; }
+  </style>
+{%- else -%}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 
@@ -217,6 +222,7 @@
 </div>
 
 <script src="{{ 'sts-slider-dots.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 {% schema %}
 {

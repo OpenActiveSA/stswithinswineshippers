@@ -8,6 +8,10 @@
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
+      {%- if settings.hide_shopping -%}
+        {%- capture shop_flag -%}{% render 'sts-is-shop-link', url: link.url, title: link.title, handle: link.handle %}{%- endcapture -%}
+        {%- if shop_flag contains '1' -%}{%- continue -%}{%- endif -%}
+      {%- endif -%}
       <li>
         {%- if link.links != blank -%}
           <header-menu>
@@ -32,6 +36,10 @@
                 tabindex="-1"
               >
                 {%- for childlink in link.links -%}
+                  {%- if settings.hide_shopping -%}
+                    {%- capture child_shop_flag -%}{% render 'sts-is-shop-link', url: childlink.url, title: childlink.title, handle: childlink.handle %}{%- endcapture -%}
+                    {%- if child_shop_flag contains '1' -%}{%- continue -%}{%- endif -%}
+                  {%- endif -%}
                   <li>
                     {%- if childlink.links == blank -%}
                       <a

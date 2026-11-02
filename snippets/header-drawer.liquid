@@ -22,6 +22,10 @@
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
               {%- for link in section.settings.menu.links -%}
+                {%- if settings.hide_shopping -%}
+                  {%- capture shop_flag -%}{% render 'sts-is-shop-link', url: link.url, title: link.title, handle: link.handle %}{%- endcapture -%}
+                  {%- if shop_flag contains '1' -%}{%- continue -%}{%- endif -%}
+                {%- endif -%}
                 <li>
                   {%- if link.links != blank -%}
                     <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
@@ -51,6 +55,10 @@
                           </button>
                           <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
                             {%- for childlink in link.links -%}
+                              {%- if settings.hide_shopping -%}
+                                {%- capture child_shop_flag -%}{% render 'sts-is-shop-link', url: childlink.url, title: childlink.title, handle: childlink.handle %}{%- endcapture -%}
+                                {%- if child_shop_flag contains '1' -%}{%- continue -%}{%- endif -%}
+                              {%- endif -%}
                               <li>
                                 {%- if childlink.links == blank -%}
                                   <a
@@ -137,7 +145,7 @@
             </ul>
           </nav>
           <div class="menu-drawer__utility-links">
-            {%- if shop.customer_accounts_enabled -%}
+            {%- if shop.customer_accounts_enabled and settings.hide_shopping == false -%}
               <a
                 href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
                 class="menu-drawer__account link focus-inset h5 medium-hide large-up-hide"

@@ -227,9 +227,23 @@
     </h1>
 
     <div class="sts-hero__actions">
+      {%- liquid
+        assign hero_link_1 = section.settings.button_link_1
+        if hero_link_1 == blank or settings.hide_shopping and hero_link_1 contains 'collections'
+          if settings.hide_shopping
+            if pages.about.url != blank
+              assign hero_link_1 = pages.about.url
+            else
+              assign hero_link_1 = '/pages/about'
+            endif
+          else
+            assign hero_link_1 = routes.all_products_collection_url
+          endif
+        endif
+      -%}
       {%- if section.settings.button_label_1 != blank -%}
         <a
-          href="{{ section.settings.button_link_1 | default: routes.all_products_collection_url }}"
+          href="{{ hero_link_1 }}"
           class="sts-btn sts-btn--hero-primary"
         >
           {{ section.settings.button_label_1 }}
@@ -345,7 +359,7 @@
       "type": "text",
       "id": "button_label_1",
       "label": "Primary button label",
-      "default": "VIEW OUR WINES"
+      "default": "OUR STORY"
     },
     {
       "type": "url",

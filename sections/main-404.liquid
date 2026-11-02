@@ -17,7 +17,11 @@
   <h1 class="title">
     {{ 'templates.404.title' | t }}
   </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
-  </a>
+  {%- if settings.hide_shopping -%}
+    <a href="{{ routes.root_url }}" class="button">Home</a>
+  {%- else -%}
+    <a href="{{ routes.all_products_collection_url }}" class="button">
+      {{ 'general.continue_shopping' | t }}
+    </a>
+  {%- endif -%}
 </div>

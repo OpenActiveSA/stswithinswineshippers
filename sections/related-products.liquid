@@ -1,3 +1,6 @@
+{%- if settings.hide_shopping -%}
+  <style>#shopify-section-{{ section.id }}{display:none!important;}</style>
+{%- else -%}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'section-related-products.css' | asset_url | stylesheet_tag }}
@@ -58,6 +61,7 @@
     {{ 'mask-arch.svg' | inline_asset_content }}
   {%- endif -%}
 </div>
+{%- endif -%}
 
 {% schema %}
 {

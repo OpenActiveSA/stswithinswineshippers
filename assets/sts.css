@@ -27,6 +27,17 @@ body {
   color: var(--sts-ink);
 }
 
+body.hide-shopping .header__icon--cart,
+body.hide-shopping .header__icon--account,
+body.hide-shopping .sts-header-search,
+body.hide-shopping .header__search,
+body.hide-shopping cart-drawer,
+body.hide-shopping .cart-notification,
+body.hide-shopping #cart-icon-bubble,
+body.hide-shopping .shopify-payment-button {
+  display: none !important;
+}
+
 /* Override Dawn theme font tokens */
 :root,
 body {

@@ -5,6 +5,10 @@
     <div class="sts-footer__menus">
       {%- for block in section.blocks -%}
         {%- if block.type == 'menu' -%}
+          {%- assign heading_key = block.settings.heading | downcase | strip -%}
+          {%- if settings.hide_shopping and heading_key == 'shop' -%}
+            {%- continue -%}
+          {%- endif -%}
           <div class="sts-footer__col" {{ block.shopify_attributes }}>
             {%- if block.settings.heading != blank -%}
               <h2 class="sts-footer__heading">{{ block.settings.heading }}</h2>
@@ -12,6 +16,10 @@
             {%- if block.settings.menu != blank -%}
               <ul class="sts-footer__list">
                 {%- for link in block.settings.menu.links -%}
+                  {%- if settings.hide_shopping -%}
+                    {%- capture shop_flag -%}{% render 'sts-is-shop-link', url: link.url, title: link.title, handle: link.handle %}{%- endcapture -%}
+                    {%- if shop_flag contains '1' -%}{%- continue -%}{%- endif -%}
+                  {%- endif -%}
                   <li>
                     <a href="{{ link.url }}">{{ link.title | escape }}</a>
                   </li>
@@ -29,6 +37,10 @@
                       {%- assign href = parts[1] | strip -%}
                     {%- else -%}
                       {%- assign href = '#' -%}
+                    {%- endif -%}
+                    {%- if settings.hide_shopping -%}
+                      {%- capture shop_flag -%}{% render 'sts-is-shop-link', url: href, title: label %}{%- endcapture -%}
+                      {%- if shop_flag contains '1' -%}{%- continue -%}{%- endif -%}
                     {%- endif -%}
                     <li><a href="{{ href }}">{{ label }}</a></li>
                   {%- endif -%}

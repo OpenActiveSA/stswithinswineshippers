@@ -1,7 +1,26 @@
+{%- liquid
+  assign hide_shopping = settings.hide_shopping
+  assign commerce_page = false
+  if hide_shopping
+    case template.name
+      when 'product', 'collection', 'cart', 'search', 'list-collections', 'gift_card'
+        assign commerce_page = true
+    endcase
+    if template.name contains 'customers'
+      assign commerce_page = true
+    endif
+  endif
+-%}
 <!doctype html>
 <html class="js" lang="{{ request.locale.iso_code }}">
   <head>
     <meta charset="utf-8">
+    {%- if commerce_page -%}
+      <meta http-equiv="refresh" content="0;url={{ routes.root_url }}">
+      <script>
+        location.replace({{ routes.root_url | json }});
+      </script>
+    {%- endif -%}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
@@ -280,9 +299,11 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'sts.css' | asset_url | stylesheet_tag }}
+    {%- unless hide_shopping -%}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+    {%- endunless -%}
 
-    {%- if settings.cart_type == 'drawer' -%}
+    {%- if settings.cart_type == 'drawer' and hide_shopping == false -%}
       {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
       {{ 'component-cart.css' | asset_url | stylesheet_tag }}
       {{ 'component-totals.css' | asset_url | stylesheet_tag }}
@@ -306,7 +327,7 @@
       <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-    {%- if settings.predictive_search_enabled -%}
+    {%- if settings.predictive_search_enabled and hide_shopping == false -%}
       <link
         rel="stylesheet"
         href="{{ 'component-predictive-search.css' | asset_url }}"
@@ -322,12 +343,12 @@
     </script>
   </head>
 
-  <body class="gradient template-{{ template.name }}{% if template.suffix != blank %} template-{{ template.name }}-{{ template.suffix }}{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body class="gradient template-{{ template.name }}{% if template.suffix != blank %} template-{{ template.name }}-{{ template.suffix }}{% endif %}{% if hide_shopping %} hide-shopping{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
 
-    {%- if settings.cart_type == 'drawer' -%}
+    {%- if settings.cart_type == 'drawer' and hide_shopping == false -%}
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
@@ -340,7 +361,9 @@
       tabindex="-1"
       data-template="{{ template.name }}"
     >
-      {{ content_for_layout }}
+      {%- unless commerce_page -%}
+        {{ content_for_layout }}
+      {%- endunless -%}
     </main>
 
     {% sections 'footer-group' %}
@@ -395,7 +418,7 @@
       };
     </script>
 
-    {%- if template.name == 'collection' -%}
+    {%- if template.name == 'collection' and hide_shopping == false -%}
       <script src="{{ 'sts-collection-filters.js' | asset_url }}" defer="defer"></script>
       <script>
         (function () {
@@ -430,11 +453,11 @@
       </script>
     {%- endif -%}
 
-    {%- if settings.predictive_search_enabled -%}
+    {%- if settings.predictive_search_enabled and hide_shopping == false -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-    {%- if settings.cart_type == 'drawer' -%}
+    {%- if settings.cart_type == 'drawer' and hide_shopping == false -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
   </body>

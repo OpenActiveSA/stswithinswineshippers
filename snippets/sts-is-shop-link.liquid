@@ -1,0 +1,15 @@
+{%- comment -%}
+  Prints 1 when a link is commerce (cart, collections, products, account, search).
+{%- endcomment -%}
+{%- liquid
+  assign u = url | default: '' | downcase
+  assign t = title | default: '' | downcase | strip
+  assign h = handle | default: '' | downcase
+  if u contains '/collections' or u contains '/products' or u contains '/cart' or u contains '/checkout' or u contains '/search' or u contains '/account' or u contains '/gift_card' or u contains '/discount' or u contains 'shopify://collections' or u contains 'shopify://products'
+    echo '1'
+  elsif h == 'shop' or h == 'wines' or h == 'catalog' or h == 'all' or h == 'gift-vouchers' or h == 'new-arrivals' or h == 'special-offers'
+    echo '1'
+  elsif t == 'shop' or t == 'wines' or t == 'all wines' or t == 'gifts' or t == 'gift vouchers' or t == 'new arrivals' or t == 'special offers' or t == 'delivery' or t == 'returns' or t == 'returns policy'
+    echo '1'
+  endif
+-%}

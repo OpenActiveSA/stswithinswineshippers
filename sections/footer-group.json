@@ -16,14 +16,7 @@
           "type": "menu",
           "settings": {
             "heading": "INFORMATION",
-            "placeholder_links": "Delivery, Returns Policy, Terms & Conditions, Privacy Policy, Cookie Policy"
-          }
-        },
-        "shop": {
-          "type": "menu",
-          "settings": {
-            "heading": "SHOP",
-            "placeholder_links": "All Wines, Gifts, Gift Vouchers, New Arrivals, Special Offers"
+            "placeholder_links": "Terms & Conditions, Privacy Policy, Cookie Policy"
           }
         },
         "visit": {
@@ -34,7 +27,7 @@
           }
         }
       },
-      "block_order": ["about", "information", "shop", "visit"],
+      "block_order": ["about", "information", "visit"],
       "settings": {
         "newsletter_enable": true,
         "newsletter_placeholder": "Enter email address...",

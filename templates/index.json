@@ -6,38 +6,10 @@
         "heading_line_1": "Destination for",
         "heading_line_2": "Wine",
         "heading_line_3": "Enthusiasts",
-        "button_label_1": "VIEW OUR WINES",
-        "button_link_1": "shopify://collections/all",
+        "button_label_1": "OUR STORY",
+        "button_link_1": "/pages/about",
         "button_label_2": "BOOK A VISIT",
         "button_link_2": "/pages/visit"
-      }
-    },
-    "finest_selection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Finest Selection",
-        "heading_size": "h1",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 6,
-        "columns_desktop": 3,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "outline",
-        "enable_desktop_slider": true,
-        "swipe_on_mobile": true,
-        "image_ratio": "portrait",
-        "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": true,
-        "quick_add": "none",
-        "columns_mobile": "1",
-        "padding_top": 60,
-        "padding_bottom": 52
       }
     },
     "sts_shipping": {
@@ -59,34 +31,6 @@
         "padding_top": 64,
         "padding_bottom": 72,
         "compact": false
-      }
-    },
-    "red_selection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Red Wine Selection",
-        "heading_size": "h1",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": false,
-        "view_all_style": "outline",
-        "enable_desktop_slider": true,
-        "swipe_on_mobile": true,
-        "image_ratio": "portrait",
-        "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": true,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 60,
-        "padding_bottom": 52
       }
     },
     "sts_testimonials": {
@@ -137,10 +81,8 @@
   },
   "order": [
     "sts_hero",
-    "finest_selection",
     "sts_shipping",
     "sts_gallery",
-    "red_selection",
     "sts_testimonials"
   ]
 }
