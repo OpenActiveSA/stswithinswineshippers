@@ -1564,11 +1564,11 @@ body.template-product .quantity__input {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  background: var(--sts-cream);
-  border: 1px solid rgba(28, 28, 26, 0.06);
+  background: #f5f1ea;
+  border: 0;
   border-radius: 2rem;
   padding: 1.2rem;
-  box-shadow: 0 1.4rem 3.6rem rgba(28, 28, 26, 0.08);
+  box-shadow: none;
 }
 
 .sts-features__media {
